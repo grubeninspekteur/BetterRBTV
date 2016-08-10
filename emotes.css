@@ -67,3 +67,10 @@
   width: 30px !important;
   height: 30px !important;
 }
+
+/* WutFace - Simon */
+.yt-emoji-icon[title="😱"] {
+  background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/WutFace.png") !important;
+  width: 23px !important;
+  height: 35px !important;
+}

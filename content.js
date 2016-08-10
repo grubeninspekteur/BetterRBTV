@@ -9,7 +9,8 @@ var emote_map = {
     "OhMyDog" : "🐶",
     "ResidentSleeper" : "😴",
     "BabyRage" : "😨",
-    "PogChamp" : "😯"
+    "PogChamp" : "😯",
+    "WutFace" : "😱"
 };
 
 var all_triggers = new RegExp(Object.keys(emote_map).join("|"));
