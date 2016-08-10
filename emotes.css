@@ -1,0 +1,69 @@
+/* Kappa - Nils */
+.yt-emoji-icon[title="🌝"] {
+  background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/Kappa.png") !important;
+  width: 25px !important;
+  height: 35px !important;
+}
+
+/* NotLikeThis - Gregor */
+.yt-emoji-icon[title="🐙"] {
+  background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/NotLikeThis.png") !important;
+  width: 28px !important;
+  height: 36px !important;
+}
+
+/* FailFish - Colin */
+.yt-emoji-icon[title="😑"] {
+  background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/FailFish.png") !important;
+  width: 30px !important;
+  height: 30px !important;
+}
+
+/* Keepo - 64k Gunnar */
+.yt-emoji-icon[title="🐼"] {
+  background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/Keepo.png") !important;
+  width: 29px !important;
+  height: 30px !important;
+}
+
+/* Kreygasm - Lars */
+.yt-emoji-icon[title="😚"] {
+  background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/Kreygasm.png") !important;
+  width: 29px !important;
+  height: 30px !important;
+}
+
+/* SwiftRage - Eduard "Kurzgeschoren" Laser */
+.yt-emoji-icon[title="😠"] {
+  background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/SwiftRage.png") !important;
+  width: 25px !important;
+  height: 30px !important;
+}
+
+/* OhMyDog */
+.yt-emoji-icon[title="🐶"] {
+  background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/OhMyDog.png") !important;
+  width: 35px !important;
+  height: 30px !important;
+}
+
+/* ResidentSleeper - Nils */
+.yt-emoji-icon[title="😴"] {
+  background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/ResidentSleeper.png") !important;
+  width: 34px !important;
+  height: 30px !important;
+}
+
+/* BabyRage - Budi */
+.yt-emoji-icon[title="😨"] {
+  background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/BabyRage.png") !important;
+  width: 28px !important;
+  height: 30px !important;
+}
+
+/* PogChamp - Sofia */
+.yt-emoji-icon[title="😯"] {
+  background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/PogChamp.png") !important;
+  width: 30px !important;
+  height: 30px !important;
+}
