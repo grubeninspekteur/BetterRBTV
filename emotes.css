@@ -1,12 +1,19 @@
 /* Kappa - Nils */
 .yt-emoji-icon[title="🌝"] {
   background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/Kappa.png") !important;
-  width: 25px !important;
-  height: 35px !important;
+  width: 22px !important;
+  height: 30px !important;
+}
+
+/* KappaPride - Nils */
+.yt-emoji-icon[title="👬"] {
+  background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/KappaPride.png") !important;
+  width: 22px !important;
+  height: 30px !important;
 }
 
 /* NotLikeThis - Gregor */
-.yt-emoji-icon[title="🐙"] {
+.yt-emoji-icon[title="😱"] {
   background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/NotLikeThis.png") !important;
   width: 28px !important;
   height: 36px !important;
@@ -47,7 +54,7 @@
   height: 30px !important;
 }
 
-/* ResidentSleeper - Nils */
+/* ResidentSleeper - Eddy */
 .yt-emoji-icon[title="😴"] {
   background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/ResidentSleeper.png") !important;
   width: 34px !important;
@@ -64,13 +71,55 @@
 /* PogChamp - Sofia */
 .yt-emoji-icon[title="😯"] {
   background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/PogChamp.png") !important;
-  width: 30px !important;
+  width: 28px !important;
   height: 30px !important;
 }
 
-/* WutFace - Simon */
-.yt-emoji-icon[title="😱"] {
+/* WutFace - Simon (Frisur abgeschnitten) */
+.yt-emoji-icon[title="😧"] {
   background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/WutFace.png") !important;
-  width: 23px !important;
+  width: 24px !important;
   height: 35px !important;
+}
+
+/* FeelsBadMan - Andreas */
+.yt-emoji-icon[title="😖"] {
+  background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/FeelsBadMan.png") !important;
+  width: 28px !important;
+  height: 35px !important;
+}
+
+/* BibleThumb - Marco/Freezer */
+.yt-emoji-icon[title="😭"] {
+  background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/BibleThumb.png") !important;
+  width: 23px !important;
+  height: 30px !important;
+}
+
+/* 4Head - Dennis R. */
+.yt-emoji-icon[title="😏"] {
+  background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/4Head.png") !important;
+  width: 22px !important;
+  height: 30px !important;
+}
+
+/* Ming Lee - Schröck */
+.yt-emoji-icon[title="🐯"] {
+  background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/MingLee.png") !important;
+  width: 22px !important;
+  height: 30px !important;
+}
+
+/* EleGiggle - Krogmann */
+.yt-emoji-icon[title="😁"] {
+  background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/EleGiggle.png") !important;
+  width: 26px !important;
+  height: 30px !important;
+}
+
+/* DansGame - Gino */
+.yt-emoji-icon[title="👿"] {
+  background: no-repeat url("chrome-extension://__MSG_@@extension_id__/emotes/DansGame.png") !important;
+  width: 37px !important;
+  height: 30px !important;
 }

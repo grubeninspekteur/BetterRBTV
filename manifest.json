@@ -1,21 +1,39 @@
 {
   "manifest_version": 2,
 
-  "name": "BRBTV",
-  "description": "Proof of concept. Zeigt lokal RBTV-Emotes anstelle der Youtube-Emotes an.",
+  "name": "BetterRBTV",
+  "description": "Komfortfunktionen für YouTubeLive mit Fokus auf den RBTV-Livestream.",
   "version": "0.1",
+  "icons": {"128": "icon.png"},
   
-   "content_scripts": [
-    {
-      "matches": ["http://youtube.com/*", "https://youtube.com/*", "http://www.youtube.com/*", "https://www.youtube.com/*", "http://gaming.youtube.com/*", "https://gaming.youtube.com/*"],
-      "css": ["emotes.css"],
-      "js": ["content.js"],
-      "run_at": "document_end",
-      "all_frames": true
-    }
+  "content_scripts": [
+  {
+    "matches": [
+      "*://*.youtube.com/*"
+    ],
+    
+    "js": [
+    "default_settings.js",
+    "keyword_replacement.js",
+    "entry.js"
+    ],
+    
+    "run_at": "document_idle",
+    "all_frames": true
+  }
   ],
   
+   "permissions": [
+      "storage"  
+   ],
+  
    "web_accessible_resources": [
-      "emotes/*.png"
-    ]
+      "emotes/*.png",
+      "emotes.css"
+   ],
+    
+    "options_ui": {
+      "page": "options.html",
+      "chrome_style": true
+    }
 }
