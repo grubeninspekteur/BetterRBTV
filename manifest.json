@@ -7,7 +7,7 @@
   
    "content_scripts": [
     {
-      "matches": ["http://youtube.com/*", "https://youtube.com/*", "http://www.youtube.com/*", "https://www.youtube.com/*", "http://gaming.youtube.com/*", "https://gaming.youtube.com/*"],
+      "matches": ["http://youtube.com/live_chat*", "https://youtube.com/live_chat*", "http://www.youtube.com/live_chat*", "https://www.youtube.com/live_chat*", "http://gaming.youtube.com/live_chat*", "https://gaming.youtube.com/live_chat*"],
       "css": ["emotes.css"],
       "js": ["content.js"],
       "run_at": "document_end",
