@@ -26,6 +26,9 @@ function include_keyword_replacement() {
     function checkForCommentInput() {
       if (document.readyState != 'complete') return;
       var textInput = document.getElementById("live-comments-input-field");
+      
+      // are we on Youtube live? Here, the chat loads later
+      if (document.getElementById("watch-sidebar-discussion") != null && textInput == null) return;
       if (textInput != null) {
         textInput.addEventListener("keyup", function(event) {
             if (all_triggers.test(textInput.innerHTML)) {
