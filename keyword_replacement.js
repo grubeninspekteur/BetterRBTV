@@ -21,7 +21,7 @@ function include_keyword_replacement() {
         "DansGame" : "👿"
     };
 
-    var all_triggers = new RegExp(Object.keys(emote_map).join("|"));
+    var emotePattern = new RegExp(Object.keys(emote_map).join("|"));
 
     function checkForCommentInput() {
       if (document.readyState != 'complete') return;
@@ -31,16 +31,13 @@ function include_keyword_replacement() {
       if (document.getElementById("watch-sidebar-discussion") != null && textInput == null) return;
       if (textInput != null) {
         textInput.addEventListener("keyup", function(event) {
-            if (all_triggers.test(textInput.innerHTML)) {
-                var theInnerHTML = textInput.innerHTML;
-                for (var key in emote_map) {
-                    if (emote_map.hasOwnProperty(key)) {
-                        theInnerHTML = theInnerHTML.replace(key, emote_map[key]);
-                    }
-                }
-                textInput.innerHTML = theInnerHTML;
-                placeCaretAtEnd(textInput);
-            }
+            var replaced = false;
+            var theInnerHTML = textInput.innerHTML.replace(emotePattern, function(token) {
+                replaced = true;
+                return emote_map[token];
+            });
+            if (replaced) textInput.innerHTML = theInnerHTML;
+            placeCaretAtEnd(textInput);
         });
       }
       clearInterval(comment_add_timer);
