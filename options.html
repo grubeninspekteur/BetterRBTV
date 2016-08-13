@@ -11,7 +11,7 @@
 <p>
 <label>
  <input type="checkbox" id="keywords">
-    Twitch-Stützräder aktivieren
+    Twitch-Stützräder
 </label><br/>
 <em>Wandelt bekannte Schlüsselwörter von Twitch in Emoticons um.</em>
 </p>
@@ -19,8 +19,12 @@
 <p>
 <label>
  <input type="checkbox" id="face-emotes">
-    RBTV-Gesichter-Emotes
-</label>
+    Emote-Pack
+</label><br/>
+<!--<span id="loading-spinner" width="12" height="12"></span>-->
+    <input type="file" id="select-pack" value="Emote-Pack laden" /><span id="file-error" style="color:red;"></span><span id="file-success" style="color:green; font-weight: bold;"></span><br />
+    Aktuell: <span id="emote-pack-name"></span>
+<span id="emote-pack-preview"></span>
 </p>
 
 <p>
@@ -28,6 +32,7 @@
   <button id="save">Speichern</button>
 </p>
 <script src="default_settings.js"></script>
+<script src="jszip/jszip.min.js"></script>
 <script src="options.js"></script>
 </body>
 </html>

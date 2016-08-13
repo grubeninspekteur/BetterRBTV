@@ -24,7 +24,7 @@
   ],
   
    "permissions": [
-      "storage"  
+      "storage"
    ],
   
    "web_accessible_resources": [
