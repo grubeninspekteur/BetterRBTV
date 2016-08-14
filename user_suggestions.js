@@ -143,9 +143,6 @@ function moveHighlightedAuthor(by) {
         }
     }
 
-
-    console.log("highlightIdx: "+ highlightedAuthorIdx);
-
     if (highlightedAuthorIdx == -1) {
         console.log("Warning: moving highlight cursor failed because there was nothing highlighted. This should not happen.");
     } else {
