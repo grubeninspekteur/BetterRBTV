@@ -12,10 +12,12 @@
         "*://*.youtube.com/*"
       ],
       "js": [
-        "jquery/jquery-3.1.0.slim.min.js",
+        "lib/jquery-3.1.0.slim.min.js",
+        "lib/dateformat.js",
         "util.js",
         "default_settings.js",
         "wait_for_chat_finished.js",
+        "timestamp.js",
         "keyword_replacement.js",
         "user_suggestions.js",
         "entry.js"

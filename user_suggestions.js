@@ -78,7 +78,7 @@ function include_user_suggestions() {
         // make sure we remove authors from time to time so we don't get a list of x-thousand users
         setInterval(resetAuthors, 60000); // 1 minute
 
-        var observer = new MutationObserver(function (mutations) {
+       registerChatObserver(function (mutations) {
             mutations.forEach(function (mutation) {
                 var count = 0;
                 for (var i = 0; i < mutation.addedNodes.length; i++) {
@@ -87,8 +87,6 @@ function include_user_suggestions() {
                 }
             });
         });
-
-        observer.observe(document.getElementById("all-comments"), {childList: true});
 
         $("#live-comments-controls").prepend("<div id='brbtv-user-suggest'></div>");
 
@@ -115,9 +113,8 @@ function include_user_suggestions() {
                 moveHighlightedAuthor(+1);
                 e.preventDefault();
             } else if (e.keyCode == KEY_TAB) {
-                if (completeAuthorSuggestion()) {
-                    e.preventDefault();
-                }
+                completeAuthorSuggestion();
+                e.preventDefault();
             }
         });
     });

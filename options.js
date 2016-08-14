@@ -4,7 +4,8 @@ function save_options() {
         twitchKeywordReplacement: document.getElementById('keywords').checked,
         faceEmotes: document.getElementById('face-emotes').checked,
         suggestUser: document.getElementById('user-suggest').checked,
-        hideAvatars: document.getElementById('hide-avatars').checked
+        hideAvatars: document.getElementById('hide-avatars').checked,
+        showTimestamp: document.getElementById('show-timestamp').checked
     }, function () {
         // Update status to let user know options were saved.
         var status = document.getElementById('status');
@@ -23,6 +24,7 @@ function restore_options() {
         document.getElementById('face-emotes').checked = items.faceEmotes;
         document.getElementById('user-suggest').checked = items.suggestUser;
         document.getElementById('hide-avatars').checked = items.hideAvatars;
+        document.getElementById('show-timestamp').checked = items.showTimestamp;
     });
     showStoredEmotePack();
 }

@@ -2,5 +2,6 @@ var default_settings = {
     twitchKeywordReplacement: true,
     faceEmotes: true,
     suggestUser: true,
-    hideAvatars: false
+    hideAvatars: false,
+    showTimestamp: true
 };
