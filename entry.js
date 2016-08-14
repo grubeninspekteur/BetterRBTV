@@ -47,4 +47,6 @@ chrome.storage.sync.get(default_settings, function (settings) {
     if (settings.showTimestamp) {
         include_timestamp();
     }
+
+    include_chat_filter(settings);
 });

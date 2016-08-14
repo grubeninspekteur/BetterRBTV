@@ -18,6 +18,7 @@
         "default_settings.js",
         "wait_for_chat_finished.js",
         "timestamp.js",
+        "chat_filter.js",
         "keyword_replacement.js",
         "user_suggestions.js",
         "entry.js"

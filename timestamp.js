@@ -7,7 +7,6 @@ function addTimestampToExistingComments() {
 function addTimestamp(commentElem) {
     if (commentElem.hasAttribute("data-timestamp")) {
         var date = new Date(parseInt(commentElem.getAttribute("data-timestamp")) * 1000);
-        console.log(date);
         // http://stackoverflow.com/questions/12802722/how-to-check-if-two-dates-not-on-the-same-calendar-day
         $(commentElem).find(".avatar").before('<span class="comment-time" title="' + date.format() + '">' + date.format("HH:MM") + '</span>');
     }

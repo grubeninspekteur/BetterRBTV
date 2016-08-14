@@ -5,7 +5,11 @@ function save_options() {
         faceEmotes: document.getElementById('face-emotes').checked,
         suggestUser: document.getElementById('user-suggest').checked,
         hideAvatars: document.getElementById('hide-avatars').checked,
-        showTimestamp: document.getElementById('show-timestamp').checked
+        showTimestamp: document.getElementById('show-timestamp').checked,
+        blockedTerms: {
+            termString: document.getElementById('blocked-terms').value.trim(),
+            isRegex: document.getElementById('blocked-terms-is-regex').checked
+        }
     }, function () {
         // Update status to let user know options were saved.
         var status = document.getElementById('status');
@@ -25,6 +29,8 @@ function restore_options() {
         document.getElementById('user-suggest').checked = items.suggestUser;
         document.getElementById('hide-avatars').checked = items.hideAvatars;
         document.getElementById('show-timestamp').checked = items.showTimestamp;
+        document.getElementById('blocked-terms').value = items.blockedTerms.termString;
+        document.getElementById('blocked-terms-is-regex').checked = items.blockedTerms.isRegex;
     });
     showStoredEmotePack();
 }
