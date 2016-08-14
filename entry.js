@@ -34,4 +34,8 @@ chrome.storage.sync.get(default_settings, function (settings) {
     if (settings.faceEmotes) {
         include_face_emotes();
     }
+
+    if (settings.suggestUser) {
+        include_user_suggestions();
+    }
 });

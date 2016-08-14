@@ -1,39 +1,38 @@
 {
   "manifest_version": 2,
-
   "name": "BetterRBTV",
   "description": "Komfortfunktionen für YouTubeLive mit Fokus auf den RBTV-Livestream.",
   "version": "0.1",
-  "icons": {"128": "icon.png"},
-  
+  "icons": {
+    "128": "icon.png"
+  },
   "content_scripts": [
-  {
-    "matches": [
-      "*://*.youtube.com/*"
-    ],
-    
-    "js": [
-    "default_settings.js",
-    "keyword_replacement.js",
-    "entry.js"
-    ],
-    
-    "run_at": "document_idle",
-    "all_frames": true
-  }
-  ],
-  
-   "permissions": [
-      "storage"
-   ],
-  
-   "web_accessible_resources": [
-      "emotes/*.png",
-      "emotes.css"
-   ],
-    
-    "options_ui": {
-      "page": "options.html",
-      "chrome_style": true
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "jquery/jquery-3.1.0.slim.min.js",
+        "util.js",
+        "default_settings.js",
+        "wait_for_chat_finished.js",
+        "keyword_replacement.js",
+        "user_suggestions.js",
+        "entry.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
     }
+  ],
+  "permissions": [
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "emotes/*.png",
+    "emotes.css"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
 }

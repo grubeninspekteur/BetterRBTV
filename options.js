@@ -2,7 +2,8 @@
 function save_options() {
     chrome.storage.sync.set({
         twitchKeywordReplacement: document.getElementById('keywords').checked,
-        faceEmotes: document.getElementById('face-emotes').checked
+        faceEmotes: document.getElementById('face-emotes').checked,
+        suggestUser: document.getElementById('user-suggest').checked
     }, function () {
         // Update status to let user know options were saved.
         var status = document.getElementById('status');
@@ -19,6 +20,7 @@ function restore_options() {
     chrome.storage.sync.get(default_settings, function (items) {
         document.getElementById('keywords').checked = items.twitchKeywordReplacement;
         document.getElementById('face-emotes').checked = items.faceEmotes;
+        document.getElementById('user-suggest').checked = items.suggestUser;
     });
     showStoredEmotePack();
 }
@@ -33,7 +35,8 @@ function showStoredEmotePack() {
             var preview = '';
             for (var i = 0; i < pack.images.length; i++) {
                 var img = pack.images[i];
-                preview += img.emote + ' <img width="' + img.width + '" height="' + img.height + '" src="data:image/png;base64,' + img.base64 + '" /> ';
+                preview += '<span style="font-size:25px">'+img.emote+'</span> =' + ' <img width="' + img.width + '" height="' + img.height + '" src="data:image/png;base64,' + img.base64 + '" /> ';
+                if (i+1 < pack.images.length) preview += ", ";
                 if (i % 4 == 3) preview += "<br/>";
             }
             document.getElementById('emote-pack-name').innerHTML = pack.name + "<br/>";
