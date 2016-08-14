@@ -12,6 +12,7 @@ function addOtherCSS(items) {
 function addFaceEmotes(settings) {
     if (settings.faceEmotes == true) {
         chrome.storage.local.get("emotePack", function(items) {
+            if (items.emotePack == null) return;
             var css = '';
             for (var i = 0; i < items.emotePack.images.length; i++) {
                 var img = items.emotePack.images[i];

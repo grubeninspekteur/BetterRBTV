@@ -4,11 +4,20 @@ function addTimestampToExistingComments() {
     });
 }
 
+var jHidingMessage;
+var jCommentsScroller = null;
+
 function addTimestamp(commentElem) {
     if (commentElem.hasAttribute("data-timestamp")) {
         var date = new Date(parseInt(commentElem.getAttribute("data-timestamp")) * 1000);
         // http://stackoverflow.com/questions/12802722/how-to-check-if-two-dates-not-on-the-same-calendar-day
-        $(commentElem).find(".avatar").before('<span class="comment-time" title="' + date.format() + '">' + date.format("HH:MM") + '</span>');
+        if (jHidingMessage.length && jCommentsScroller.length) {
+            var wasScrolling = !jHidingMessage.hasClass("hid");
+            $(commentElem).find(".avatar").before('<span class="comment-time" title="' + date.format() + '">' + date.format("HH:MM") + '</span>');
+            if (!wasScrolling) {
+                jCommentsScroller.scrollTop(jCommentsScroller[0].scrollHeight);
+            }
+        }
     }
 }
 
@@ -19,6 +28,8 @@ function daydiff(first, second) {
 
 function include_timestamp() {
     onChatLoaded(function () {
+        jHidingMessage = $("#live-comments-setting-bottom-scroll");
+        jCommentsScroller =  $("#comments-scroller");
         addCssToHead(".comment-time {color:grey; font-size: 12px}");
         addTimestampToExistingComments();
         registerChatObserver(function (mutations) {
