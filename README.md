@@ -1,4 +1,9 @@
 # BetterRBTV Google Chrome Extension
-Proof of Concept, welche den YouTubeLive-Chat um Twitch-ähnliche Emotes ergänzt, die transparent für andere Benutzer in normale Emotes umgewandelt werden.
+Erweiterungen für den YouTube-Live-Chat.
 
-**Achtung:** Es wird ein Emote-Pack benötigt, damit auch entsprechende Emotes angezeigt werden. Das Pack kann über die Optionen der Erweiterung geladen werden.
+## Features
+* Ersetzung von Twitch-Keywords
+* Timestamps für Nachrichten
+* Avatare verbergen
+* Autocomplete von Benutzernamen nach "@"
+* Chatnachrichten filtern
