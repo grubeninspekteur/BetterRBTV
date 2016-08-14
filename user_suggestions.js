@@ -107,10 +107,14 @@ function include_user_suggestions() {
 
         textInput.keydown(function (e) {
             if (e.keyCode == KEY_UP) {
-                moveHighlightedAuthor(-1);
-                e.preventDefault();
+                if (highlightedAuthor) {
+                    moveHighlightedAuthor(-1);
+                    e.preventDefault();
+                }
             } else if (e.keyCode == KEY_DOWN) {
-                moveHighlightedAuthor(+1);
+                if (highlightedAuthor) {
+                    moveHighlightedAuthor(+1);
+                }
                 e.preventDefault();
             } else if (e.keyCode == KEY_TAB) {
                 completeAuthorSuggestion();
