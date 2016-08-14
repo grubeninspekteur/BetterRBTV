@@ -91,6 +91,8 @@ function saveImages(name, emoticons, images, image_dimensions) {
     });
 }
 
+var untrustedChars = new RegExp("[\"'<>\\$\\(\\)&/\\?\\^\\*]|expression|url");
+
 function loadEmotePack(fileName, fileContents) {
     JSZip.loadAsync(fileContents).then(function (zip) {
             var mapFile = zip.file("map.txt");
@@ -108,10 +110,13 @@ function loadEmotePack(fileName, fileContents) {
                     var lines = contents.split('\n');
                     for (var i = 0; i < lines.length; i++) {
                         var parts = lines[i].trim().split(':');
-                        if (parts.length != 2) {
-                            readError("map.txt: Fehler Zeile " + i);
+                        if (parts.length != 2 || untrustedChars.test(parts[0])) {
+                            readError("map.txt: Fehler Zeile " + (i+1));
                             return;
                         }
+
+
+
                         var emoticon = parts[0].trim();
                         var imageFileName = parts[1].trim();
                         if (!imageFileName.endsWith('.png')) {

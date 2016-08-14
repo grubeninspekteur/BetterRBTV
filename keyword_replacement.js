@@ -12,7 +12,7 @@ function include_keyword_replacement() {
         "PogChamp": "😯",
         "WutFace": "😧",
         "FeelsBadMan": "😖",
-        "BibleThumb": "😭",
+        "BibleThump": "😭",
         "4Head": "😏",
         "MingLee": "🐯",
         "EleGiggle": "😁",
