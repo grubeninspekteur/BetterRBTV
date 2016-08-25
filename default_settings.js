@@ -3,6 +3,7 @@ var default_settings = {
     faceEmotes: true,
     suggestUser: true,
     hideAvatars: false,
+    preventChatNewline: true,
     showTimestamp: true,
     blockedTerms: {
         termString: '',

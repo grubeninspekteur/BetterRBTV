@@ -6,6 +6,14 @@ function addOtherCSS(items) {
         css += ".comment .avatar {display: none !important;}";
     }
 
+    if (items.preventChatNewline == true) {
+        css += ".live-chat-widget .author-is-moderator .byline, " +
+            ".live-chat-widget .author-is-member .byline, " +
+            ".live-chat-widget .author-is-owner .byline, " +
+            ".live-chat-widget .comment.fan-funding-tip .byline, " +
+            ".live-chat-widget .comment.new-member-announcement .byline {display: inline !important;}";
+    }
+
     addCssToHead(css);
 }
 
