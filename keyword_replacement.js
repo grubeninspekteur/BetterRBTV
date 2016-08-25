@@ -1,6 +1,6 @@
 function include_keyword_replacement() {
 
-    onChatLoaded(function () {
+    YouTubeLive.onChatLoaded(function (youtube) {
         var emote_map = {
             "NotLikeThis": "😱",
             "FailFish": "😑",
@@ -23,8 +23,8 @@ function include_keyword_replacement() {
 
         var emotePattern = new RegExp(Object.keys(emote_map).join("|"));
 
-        var textInput = document.getElementById("live-comments-input-field");
-        if (textInput != null) {
+        var textInput = youtube.getChatInputField();
+        if (textInput) {
             textInput.addEventListener("keyup", function (event) {
                 var replaced = false;
                 var whatWasReplaced = '';

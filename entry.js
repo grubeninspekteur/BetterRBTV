@@ -48,7 +48,7 @@ chrome.storage.sync.get(default_settings, function (settings) {
     }
 
     // only bother inserting css if we are on YouTube Live
-    onChatLoaded(function () {
+    YouTubeLive.onChatLoaded(function (youtube) {
         addOtherCSS(settings);
         addFaceEmotes(settings);
         addEmojiTooltips();

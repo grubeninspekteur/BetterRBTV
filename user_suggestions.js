@@ -4,18 +4,20 @@ const KEY_DOWN = 40;
 const KEY_UP = 38;
 const KEY_TAB = 9;
 
-function resetAuthors() {
+function resetAuthors(youtube) {
+    // TODO use trie to not iterate over n users
     var newAuthors = new Set();
-    $("#all-comments").find("li").not(".author-is-owner").find("span.author a.yt-user-name").each(function (i, elem) {
-        authors.add(elem.innerText);
+    youtube.iteratePastChatMessages(function(message) {
+        $(message).not(".author-is-owner").find("span.author a.yt-user-name").each(function (i, elem) {
+            newAuthors.add(elem.innerText);
+        });
     });
     authors = newAuthors;
 }
 
 var highlightedAuthor = '';
 
-function suggestAuthors(name) {
-    var suggestBox = $("#brbtv-user-suggest");
+function suggestAuthors(suggestBox, name) {
     suggestBox.empty();
     if (name.length > 0) {
         var suggestions = 0;
@@ -65,60 +67,55 @@ function findPositionOfAtBeforeCaret(jTextInput) {
     }
     return theAtPos;
 }
-function resetSuggestions() {
-    $("#brbtv-user-suggest").empty();
+function resetSuggestions(suggestBox) {
+    suggestBox.empty();
     highlightedAuthor = '';
 }
 function include_user_suggestions() {
-    onChatLoaded(function () {
-        $("head").append("<style>.highlighted-suggested-author {background-color: blue; width: 100%; color: white;} .suggested-author {display: block;}</style>");
+    YouTubeLive.onChatLoaded(function (youtube) {
+        addCssToHead(".highlighted-suggested-author {background-color: blue; width: 100%; color: white;} .suggested-author {display: block;}</style>");
+        $("#live-comments-controls").prepend("<div id='brbtv-user-suggest'></div>");
+        var suggestBox = $("#brbtv-user-suggest");
 
         // fetch initial authors
-        resetAuthors();
+        resetAuthors(youtube);
 
         // make sure we remove authors from time to time so we don't get a list of x-thousand users
-        setInterval(resetAuthors, 60000); // 1 minute
+        setInterval(function() {resetAuthors(youtube)}, 60000); // 1 minute
 
-       registerChatObserver(function (mutations) {
-            mutations.forEach(function (mutation) {
-                var count = 0;
-                for (var i = 0; i < mutation.addedNodes.length; i++) {
-                    authors.add($(mutation.addedNodes[i]).not("author-viewing").find("a.yt-user-name").text());
-                    count++;
-                }
-            });
-        });
-
-        $("#live-comments-controls").prepend("<div id='brbtv-user-suggest'></div>");
-
-        var textInput = $("#live-comments-input-field");
-
-        textInput.keyup(function (e) {
-            var indexOfAt = findPositionOfAtBeforeCaret(textInput);
-            if (indexOfAt != -1) {
-                var caret = getCaretPosition(textInput[0]);
-                if (caret > indexOfAt) {
-                    var namePart = textInput.html().substring(indexOfAt + 1, caret);
-                    suggestAuthors(namePart);
-                }
-            } else {
-                resetSuggestions();
+        youtube.registerChatMessageObserver(function (message) {
+            var author_name = $(message).not("author-viewing").find("a.yt-user-name").text();
+            if (author_name) {
+                authors.add(author_name);
             }
         });
 
-        textInput.keydown(function (e) {
+        youtube.getJChatInputField().keyup(function (e) {
+            var indexOfAt = findPositionOfAtBeforeCaret(youtube.getJChatInputField());
+            if (indexOfAt != -1) {
+                var caret = getCaretPosition(youtube.getChatInputField());
+                if (caret > indexOfAt) {
+                    var namePart = youtube.getJChatInputField().html().substring(indexOfAt + 1, caret);
+                    suggestAuthors(suggestBox, namePart);
+                }
+            } else {
+                resetSuggestions(suggestBox);
+            }
+        });
+
+        youtube.getJChatInputField().keydown(function (e) {
             if (e.keyCode == KEY_UP) {
                 if (highlightedAuthor) {
-                    moveHighlightedAuthor(-1);
+                    moveHighlightedAuthor(suggestBox, -1);
                     e.preventDefault();
                 }
             } else if (e.keyCode == KEY_DOWN) {
                 if (highlightedAuthor) {
-                    moveHighlightedAuthor(+1);
+                    moveHighlightedAuthor(suggestBox, +1);
                     e.preventDefault();
                 }
             } else if (e.keyCode == KEY_TAB) {
-                completeAuthorSuggestion();
+                completeAuthorSuggestion(suggestBox, youtube.getJChatInputField());
                 e.preventDefault();
             }
         });
@@ -127,12 +124,12 @@ function include_user_suggestions() {
 
 //http://stackoverflow.com/questions/4467539/javascript-modulo-not-behaving
 // JavaScript's modulo operator does not work as intended...
-function fixedModulo(x,y) {
-    return ((x%y)+y)%y;
+function fixedModulo(x, y) {
+    return ((x % y) + y) % y;
 }
 
-function moveHighlightedAuthor(by) {
-    var authorElements = $("#brbtv-user-suggest").find(".suggested-author");
+function moveHighlightedAuthor(suggestBox, by) {
+    var authorElements = suggestBox.find(".suggested-author");
 
     if (authorElements.length == 0) return;
 
@@ -154,15 +151,14 @@ function moveHighlightedAuthor(by) {
     }
 }
 
-function completeAuthorSuggestion() {
-    var highlightedAuthorElement = $("#brbtv-user-suggest").find(".highlighted-suggested-author");
+function completeAuthorSuggestion(suggestBox, textInput) {
+    var highlightedAuthorElement = suggestBox.find(".highlighted-suggested-author");
     if (highlightedAuthorElement.length) {
-        var textInput = $("#live-comments-input-field");
         var indexOfAt = findPositionOfAtBeforeCaret(textInput);
         var indexOfCaret = getCaretPosition(textInput[0]);
-        textInput.html(textInput.html().replaceBetween(indexOfAt+1,indexOfCaret, highlightedAuthor + ",&nbsp;"));
+        textInput.html(textInput.html().replaceBetween(indexOfAt + 1, indexOfCaret, highlightedAuthor + ",&nbsp;"));
         setCaretPosition(textInput[0], indexOfAt + highlightedAuthor.length + 3);
-        resetSuggestions();
+        resetSuggestions(suggestBox);
         return true;
     } else {
         return false;
@@ -170,6 +166,6 @@ function completeAuthorSuggestion() {
 }
 
 // http://stackoverflow.com/questions/14880229/how-to-replace-a-substring-between-two-indices
-String.prototype.replaceBetween = function(start, end, what) {
+String.prototype.replaceBetween = function (start, end, what) {
     return this.substring(0, start) + what + this.substring(end);
 };
