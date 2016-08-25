@@ -6,12 +6,16 @@ function addOtherCSS(items) {
         css += ".comment .avatar {display: none !important;}";
     }
 
-    if (items.preventChatNewline == true) {
+    if (items.saveSpace == true) {
         css += ".live-chat-widget .author-is-moderator .byline, " +
             ".live-chat-widget .author-is-member .byline, " +
             ".live-chat-widget .author-is-owner .byline, " +
             ".live-chat-widget .comment.fan-funding-tip .byline, " +
             ".live-chat-widget .comment.new-member-announcement .byline {display: inline !important;}";
+        css += ".live-chat-widget .author-is-moderator .avatar, " +
+            ".live-chat-widget .author-is-member .avatar, " +
+            ".live-chat-widget .author-is-owner .avatar, " +
+            ".live-chat-widget .comment.fan-funding-tip .avatar {width: 24px !important; height: 24px !important;}"
     }
 
     addCssToHead(css);

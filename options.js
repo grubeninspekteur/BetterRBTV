@@ -5,7 +5,7 @@ function save_options() {
         faceEmotes: document.getElementById('face-emotes').checked,
         suggestUser: document.getElementById('user-suggest').checked,
         hideAvatars: document.getElementById('hide-avatars').checked,
-        preventChatNewline: document.getElementById('prevent-newline').checked,
+        saveSpace: document.getElementById('save-space').checked,
         showTimestamp: document.getElementById('show-timestamp').checked,
         blockedTerms: {
             termString: document.getElementById('blocked-terms').value.trim(),
@@ -29,7 +29,7 @@ function restore_options() {
         document.getElementById('face-emotes').checked = items.faceEmotes;
         document.getElementById('user-suggest').checked = items.suggestUser;
         document.getElementById('hide-avatars').checked = items.hideAvatars;
-        document.getElementById('prevent-newline').checked = items.preventChatNewline;
+        document.getElementById('save-space').checked = items.saveSpace;
         document.getElementById('show-timestamp').checked = items.showTimestamp;
         document.getElementById('blocked-terms').value = items.blockedTerms.termString;
         document.getElementById('blocked-terms-is-regex').checked = items.blockedTerms.isRegex;
