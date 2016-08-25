@@ -1,27 +1,28 @@
 function include_keyword_replacement() {
-    var emote_map = {
-        "NotLikeThis": "😱",
-        "FailFish": "😑",
-        "Keepo": "🐼",
-        "KappaPride": "👬",
-        "Kreygasm": "😚",
-        "SwiftRage": "😠",
-        "OhMyDog": "🐶",
-        "ResidentSleeper": "😴",
-        "BabyRage": "😨",
-        "PogChamp": "😯",
-        "WutFace": "😧",
-        "FeelsBadMan": "😖",
-        "BibleThump": "😭",
-        "4Head": "😏",
-        "MingLee": "🐯",
-        "EleGiggle": "😁",
-        "DansGame": "👿"
-    };
-
-    var emotePattern = new RegExp(Object.keys(emote_map).join("|"));
 
     onChatLoaded(function () {
+        var emote_map = {
+            "NotLikeThis": "😱",
+            "FailFish": "😑",
+            "Keepo": "🐼",
+            "KappaPride": "👬",
+            "Kreygasm": "😚",
+            "SwiftRage": "😠",
+            "OhMyDog": "🐶",
+            "ResidentSleeper": "😴",
+            "BabyRage": "😨",
+            "PogChamp": "😯",
+            "WutFace": "😧",
+            "FeelsBadMan": "😖",
+            "BibleThump": "😭",
+            "4Head": "😏",
+            "MingLee": "🐯",
+            "EleGiggle": "😁",
+            "DansGame": "👿"
+        };
+
+        var emotePattern = new RegExp(Object.keys(emote_map).join("|"));
+
         var textInput = document.getElementById("live-comments-input-field");
         if (textInput != null) {
             textInput.addEventListener("keyup", function (event) {

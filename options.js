@@ -192,5 +192,5 @@ function choose_emote_pack(evt) {
 document.addEventListener('DOMContentLoaded', restore_options);
 document.getElementById('save').addEventListener('click',
     save_options);
-document.getElementById('select-pack').addEventListener('change',
+document.getElementById('select-pack').addEventListener('input',
     choose_emote_pack);

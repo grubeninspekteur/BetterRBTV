@@ -1,6 +1,54 @@
 var _chatObservers = [];
 var observer = null;
 
+class Some {
+    constructor(value) {
+        this._value = value;
+    }
+
+    get() {
+        return this._value;
+    }
+
+    isEmpty() {
+        return false;
+    }
+
+    forEach(f) {
+        f(this._value);
+    }
+
+    orElse(default_value) {
+        return this._value;
+    }
+
+    toArray() {
+        return [this._value];
+    }
+}
+
+class None {
+    get() {
+        throw "Called get() on empty Option";
+    }
+
+    isEmpty() {
+        return true;
+    }
+
+    forEach(f) {
+        // pass
+    }
+
+    orElse(default_value) {
+        return default_value;
+    }
+
+    toArray() {
+        return [];
+    }
+}
+
 function addCssToHead(css) {
     if (css != null && css != '') {
         var brbtvStyle = document.getElementById('rbtv-style-optional');

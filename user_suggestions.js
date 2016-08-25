@@ -5,10 +5,11 @@ const KEY_UP = 38;
 const KEY_TAB = 9;
 
 function resetAuthors() {
-    authors = new Set();
-    $("#all-comments").find("span.author a.yt-user-name").each(function (i, elem) {
-        authors.add(elem.innerHTML);
+    var newAuthors = new Set();
+    $("#all-comments").find("li").not(".author-is-owner").find("span.author a.yt-user-name").each(function (i, elem) {
+        authors.add(elem.innerText);
     });
+    authors = newAuthors;
 }
 
 var highlightedAuthor = '';
@@ -82,7 +83,7 @@ function include_user_suggestions() {
             mutations.forEach(function (mutation) {
                 var count = 0;
                 for (var i = 0; i < mutation.addedNodes.length; i++) {
-                    authors.add($(mutation.addedNodes[i]).find("a.yt-user-name").html());
+                    authors.add($(mutation.addedNodes[i]).not("author-viewing").find("a.yt-user-name").text());
                     count++;
                 }
             });
@@ -114,8 +115,8 @@ function include_user_suggestions() {
             } else if (e.keyCode == KEY_DOWN) {
                 if (highlightedAuthor) {
                     moveHighlightedAuthor(+1);
+                    e.preventDefault();
                 }
-                e.preventDefault();
             } else if (e.keyCode == KEY_TAB) {
                 completeAuthorSuggestion();
                 e.preventDefault();
@@ -137,7 +138,6 @@ function moveHighlightedAuthor(by) {
 
     var highlightedAuthorIdx = -1;
 
-    //Why is this giving wrong results once I changed the highlighted class? -> var highlightedAuthorIdx = authorElements.index(".highlighted-suggested-author");
     for (var i = 0; i < authorElements.length; i++) {
         if (authorElements.eq(i).hasClass("highlighted-suggested-author")) {
             highlightedAuthorIdx = i;
@@ -145,7 +145,7 @@ function moveHighlightedAuthor(by) {
     }
 
     if (highlightedAuthorIdx == -1) {
-        console.log("Warning: moving highlight cursor failed because there was nothing highlighted. This should not happen.");
+        console.warn("Moving highlight cursor failed because there was nothing highlighted. This should not happen.");
     } else {
         authorElements.eq(highlightedAuthorIdx).removeClass("highlighted-suggested-author");
         highlightedAuthorIdx = fixedModulo((highlightedAuthorIdx + by), authorElements.length);

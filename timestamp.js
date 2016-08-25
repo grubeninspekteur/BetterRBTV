@@ -30,7 +30,7 @@ function include_timestamp() {
     onChatLoaded(function () {
         jHidingMessage = $("#live-comments-setting-bottom-scroll");
         jCommentsScroller =  $("#comments-scroller");
-        addCssToHead(".comment-time {color:grey; font-size: 12px}");
+        addCssToHead(".comment-time {color:grey; font-size: 12px; padding-top: 4px; padding-right: 4px;}");
         addTimestampToExistingComments();
         registerChatObserver(function (mutations) {
             mutations.forEach(function (mutation) {
