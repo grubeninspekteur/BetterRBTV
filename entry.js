@@ -20,6 +20,10 @@ function addOtherCSS(items) {
         css += "#live-comments-controls .byline {display: none !important;}";
     }
 
+    if (items.noGreenMemberAccent == true) {
+        css += ".live-chat-widget.enable-memberships .comment.author-is-member .accent-bar {display:none; !important;}";
+    }
+
     addCssToHead(css);
 }
 
