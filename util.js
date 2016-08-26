@@ -229,7 +229,7 @@ class SuggestionBox {
 
             this._jSuggestBox.removeClass("hid");
         } else {
-            this._jSuggestBox.addClass("hid");
+            this._resetBox();
         }
     }
 
