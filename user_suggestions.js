@@ -33,9 +33,10 @@ function include_user_suggestions() {
                     a.text().localeCompare(b.text())
                 });
             }
-
-            suggestBox.setContents(suggestedAuthorElements);
         }
+
+        suggestBox.setContents(suggestedAuthorElements);
+
     }
 
     function completeAuthorSuggestion(suggestBox, authorName, youtube) {
