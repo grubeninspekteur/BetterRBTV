@@ -2,6 +2,7 @@ var default_settings = {
     twitchKeywordReplacement: true,
     faceEmotes: true,
     suggestUser: true,
+    suggestEmote: true,
     hideAvatars: false,
     saveSpace: true,
     showTimestamp: true,

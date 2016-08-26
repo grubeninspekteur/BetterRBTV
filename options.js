@@ -4,6 +4,7 @@ function save_options() {
         twitchKeywordReplacement: document.getElementById('keywords').checked,
         faceEmotes: document.getElementById('face-emotes').checked,
         suggestUser: document.getElementById('user-suggest').checked,
+        suggestEmote: document.getElementById('emote-suggest').checked,
         hideAvatars: document.getElementById('hide-avatars').checked,
         saveSpace: document.getElementById('save-space').checked,
         showTimestamp: document.getElementById('show-timestamp').checked,
@@ -28,6 +29,7 @@ function restore_options() {
         document.getElementById('keywords').checked = items.twitchKeywordReplacement;
         document.getElementById('face-emotes').checked = items.faceEmotes;
         document.getElementById('user-suggest').checked = items.suggestUser;
+        document.getElementById('emote-suggest').checked = items.suggestEmote;
         document.getElementById('hide-avatars').checked = items.hideAvatars;
         document.getElementById('save-space').checked = items.saveSpace;
         document.getElementById('show-timestamp').checked = items.showTimestamp;
@@ -194,5 +196,5 @@ function choose_emote_pack(evt) {
 document.addEventListener('DOMContentLoaded', restore_options);
 document.getElementById('save').addEventListener('click',
     save_options);
-document.getElementById('select-pack').addEventListener('input',
+document.getElementById('select-pack').addEventListener('change',
     choose_emote_pack);

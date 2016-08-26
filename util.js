@@ -67,24 +67,6 @@ function addCssToHead(css) {
     }
 }
 
-/* TODO remove when API works
- var _chatObservers = [];
- var observer = null;
-
-function registerChatObserver(callback) {
-    _chatObservers.push(callback);
-
-    if (observer == null) {
-        observer = new MutationObserver(function (mutations) {
-            for (var i = 0; i < _chatObservers.length; i++) {
-                _chatObservers[i](mutations);
-            }
-        });
-    }
-
-    observer.observe(document.getElementById("all-comments"), {childList: true});
-}*/
-
 //http://stackoverflow.com/questions/6249095/how-to-set-caretcursor-position-in-contenteditable-element-div
 function setCaretPosition(el, position) {
     var range = document.createRange();
