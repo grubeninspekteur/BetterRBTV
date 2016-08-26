@@ -134,13 +134,56 @@ class SuggestionBox {
         this.highlightedSelection = -1;
 
         if (!SuggestionBox.ANY_BOX_CREATED) {
-            // ad box css only once
-            addCssToHead(".brbtv-highlighted-suggestion {background-color: blue; width: 100%; color: white;} .brbtv-suggestion {display: block;}</style>");
+            // add box css only once
+            var cssToAdd = `
+		#brbtv-suggestion-box,
+		#brbtv-suggestion-box * {
+			box-sizing: border-box;
+		}
+		.brbtv-suggestion-box {
+			margin-bottom: 8px;
+		}
+		.brbtv-suggestion {
+			padding:5px;
+						border-bottom: 1px solid rgba(0,0,0,0.3);
+			border-top: 1px solid rgba(255,255,255,0.2);
+			display: block;
+		}
+		.brbtv-suggestion:first-child {
+			position: relative;
+			margin-top: 2.5em;
+		}
+		.brbtv-suggestion:first-child::before {
+			content: 'press TAB key to complete';
+			display: block;
+			position: absolute;
+			top:0;
+			left:0;
+			transform: translateY(-100%);
+			padding: 0 5px;
+			height: 2.5em;
+			line-height: 2.5em;
+			color: #888;
+			font-weight:500;
+		}
+		.brbtv-suggestion:last-child {
+			border-bottom: 0;
+		}
+		.brbtv-highlighted-suggestion {
+			background-color: #0f9d58;
+			width: 100%;
+			color: white;
+			padding-left: 14px;
+		}
+		`;
+            addCssToHead(cssToAdd);
             SuggestionBox.ANY_BOX_CREATED = true;
         }
 
         $("#live-comments-controls").prepend("<div id='brbtv-suggest-" + boxName + "'></div>");
         this._jSuggestBox = $("#brbtv-suggest-" + boxName);
+        this._jSuggestBox.addClass("brbtv-suggestion-box");
+        this._jSuggestBox.addClass("hid");
         jTextInput.keydown(function (e) {
             if (e.keyCode == KEY_UP) {
                 if (self.highlightedSelection) {
@@ -183,6 +226,10 @@ class SuggestionBox {
                 this.highlightedSelection = spanElements[0].text();
                 spanElements[0].addClass("brbtv-highlighted-suggestion");
             }
+
+            this._jSuggestBox.removeClass("hid");
+        } else {
+            this._jSuggestBox.addClass("hid");
         }
     }
 
@@ -221,6 +268,7 @@ class SuggestionBox {
 
     _resetBox() {
         this._jSuggestBox.empty();
+        this._jSuggestBox.addClass("hid");
         this.highlightedSelection = '';
     }
 
