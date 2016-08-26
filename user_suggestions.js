@@ -73,7 +73,48 @@ function resetSuggestions(suggestBox) {
 }
 function include_user_suggestions() {
     YouTubeLive.onChatLoaded(function (youtube) {
-        addCssToHead(".highlighted-suggested-author {background-color: blue; width: 100%; color: white;} .suggested-author {display: block;}</style>");
+		var cssToAdd = `
+		#brbtv-user-suggest,
+		#brbtv-user-suggest * {
+			box-sizing: border-box;
+		}
+		#brbtv-user-suggest {
+			margin-bottom: 8px;
+		}
+		.suggested-author {
+			padding:5px;
+			border-bottom: 1px solid rgba(0,0,0,0.3);
+			border-top: 1px solid rgba(255,255,255,0.2);
+			display: block;
+		}
+		.suggested-author:first-child {
+			position: relative;
+			margin-top: 2.5em;
+		}
+		.suggested-author:first-child::before {
+			content: 'press TAB key to complete';
+			display: block;
+			position: absolute;
+			top:0;
+			left:0;
+			transform: translateY(-100%);
+			padding: 0 5px;
+			height: 2.5em;
+			line-height: 2.5em;
+			color: #888;
+			font-weight:500;
+		}
+		.suggested-author:last-child {
+			border-bottom: 0;
+		}
+		.highlighted-suggested-author {
+			background-color: #0f9d58;
+			width: 100%;
+			color: white;
+			padding-left: 14px;
+		}
+		`;
+        addCssToHead(cssToAdd);
         $("#live-comments-controls").prepend("<div id='brbtv-user-suggest'></div>");
         var suggestBox = $("#brbtv-user-suggest");
 
@@ -115,6 +156,7 @@ function include_user_suggestions() {
                     e.preventDefault();
                 }
             } else if (e.keyCode == KEY_TAB) {
+				
                 completeAuthorSuggestion(suggestBox, youtube.getJChatInputField());
                 e.preventDefault();
             }
