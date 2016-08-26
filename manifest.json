@@ -14,6 +14,7 @@
       "js": [
         "lib/jquery-3.1.0.slim.min.js",
         "lib/dateformat.js",
+        "lib/trie.js",
         "emoji_to_keyword.json",
         "keyword_to_emoji.json",
         "util.js",
@@ -23,6 +24,7 @@
         "chat_filter.js",
         "keyword_replacement.js",
         "user_suggestions.js",
+        "keyword_suggestions.js",
         "entry.js"
       ],
       "run_at": "document_idle",

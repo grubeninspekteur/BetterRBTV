@@ -76,6 +76,10 @@ chrome.storage.sync.get(default_settings, function (settings) {
         include_user_suggestions();
     }
 
+    if (settings.suggestEmote) {
+        include_keyword_suggestions();
+    }
+
     if (settings.showTimestamp) {
         include_timestamp();
     }
