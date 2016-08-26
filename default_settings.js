@@ -5,6 +5,7 @@ var default_settings = {
     suggestEmote: true,
     hideAvatars: false,
     saveSpace: true,
+    noGreenMemberAccent: false,
     showTimestamp: true,
     blockedTerms: {
         termString: '',

@@ -15,7 +15,13 @@ function addOtherCSS(items) {
         css += ".live-chat-widget .author-is-moderator .avatar, " +
             ".live-chat-widget .author-is-member .avatar, " +
             ".live-chat-widget .author-is-owner .avatar, " +
-            ".live-chat-widget .comment.fan-funding-tip .avatar {width: 24px !important; height: 24px !important;}"
+            ".live-chat-widget .comment.fan-funding-tip .avatar {width: 24px !important; height: 24px !important; padding-left: 4px !important; padding-right: 4px !important;}";
+        // we know our name, thank you very much.
+        css += "#live-comments-controls .byline {display: none !important;}";
+    }
+
+    if (items.noGreenMemberAccent == true) {
+        css += ".live-chat-widget.enable-memberships .comment.author-is-member .accent-bar {display:none; !important;}";
     }
 
     addCssToHead(css);
