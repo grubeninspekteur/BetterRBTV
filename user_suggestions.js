@@ -40,7 +40,7 @@ function include_user_suggestions() {
 
     function completeAuthorSuggestion(suggestBox, authorName, youtube) {
         if (authorName) {
-            suggestBox.replaceSuggestion(youtube.getJChatInputField(), "@", "@" + authorName + ",", true);
+            suggestBox.replaceSuggestion(youtube.getJChatInputField(), "@", "@" + authorName, true);
         }
     }
 
