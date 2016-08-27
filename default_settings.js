@@ -13,5 +13,7 @@ var default_settings = {
     blockedTerms: {
         termString: '',
         isRegex: false
-    }
+    },
+    ignoredUsers: [],
+    highlightedUsers: []
 };

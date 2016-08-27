@@ -43,8 +43,53 @@ function restore_options() {
         document.getElementById('show-timestamp').checked = items.showTimestamp;
         document.getElementById('blocked-terms').value = items.blockedTerms.termString;
         document.getElementById('blocked-terms-is-regex').checked = items.blockedTerms.isRegex;
+
+        listMutedUsers(items.ignoredUsers);
+        listHighlightedUsers(items.highlightedUsers);
     });
     showStoredEmotePack();
+}
+
+function removeMutedUser(ignoredUserId) {
+    chrome.storage.sync.get({ignoredUsers: []}, function (items) {
+        var updatedIgnoredUsers = items.ignoredUsers.filter(u => u.id != ignoredUserId);
+        chrome.storage.sync.set({
+            ignoredUsers: updatedIgnoredUsers
+        },
+        function() {
+            $("#muted-users").find("li[data-yt-user-id='"+ignoredUserId+"']").remove();
+            if (!updatedIgnoredUsers.length) {
+                $("#no-muted-users").removeClass("hid");
+            }
+        }
+        );
+    });
+}
+
+function listMutedUsers(mutedUsers) {
+    if (mutedUsers.length) {
+        $("#no-muted-users").addClass("hid");
+        var jMutedUsers = $("#muted-users");
+        jMutedUsers.removeClass("hid");
+
+
+        for (let i = 0; i < mutedUsers.length; i++) {
+            let mutedUser = mutedUsers[i];
+            let li = $("<li></li>");
+            li.text(mutedUser.name + " ");
+            li.attr('data-yt-user-id', mutedUser.id);
+            let btn = $('<button class="remove-user-button">Entfernen</button>');
+            btn.click(function(e) {
+                removeMutedUser(mutedUser.id);
+            });
+            li.append(btn);
+            jMutedUsers.append(li);
+        }
+    }
+}
+
+function listHighlightedUsers(highlightedUsers) {
+
 }
 
 function showStoredEmotePack() {

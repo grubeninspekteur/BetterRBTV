@@ -7,6 +7,19 @@
         body {
             padding: 10px;
         }
+
+        .hid {
+            display: none;
+        }
+
+        .remove-user-button {
+            background: none;
+            border: none;
+            padding: 0;
+            font: inherit;
+            text-decoration: underline;
+            cursor: pointer;
+        }
     </style>
     <link rel="stylesheet" href="lib/jquery-ui.min.css">
     <link rel="stylesheet" href="lib/jquery-ui.theme.min.css">
@@ -119,6 +132,24 @@
                 Regulärer Ausdruck
             </label>
         </p>
+        <p>
+            Stummgeschaltete Benutzer
+        </p>
+        <div id="no-muted-users">
+            <em>Keine. Schalte Benutzer über das Menü beim Klick auf den Namen stumm.</em>
+        </div>
+        <ul id="muted-users" class="hid">
+
+        </ul>
+        <p>
+            Hervorgehobene Benutzer
+        </p>
+        <div id="no-highlighted-users">
+            <em>Keine. Hebe Benutzer über das Menü beim Klick auf den Namen hervor.</em>
+        </div>
+        <ul id="highlighted-users" class="hid">
+
+        </ul>
     </div>
 </div>
 

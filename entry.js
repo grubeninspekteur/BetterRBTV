@@ -6,6 +6,8 @@ function addOtherCSS(items) {
 
     if (items.hideAvatars == true) {
         css += ".comment .avatar {display: none !important;}";
+        // without seeing avatars, you shouldn't be able to report them
+        css += ".comment-action-report-profile-image {display: none !important;}";
     }
 
     if (items.saveSpace == true) {
@@ -105,4 +107,5 @@ chrome.storage.sync.get(default_settings, function (settings) {
     }
 
     include_chat_filter(settings);
+    include_user_filter(settings);
 });
