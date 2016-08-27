@@ -4,113 +4,131 @@
     <meta charset="utf-8">
     <title>BetterRBTV: Einstellungen</title>
     <style>
-        body: {
+        body {
             padding: 10px;
         }
     </style>
+    <link rel="stylesheet" href="lib/jquery-ui.min.css">
+    <link rel="stylesheet" href="lib/jquery-ui.theme.min.css">
 </head>
 
 <body>
-<p>
-    <label>
-        <input type="checkbox" id="keywords">
-        Twitch-Stützräder
-    </label><br/>
-    <em>Wandelt bekannte Schlüsselwörter von Twitch in Emoticons um.</em>
-</p>
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Emotes</a></li>
+        <li><a href="#tabs-2">Erscheinung</a></li>
+        <li><a href="#tabs-3">Nachrichtenfilter</a></li>
+    </ul>
 
-<p>
-    <label>
-        <input type="checkbox" id="face-emotes">
-        Emote-Pack
-    </label><br/>
-    <!--<span id="loading-spinner" width="12" height="12"></span>-->
-    <input type="file" id="select-pack" accept=".zip" value="Emote-Pack laden"><span id="file-error" style="color:red;"></span><span
-        id="file-success" style="color:green; font-weight: bold;"></span><br/>
-    Aktuell: <span id="emote-pack-name"></span>
-    <span id="emote-pack-preview"></span>
-</p>
+    <div id="tabs-1">
+        <p>
+            <label>
+                <input type="checkbox" id="keywords">
+                Twitch-Stützräder
+            </label><br/>
+            <em>Wandelt bekannte Schlüsselwörter von Twitch in Emoticons um.</em>
+        </p>
 
-<p>
-    <label>
-        <input type="checkbox" id="user-suggest">
-        User-Vorschläge nach "@"
-    </label>
-</p>
+        <p>
+            <label>
+                <input type="checkbox" id="emote-suggest">
+                Emote-Vorschläge nach ":"
+            </label>
+        </p>
 
-<p>
-    <label>
-        <input type="checkbox" id="emote-suggest">
-        Emote-Vorschläge nach ":"
-    </label>
-</p>
+        <p>
+            <label>
+                <input type="checkbox" id="face-emotes">
+                Emote-Pack
+            </label><br/>
+            <!--<span id="loading-spinner" width="12" height="12"></span>-->
+            <input type="file" id="select-pack" accept=".zip" value="Emote-Pack laden"><span id="file-error"
+                                                                                             style="color:red;"></span><span
+                id="file-success" style="color:green; font-weight: bold;"></span><br/>
+            Aktuell: <span id="emote-pack-name"></span>
+            <span id="emote-pack-preview"></span>
+        </p>
+    </div>
 
-<p>
-    <label>
-        <input type="checkbox" id="hide-avatars">
-        Avatare verbergen
-    </label>
-</p>
+    <div id="tabs-2">
+        <p>
+            <label>
+                <input type="checkbox" id="user-suggest">
+                User-Vorschläge nach "@"
+            </label>
+        </p>
 
-<p>
-    <label>
-        <input type="checkbox" id="better-mention-highlight">
-        Bessere Sichtbarkeit von eigenen Usernamen-Erwähnungen (@...)
-    </label>
-</p>
+        <p>
+            <label>
+                <input type="checkbox" id="show-timestamp">
+                Bei Nachrichten Erstellungszeit zeigen
+            </label>
+        </p>
 
-<p>
-    <label>
-        <input type="checkbox" id="less-vip-highlight">
-        weniger aufdringliche VIP-Meldungen
-    </label>
-</p>
+        <p>
+            <label>
+                <input type="checkbox" id="save-space">
+                Zeigt Avatare und Kommentarzeilen von VIPs, Besitzern und Moderatoren platzsparend an
+            </label>
+        </p>
 
-<p>
-    <label>
-        <input type="checkbox" id="better-seperate-messages">
-        Chatnachrichten besser erkennbar voneinander trennen
-    </label>
-</p>
+        <p>
+            <label>
+                <input type="checkbox" id="hide-avatars">
+                Avatare verbergen
+            </label>
+        </p>
 
-<p>
-    <label>
-        <input type="checkbox" id="save-space">
-        Zeigt Avatare und Kommentarzeilen von VIPs, Besitzern und Moderatoren platzsparend an
-    </label>
-</p>
+        <p>
+            <label>
+                <input type="checkbox" id="better-mention-highlight">
+                Bessere Sichtbarkeit von eigenen Usernamen-Erwähnungen (@...)
+            </label>
+        </p>
 
-<p>
-    <label>
-        <input type="checkbox" id="no-green-member-accent">
-        Keine grüne Akzentleiste links bei Nachrichten von VIPs
-    </label>
-</p>
+        <p>
+            <label>
+                <input type="checkbox" id="better-seperate-messages">
+                Chatnachrichten besser erkennbar voneinander trennen
+            </label>
+        </p>
 
-<p>
-    <label>
-        <input type="checkbox" id="show-timestamp">
-        Bei Nachrichten Erstellungszeit zeigen
-    </label>
-</p>
+        <p>
+            <label>
+                <input type="checkbox" id="less-vip-highlight">
+                weniger aufdringliche VIP-Meldungen
+            </label>
+        </p>
 
-<p>
-    <label>
-        Nachrichtentext-Blacklist - Wörter per Leerzeichen trennen<br/>
-        <input type="text" placeholder="!cd !gpd ..." id="blocked-terms">
-    </label>
-    <label>
-        <input type="checkbox" id="blocked-terms-is-regex">
-        Regulärer Ausdruck
-    </label>
-</p>
+        <p>
+            <label>
+                <input type="checkbox" id="no-green-member-accent">
+                Keine grüne Akzentleiste links bei Nachrichten von VIPs
+            </label>
+        </p>
+    </div>
 
-<p>
-<div id="status"></div>
+    <div id="tabs-3">
+        <p>
+            <label>
+                Nachrichtentext-Blacklist - Wörter per Leerzeichen trennen<br/>
+                <input type="text" placeholder="!cd !gpd ..." id="blocked-terms">
+            </label>
+            <label>
+                <input type="checkbox" id="blocked-terms-is-regex">
+                Regulärer Ausdruck
+            </label>
+        </p>
+    </div>
+</div>
+
 <button id="save">Speichern</button>
-</p>
+<div id="status"></div>
+
 <script src="default_settings.js"></script>
 <script src="lib/jszip.min.js"></script>
+<script src="lib/jquery-3.1.0.slim.min.js"></script>
+<script src="lib/jquery-ui.min.js"></script>
 <script src="options.js"></script>
 </body>
 </html>

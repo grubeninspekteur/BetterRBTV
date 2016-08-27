@@ -59,7 +59,7 @@ function showStoredEmotePack() {
                 var img = pack.images[i];
                 preview += '<span style="font-size:25px">'+img.emote+'</span> =' + ' <img width="' + img.width + '" height="' + img.height + '" src="data:image/png;base64,' + img.base64 + '" /> ';
                 if (i+1 < pack.images.length) preview += ", ";
-                if (i % 4 == 3) preview += "<br/>";
+                //if (i % 4 == 3) preview += "<br/>";
             }
             document.getElementById('emote-pack-name').innerHTML = pack.name + "<br/>";
             document.getElementById('emote-pack-preview').innerHTML = preview;
@@ -157,11 +157,6 @@ function loadEmotePack(fileName, fileContents) {
 
                             Promise.all(images_dimension_promises).then(
                                 function(image_dimensions) {
-                                    testOutput = "";
-                                    for (var i = 0; i < encoded_images.length; i++) {
-                                        testOutput += emoticons[i] + "=width:" + image_dimensions[i][0]+"height:"+image_dimensions[i][1]+"\n";
-                                    }
-
                                     saveImages(fileName, emoticons, encoded_images, image_dimensions);
                                 }
                             );
@@ -206,3 +201,5 @@ document.getElementById('save').addEventListener('click',
     save_options);
 document.getElementById('select-pack').addEventListener('change',
     choose_emote_pack);
+
+$("#tabs").tabs();
