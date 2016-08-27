@@ -36,7 +36,7 @@ function include_keyword_replacement() {
                 if (replaced) {
                     var replacedPosition = textInput.innerHTML.indexOf(whatWasReplaced);
                     textInput.innerHTML = theInnerHTML;
-                    setCaretPosition(textInput, replacedPosition + 1);
+                    setCaretPosition(textInput, replacedPosition + 2);
                 }
             });
         }

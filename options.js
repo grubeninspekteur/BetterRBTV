@@ -1,3 +1,8 @@
+// Non Chrome browsers: if sync is not available, redirect to local storage
+if (!chrome.storage.sync) {
+    chrome.storage.sync = chrome.storage.local;
+}
+
 // Saves options to chrome.storage.sync.
 function save_options() {
     chrome.storage.sync.set({
