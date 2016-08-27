@@ -44,8 +44,31 @@ function restore_options() {
         document.getElementById('blocked-terms').value = items.blockedTerms.termString;
         document.getElementById('blocked-terms-is-regex').checked = items.blockedTerms.isRegex;
 
-        listMutedUsers(items.ignoredUsers);
-        listHighlightedUsers(items.highlightedUsers);
+        listFilteredUsers(items.ignoredUsers, "ignoredUsers", $("#no-muted-users"), $("#muted-users"));
+        listFilteredUsers(items.highlightedUsers, "highlightedUsers", $("#no-highlighted-users"), $("#highlighted-users"));
+        var jCustomHighlightInput = $("#add-custom-highlight-id");
+        var customHighlightButton = $("#add-custom-highlight-button");
+
+        customHighlightButton.click(function (e) {
+            var theId = jCustomHighlightInput.val().trim();
+            if (theId) {
+                customHighlightButton.prop("disabled", true);
+                chrome.storage.sync.get({highlightedUsers: []}, function (items) {
+                    var updatedHighlightedUsers = items.highlightedUsers;
+                    updatedHighlightedUsers.push({
+                        name: "custom-added",
+                        id: theId,
+                        addedTime: Date.now()
+                    });
+                    chrome.storage.sync.set({highlightedUsers: updatedHighlightedUsers}, function () {
+
+                        jCustomHighlightInput.val("");
+                        customHighlightButton.prop("disabled", false);
+                        listFilteredUsers(updatedHighlightedUsers, "highlightedUsers", $("#no-highlighted-users"), $("#highlighted-users"));
+                    });
+                });
+            }
+        });
     });
     showStoredEmotePack();
 }
@@ -54,6 +77,7 @@ function listFilteredUsers(filteredUsersArray, storageKey, jNoUsersFiltered, jFi
     if (filteredUsersArray.length) {
         jNoUsersFiltered.addClass("hid");
         jFilteredUsers.removeClass("hid");
+        jFilteredUsers.empty();
 
 
         for (let i = 0; i < filteredUsersArray.length; i++) {
@@ -84,14 +108,6 @@ function listFilteredUsers(filteredUsersArray, storageKey, jNoUsersFiltered, jFi
             jFilteredUsers.append(li);
         }
     }
-}
-
-function listMutedUsers(mutedUsers) {
-    listFilteredUsers(mutedUsers, "ignoredUsers", $("#no-muted-users"), $("#muted-users"));
-}
-
-function listHighlightedUsers(highlightedUsers) {
-    listFilteredUsers(highlightedUsers, "highlightedUsers", $("#no-highlighted-users"), $("#highlighted-users"));
 }
 
 function showStoredEmotePack() {
