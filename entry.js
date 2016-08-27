@@ -101,6 +101,12 @@ chrome.storage.sync.get(default_settings, function (settings) {
     if (settings.showTimestamp) {
         include_timestamp();
     }
+	
+	// put it before mention highlighting because it searches for .mention class inside comment, which the
+	// following function would already have removed
+	if (settings.pushNotifications) {
+        include_push_notifications();
+    }
 
     if (settings.betterMentionHighlight) {
         include_better_mention_highlight();

@@ -6,6 +6,7 @@ var default_settings = {
     hideAvatars: false,
     saveSpace: true,
 	betterMentionHighlight: true,
+	pushNotifications: false,
 	lessVipHighlight: false,
 	betterSeperateMessages: false,
     noGreenMemberAccent: false,
