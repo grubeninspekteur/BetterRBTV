@@ -31,6 +31,7 @@ function addOtherCSS(items) {
         css += ".live-chat-widget.dark .comment.fan-funding-tip, .live-chat-widget.dark .comment.fan-funding-tip .comment-text, .live-chat-widget.dark .comment.new-member-announcement .comment-text {color: rgba(255,255,255,0.54) !important;}";
         css += ".live-chat-widget .comment.fan-funding-tip:not(:hover) .comment-text a, .live-chat-widget .comment.new-member-announcement .comment-text a {color:#000 !important;}";
         css += ".live-chat-widget.dark .comment:not(:hover) .comment-text a {color:#fff !important;}";
+        css += ".live-chat-widget.dark .comment:hover .comment-text a {color:#fff !important;}";
     }
     if (items.betterSeperateMessages == true) {
         css += ".live-chat-widget .comment {border-bottom: 1px solid rgba(0,0,0,0.2);}";
