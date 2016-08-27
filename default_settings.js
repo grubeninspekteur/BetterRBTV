@@ -5,6 +5,9 @@ var default_settings = {
     suggestEmote: true,
     hideAvatars: false,
     saveSpace: true,
+	betterMentionHighlight: true,
+	lessVipHighlight: false,
+	betterSeperateMessages: false,
     noGreenMemberAccent: false,
     showTimestamp: true,
     blockedTerms: {

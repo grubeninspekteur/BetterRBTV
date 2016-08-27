@@ -21,6 +21,7 @@
         "YouTubeLive.js",
         "default_settings.js",
         "timestamp.js",
+		"better_mention_highlight.js",
         "chat_filter.js",
         "keyword_replacement.js",
         "user_suggestions.js",

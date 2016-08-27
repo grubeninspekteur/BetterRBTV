@@ -23,6 +23,19 @@ function addOtherCSS(items) {
     if (items.noGreenMemberAccent == true) {
         css += ".live-chat-widget.enable-memberships .comment.author-is-member .accent-bar {display:none; !important;}";
     }
+	
+    if (items.lessVipHighlight == true) {
+        css += ".live-chat-widget .comment.fan-funding-tip, .live-chat-widget .comment.new-member-announcement, .live-chat-widget.dark .comment.fan-funding-tip, .live-chat-widget.dark .comment.new-member-announcement {background-color: initial !important;}";
+        css += ".live-chat-widget .comment.new-member-announcement .byline {color: #0f9d58 !important;}";
+        css += ".live-chat-widget .comment.fan-funding-tip, .live-chat-widget .comment.fan-funding-tip .comment-text, .live-chat-widget .comment.new-member-announcement .comment-text {color: rgba(0,0,0,0.54) !important;}";
+        css += ".live-chat-widget.dark .comment.fan-funding-tip, .live-chat-widget.dark .comment.fan-funding-tip .comment-text, .live-chat-widget.dark .comment.new-member-announcement .comment-text {color: rgba(255,255,255,0.54) !important;}";
+        css += ".live-chat-widget .comment.fan-funding-tip:not(:hover) .comment-text a, .live-chat-widget .comment.new-member-announcement .comment-text a {color:#000 !important;}";
+        css += ".live-chat-widget.dark .comment:not(:hover) .comment-text a {color:#fff !important;}";
+    }
+    if (items.betterSeperateMessages == true) {
+        css += ".live-chat-widget .comment {border-bottom: 1px solid rgba(0,0,0,0.2);}";
+        css += ".live-chat-widget.dark .comment {border-top: 1px solid rgba(255,255,255,0.2); border-bottom: 1px solid rgba(0,0,0,0.6); }";
+    }
 
     addCssToHead(css);
 }
@@ -82,6 +95,10 @@ chrome.storage.sync.get(default_settings, function (settings) {
 
     if (settings.showTimestamp) {
         include_timestamp();
+    }
+
+    if (settings.betterMentionHighlight) {
+        include_better_mention_highlight();
     }
 
     include_chat_filter(settings);
