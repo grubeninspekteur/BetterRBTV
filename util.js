@@ -137,8 +137,8 @@ class SuggestionBox {
         if (!SuggestionBox.ANY_BOX_CREATED) {
             // add box css only once
             var cssToAdd = `
-		#brbtv-suggestion-box,
-		#brbtv-suggestion-box * {
+		.brbtv-suggestion-box,
+		.brbtv-suggestion-box * {
 			box-sizing: border-box;
 		}
 		.brbtv-suggestion-box {
@@ -146,7 +146,7 @@ class SuggestionBox {
 		}
 		.brbtv-suggestion {
 			padding:5px;
-						border-bottom: 1px solid rgba(0,0,0,0.3);
+			border-bottom: 1px solid rgba(0,0,0,0.3);
 			border-top: 1px solid rgba(255,255,255,0.2);
 			display: block;
 		}
