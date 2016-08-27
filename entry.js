@@ -78,6 +78,11 @@ function addEmojiTooltips() {
 }
 
 // *** ENTRY POINT ***
+// Non Chrome browsers: if sync is not available, redirect to local storage
+if (!chrome.storage.sync) {
+    chrome.storage.sync = chrome.storage.local;
+}
+
 chrome.storage.sync.get(default_settings, function (settings) {
     if (settings.twitchKeywordReplacement) {
         include_keyword_replacement(settings);
