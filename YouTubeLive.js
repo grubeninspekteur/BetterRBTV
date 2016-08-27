@@ -73,6 +73,10 @@ class YouTubeLive {
 
     static _startLoadingChat() {
         if (YouTubeLive._currently_loading & YouTubeLive.CHAT) return;
+        if (BRBTV_DEBUG) {
+            let url = $("link[rel='canonical']").attr('href');
+            console.log("BRBTV: Started looking for chat on "+url);
+        }
         YouTubeLive._currently_loading = YouTubeLive._currently_loading | YouTubeLive.CHAT;
         function chatTimeoutOccurred(callback) {
             if (document.readyState != 'complete') {
@@ -88,7 +92,16 @@ class YouTubeLive {
             }
 
             if (textInput != null) {
+                if (BRBTV_DEBUG) {
+                    let url = $("link[rel='canonical']").attr('href');
+                    console.log("BRBTV: chat found on "+url);
+                }
                 callback();
+            } else {
+                if (BRBTV_DEBUG) {
+                    let url = $("link[rel='canonical']").attr('href');
+                    console.log("BRBTV: No chat found, scripts will not run on "+url);
+                }
             }
         }
 

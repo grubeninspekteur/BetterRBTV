@@ -1,3 +1,5 @@
+const BRBTV_DEBUG = false;
+
 function addOtherCSS(items) {
 
     var css = '';
