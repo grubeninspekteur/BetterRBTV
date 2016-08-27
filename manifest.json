@@ -42,11 +42,5 @@
   },
   "browser_action": {
     "default_icon": "icon-32.png"
-  },
-
-  "applications": {
-    "gecko": {
-      "id": "see-stackoverflow-38345406@firefox.bug"
-    }
   }
 }
