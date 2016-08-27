@@ -205,7 +205,7 @@ class SuggestionBox {
     }
 
     /**
-     * Adds the specified dom elements to the suggestion box in their order. The current user selection
+     * Adds the specified DOM elements to the suggestion box in their order. The current user selection
      * will be reset to the top.
      *
      * @param spanElements jQuery span elements
@@ -236,7 +236,7 @@ class SuggestionBox {
 
     /**
      * Will call the callback if on a keyup event the specified triggerString was found at a
-     * position before the caret with the string between the trigger and the caret. Otherwise,
+     * position before the caret with the string between the trigger (non-inclusive) and the caret. Otherwise,
      * the callback will be called with null.
      */
     addTrigger(jChatInput, triggerString, callback) {

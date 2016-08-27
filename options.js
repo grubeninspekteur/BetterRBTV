@@ -43,12 +43,75 @@ function restore_options() {
         document.getElementById('show-timestamp').checked = items.showTimestamp;
         document.getElementById('blocked-terms').value = items.blockedTerms.termString;
         document.getElementById('blocked-terms-is-regex').checked = items.blockedTerms.isRegex;
+
+        listFilteredUsers(items.ignoredUsers, "ignoredUsers", $("#no-muted-users"), $("#muted-users"));
+        listFilteredUsers(items.highlightedUsers, "highlightedUsers", $("#no-highlighted-users"), $("#highlighted-users"));
+        var jCustomHighlightInput = $("#add-custom-highlight-id");
+        var customHighlightButton = $("#add-custom-highlight-button");
+
+        customHighlightButton.click(function (e) {
+            var theId = jCustomHighlightInput.val().trim();
+            if (theId) {
+                customHighlightButton.prop("disabled", true);
+                chrome.storage.sync.get({highlightedUsers: []}, function (items) {
+                    var updatedHighlightedUsers = items.highlightedUsers;
+                    updatedHighlightedUsers.push({
+                        name: "custom-added",
+                        id: theId,
+                        addedTime: Date.now()
+                    });
+                    chrome.storage.sync.set({highlightedUsers: updatedHighlightedUsers}, function () {
+
+                        jCustomHighlightInput.val("");
+                        customHighlightButton.prop("disabled", false);
+                        listFilteredUsers(updatedHighlightedUsers, "highlightedUsers", $("#no-highlighted-users"), $("#highlighted-users"));
+                    });
+                });
+            }
+        });
     });
     showStoredEmotePack();
 }
 
+function listFilteredUsers(filteredUsersArray, storageKey, jNoUsersFiltered, jFilteredUsers) {
+    if (filteredUsersArray.length) {
+        jNoUsersFiltered.addClass("hid");
+        jFilteredUsers.removeClass("hid");
+        jFilteredUsers.empty();
+
+
+        for (let i = 0; i < filteredUsersArray.length; i++) {
+            let filteredUser = filteredUsersArray[i];
+            let li = $("<li></li>");
+            li.text(filteredUser.name + " (" + filteredUser.id + ") ");
+            li.attr('data-yt-user-id', filteredUser.id);
+            let btn = $('<button class="remove-user-button">Entfernen</button>');
+            btn.click(function (e) {
+                let query = {};
+                query[storageKey] = [];
+                console.log(query);
+                chrome.storage.sync.get(query, function (items) {
+                    var updatedFilteredUsers = items[storageKey].filter(u => u.id != filteredUser.id);
+                    let query = {};
+                    query[storageKey] = updatedFilteredUsers;
+                    chrome.storage.sync.set(query,
+                        function () {
+                            jFilteredUsers.find("li[data-yt-user-id='" + filteredUser.id + "']").remove();
+                            if (!updatedFilteredUsers.length) {
+                                jNoUsersFiltered.removeClass("hid");
+                            }
+                        }
+                    );
+                });
+            });
+            li.append(btn);
+            jFilteredUsers.append(li);
+        }
+    }
+}
+
 function showStoredEmotePack() {
-    chrome.storage.local.get('emotePack', function(items) {
+    chrome.storage.local.get('emotePack', function (items) {
         var pack = items.emotePack;
         if (pack == null) {
             document.getElementById('emote-pack-name').innerHTML = "Kein Emote-Pack installiert";
@@ -57,9 +120,9 @@ function showStoredEmotePack() {
             var preview = '';
             for (var i = 0; i < pack.images.length; i++) {
                 var img = pack.images[i];
-                preview += '<span style="font-size:25px">'+img.emote+'</span> =' + ' <img width="' + img.width + '" height="' + img.height + '" src="data:image/png;base64,' + img.base64 + '" /> ';
-                if (i+1 < pack.images.length) preview += ", ";
-                if (i % 4 == 3) preview += "<br/>";
+                preview += '<span style="font-size:25px">' + img.emote + '</span> =' + ' <img width="' + img.width + '" height="' + img.height + '" src="data:image/png;base64,' + img.base64 + '" /> ';
+                if (i + 1 < pack.images.length) preview += ", ";
+                //if (i % 4 == 3) preview += "<br/>";
             }
             document.getElementById('emote-pack-name').innerHTML = pack.name + "<br/>";
             document.getElementById('emote-pack-preview').innerHTML = preview;
@@ -97,7 +160,7 @@ function saveImages(name, emoticons, images, image_dimensions) {
             "height": image_dimensions[i][1]
         });
     }
-    chrome.storage.local.set({"emotePack" : pack}, function() {
+    chrome.storage.local.set({"emotePack": pack}, function () {
         showStoredEmotePack();
         readSuccess("Emote-Pack geladen!");
     });
@@ -123,10 +186,9 @@ function loadEmotePack(fileName, fileContents) {
                     for (var i = 0; i < lines.length; i++) {
                         var parts = lines[i].trim().split(':');
                         if (parts.length != 2 || untrustedChars.test(parts[0])) {
-                            readError("map.txt: Fehler Zeile " + (i+1));
+                            readError("map.txt: Fehler Zeile " + (i + 1));
                             return;
                         }
-
 
 
                         var emoticon = parts[0].trim();
@@ -139,7 +201,6 @@ function loadEmotePack(fileName, fileContents) {
                     }
 
 
-
                     Promise.all(promises).then(
                         function (encoded_images) {
                             var images_dimension_promises = [];
@@ -147,21 +208,18 @@ function loadEmotePack(fileName, fileContents) {
                                 // get image dimensions
                                 var img = new Image;
                                 // boilerplate code to capture i and img at this moment
-                                (function(i, img) {
-                                images_dimension_promises.push(new Promise(function(resolve, reject) {
-                                    img.onload = function(){resolve([img.width, img.height])};
-                                    img.src = "data:image;base64," + encoded_images[i];
-                                }));
-                                })(i,img);
+                                (function (i, img) {
+                                    images_dimension_promises.push(new Promise(function (resolve, reject) {
+                                        img.onload = function () {
+                                            resolve([img.width, img.height])
+                                        };
+                                        img.src = "data:image;base64," + encoded_images[i];
+                                    }));
+                                })(i, img);
                             }
 
                             Promise.all(images_dimension_promises).then(
-                                function(image_dimensions) {
-                                    testOutput = "";
-                                    for (var i = 0; i < encoded_images.length; i++) {
-                                        testOutput += emoticons[i] + "=width:" + image_dimensions[i][0]+"height:"+image_dimensions[i][1]+"\n";
-                                    }
-
+                                function (image_dimensions) {
                                     saveImages(fileName, emoticons, encoded_images, image_dimensions);
                                 }
                             );
@@ -170,9 +228,9 @@ function loadEmotePack(fileName, fileContents) {
                             return;
                         })
                 },
-            function() {
+                function () {
                     readError("map.txt konnte nicht gelesen werden!");
-            });
+                });
         },
         function () {
             readError('Zip-Datei konnte nicht entpackt werden');
@@ -206,3 +264,5 @@ document.getElementById('save').addEventListener('click',
     save_options);
 document.getElementById('select-pack').addEventListener('change',
     choose_emote_pack);
+
+$("#tabs").tabs();

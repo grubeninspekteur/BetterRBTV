@@ -23,6 +23,7 @@
         "timestamp.js",
 		"better_mention_highlight.js",
         "chat_filter.js",
+        "user_filters.js",
         "keyword_replacement.js",
         "user_suggestions.js",
         "keyword_suggestions.js",

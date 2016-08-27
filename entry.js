@@ -1,9 +1,13 @@
+const BRBTV_DEBUG = false;
+
 function addOtherCSS(items) {
 
     var css = '';
 
     if (items.hideAvatars == true) {
         css += ".comment .avatar {display: none !important;}";
+        // without seeing avatars, you shouldn't be able to report them
+        css += ".comment-action-report-profile-image {display: none !important;}";
     }
 
     if (items.saveSpace == true) {
@@ -21,7 +25,7 @@ function addOtherCSS(items) {
     }
 
     if (items.noGreenMemberAccent == true) {
-        css += ".live-chat-widget.enable-memberships .comment.author-is-member .accent-bar {display:none; !important;}";
+        css += ".live-chat-widget.enable-memberships .comment.author-is-member:not(.brbtv-highlighted-message) .accent-bar  {display: none !important;}";
     }
 	
     if (items.lessVipHighlight == true) {
@@ -103,4 +107,5 @@ chrome.storage.sync.get(default_settings, function (settings) {
     }
 
     include_chat_filter(settings);
+    include_user_filter(settings);
 });
