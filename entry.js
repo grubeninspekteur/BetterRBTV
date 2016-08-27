@@ -25,7 +25,7 @@ function addOtherCSS(items) {
     }
 
     if (items.noGreenMemberAccent == true) {
-        css += ".live-chat-widget.enable-memberships .comment.author-is-member .accent-bar {display:none; !important;}";
+        css += ".live-chat-widget.enable-memberships .comment.author-is-member:not(.brbtv-highlighted-message) .accent-bar  {display: none !important;}";
     }
 	
     if (items.lessVipHighlight == true) {
