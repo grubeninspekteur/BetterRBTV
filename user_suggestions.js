@@ -1,5 +1,4 @@
 var authors = new Set();
-const MAX_SUGGESTIONS = 5;
 
 function resetAuthors(youtube) {
     // TODO use trie to not iterate over n users
@@ -33,9 +32,10 @@ function include_user_suggestions() {
                     a.text().localeCompare(b.text())
                 });
             }
-
-            suggestBox.setContents(suggestedAuthorElements);
         }
+
+        suggestBox.setContents(suggestedAuthorElements);
+
     }
 
     function completeAuthorSuggestion(suggestBox, authorName, youtube) {
@@ -62,7 +62,10 @@ function include_user_suggestions() {
             }
         });
 
-        var suggestBox = new SuggestionBox("author", youtube.getJChatInputField(), function (authorName, suggestBox) {
+        var suggestBox = new SuggestionBox(
+            "author",
+            youtube.getJChatInputField(),
+            function (authorName, suggestBox) {
             completeAuthorSuggestion(suggestBox, authorName, youtube);
         });
 

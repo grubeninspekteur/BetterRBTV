@@ -114,6 +114,7 @@ String.prototype.replaceBetween = function (start, end, what) {
     return this.substring(0, start) + what + this.substring(end);
 };
 
+const MAX_SUGGESTIONS = 5;
 const KEY_DOWN = 40;
 const KEY_UP = 38;
 const KEY_TAB = 9;
@@ -229,7 +230,7 @@ class SuggestionBox {
 
             this._jSuggestBox.removeClass("hid");
         } else {
-            this._jSuggestBox.addClass("hid");
+            this._resetBox();
         }
     }
 
