@@ -1,14 +1,22 @@
-var authors = new Set();
+var authorTrie = new Trie();
+var authorSet = new Set();
 
 function resetAuthors(youtube) {
-    // TODO use trie to not iterate over n users
-    var newAuthors = new Set();
+    var newAuthorTrie = new Trie();
+    var newAuthorSet = new Set();
+
     youtube.iteratePastChatMessages(function (message) {
         $(message).not(".author-is-owner").find("span.author a.yt-user-name").each(function (i, elem) {
-            newAuthors.add(elem.innerText);
+
+                var authorNameLc = elem.innerText.toLowerCase();
+            if (!newAuthorSet.has(authorNameLc)) {
+                newAuthorSet.add(authorNameLc);
+                newAuthorTrie.add(authorNameLc, {name: elem.innerText});
+            }
         });
     });
-    authors = newAuthors;
+    authorTrie = newAuthorTrie;
+    authorSet = newAuthorSet;
 }
 
 function include_user_suggestions() {
@@ -16,20 +24,15 @@ function include_user_suggestions() {
         var suggestedAuthorElements = [];
 
         if (name && name.length > 0) {
-            var suggestions = 0;
             var name_lower = name.toLowerCase();
-            for (let author of authors) {
-                if (author.toLowerCase().startsWith(name_lower)) {
-                    suggestions++;
-                    let authorElement = $("<span></span>");
-                    authorElement.text(author);
-                    suggestedAuthorElements.push(authorElement);
-                    if (suggestions == MAX_SUGGESTIONS) break;
-                }
 
-                // show list alphabetically
-                suggestedAuthorElements.sort(function (a, b) {
-                    a.text().localeCompare(b.text())
+            var root = authorTrie.find(name_lower);
+
+            if (root != null) {
+                suggestedAuthorElements = root.getMetas(MAX_SUGGESTIONS).map(meta => {
+                    let authorElement = $("<span></span>");
+                    authorElement.text(meta.name);
+                    return authorElement;
                 });
             }
         }
@@ -47,18 +50,20 @@ function include_user_suggestions() {
     // MAIN
 
     YouTubeLive.onChatLoaded(function (youtube) {
-        // fetch initial authors
+        // fetch initial authorTrie
         resetAuthors(youtube);
 
-        // make sure we remove authors from time to time so we don't get a list of x-thousand users
+        // make sure we remove authorTrie from time to time so we don't get a list of x-thousand users
         setInterval(function () {
             resetAuthors(youtube)
         }, 60000); // 1 minute
 
         youtube.registerChatMessageObserver(function (message) {
-            var author_name = $(message).not("author-viewing").find("a.yt-user-name").text();
-            if (author_name) {
-                authors.add(author_name);
+            var authorName = $(message).not(".author-viewing").find("a.yt-user-name").text();
+            var authorNameLc = authorName.toLowerCase();
+            if (authorName && !authorSet.has(authorNameLc)) {
+                authorTrie.add(authorNameLc, {name: authorName});
+                authorSet.add(authorNameLc);
             }
         });
 
@@ -66,8 +71,8 @@ function include_user_suggestions() {
             "author",
             youtube.getJChatInputField(),
             function (authorName, suggestBox) {
-            completeAuthorSuggestion(suggestBox, authorName, youtube);
-        });
+                completeAuthorSuggestion(suggestBox, authorName, youtube);
+            });
 
         suggestBox.addTrigger(youtube.getJChatInputField(), "@", function (namePart) {
             suggestAuthors(suggestBox, namePart);
