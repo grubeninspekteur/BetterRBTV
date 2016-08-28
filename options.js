@@ -12,6 +12,7 @@ function save_options() {
         suggestEmote: document.getElementById('emote-suggest').checked,
         hideAvatars: document.getElementById('hide-avatars').checked,
         betterMentionHighlight: document.getElementById('better-mention-highlight').checked,
+        pushNotifications: document.getElementById('push-notifications').checked,
         lessVipHighlight: document.getElementById('less-vip-highlight').checked,
         betterSeperateMessages: document.getElementById('better-seperate-messages').checked,
         noGreenMemberAccent: document.getElementById('no-green-member-accent').checked,
@@ -42,6 +43,7 @@ function restore_options() {
         document.getElementById('hide-avatars').checked = items.hideAvatars;
         document.getElementById('save-space').checked = items.saveSpace;
         document.getElementById('better-mention-highlight').checked = items.betterMentionHighlight;
+        document.getElementById('push-notifications').checked = items.pushNotifications;
         document.getElementById('less-vip-highlight').checked = items.lessVipHighlight;
         document.getElementById('better-seperate-messages').checked = items.betterSeperateMessages;
         document.getElementById('no-green-member-accent').checked = items.noGreenMemberAccent;
