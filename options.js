@@ -11,6 +11,7 @@ function save_options() {
         suggestUser: document.getElementById('user-suggest').checked,
         suggestEmote: document.getElementById('emote-suggest').checked,
         hideAvatars: document.getElementById('hide-avatars').checked,
+        coloredNames: document.getElementById('colored-names').checked,
         betterMentionHighlight: document.getElementById('better-mention-highlight').checked,
         pushNotifications: document.getElementById('push-notifications').checked,
         lessVipHighlight: document.getElementById('less-vip-highlight').checked,
@@ -42,6 +43,7 @@ function restore_options() {
         document.getElementById('emote-suggest').checked = items.suggestEmote;
         document.getElementById('hide-avatars').checked = items.hideAvatars;
         document.getElementById('save-space').checked = items.saveSpace;
+        document.getElementById('colored-names').checked = items.coloredNames;
         document.getElementById('better-mention-highlight').checked = items.betterMentionHighlight;
         document.getElementById('push-notifications').checked = items.pushNotifications;
         document.getElementById('less-vip-highlight').checked = items.lessVipHighlight;

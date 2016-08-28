@@ -22,6 +22,7 @@
         "YouTubeLive.js",
         "default_settings.js",
         "timestamp.js",
+		"colored_names.js",
 		"better_mention_highlight.js",
 		"push_notifications.js",
         "chat_filter.js",
