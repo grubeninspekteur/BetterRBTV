@@ -1,16 +1,15 @@
 function createPushNotification(commentElem) {
 
 	// http://www.html5rocks.com/en/tutorials/pagevisibility/intro/#toc-topic
+	var browser_props = ['webkitHidden','mozHidden','msHidden','oHidden'];
 	function getHiddenProp(){
-		var prefixes = ['webkit','moz','ms','o'];
-		
 		// if 'hidden' is natively supported just return it
 		if ('hidden' in document) return 'hidden';
 		
 		// otherwise loop over all the known prefixes until we find one
-		for (var i = 0; i < prefixes.length; i++){
-			if ((prefixes[i] + 'Hidden') in document) 
-				return prefixes[i] + 'Hidden';
+		for (var i = 0; i < browser_props.length; i++){
+			if ((browser_props[i]) in document)
+				return browser_props[i];
 		}
 
 		// otherwise it's not supported
@@ -34,7 +33,6 @@ function createPushNotification(commentElem) {
 			var mention = $(commentElem).find('.mention');
 			if (mention.length) {
 				
-				// get dat' sexy data
 				var commentId = $(commentElem).find('li.comment').attr('id');
 				var userName = $(commentElem).find('.yt-user-name').text().trim();
 				var commentMsg = $(commentElem).find('.comment-text').text().trim();
@@ -58,6 +56,11 @@ function createPushNotification(commentElem) {
 }
 
 function include_push_notifications() {
+	// ask for permission at startup
+	if (!Push.Permission.has()) {
+		Push.Permission.request();
+	}
+
     YouTubeLive.onChatLoaded(function (youtube) {
         youtube.registerChatMessageObserver(createPushNotification, false);
     });
