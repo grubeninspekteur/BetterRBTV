@@ -71,36 +71,45 @@ function addCssToHead(css) {
 function setCaretPosition(el, position) {
     var range = document.createRange();
     var sel = window.getSelection();
-    range.setStart(el.childNodes[0], position);
-    range.collapse(true);
-    sel.removeAllRanges();
-    sel.addRange(range);
-}
-
-// http://stackoverflow.com/questions/3972014/get-caret-position-in-contenteditable-div
-function getCaretPosition(editableDiv) {
-    var caretPos = 0,
-        sel, range;
-    if (window.getSelection) {
-        sel = window.getSelection();
-        if (sel.rangeCount) {
-            range = sel.getRangeAt(0);
-            if (range.commonAncestorContainer.parentNode == editableDiv) {
-                caretPos = range.endOffset;
-            }
-        }
-    } else if (document.selection && document.selection.createRange) {
-        range = document.selection.createRange();
-        if (range.parentElement() == editableDiv) {
-            var tempEl = document.createElement("span");
-            editableDiv.insertBefore(tempEl, editableDiv.firstChild);
-            var tempRange = range.duplicate();
-            tempRange.moveToElementText(tempEl);
-            tempRange.setEndPoint("EndToEnd", range);
-            caretPos = tempRange.text.length;
+    // find first text node containing the position
+    let lengthPassed = 0;
+    for (let i = 0; i < el.childNodes.length; i++) {
+        if (el.childNodes[i].nodeType != 3) continue;
+        if (position > el.childNodes[i].nodeValue.length + lengthPassed) {
+            lengthPassed += el.childNodes[i].nodeValue.length;
+        } else {
+            range.setStart(el.childNodes[i], position - lengthPassed);
+            range.collapse(true);
+            sel.removeAllRanges();
+            sel.addRange(range);
+            return;
         }
     }
-    return caretPos;
+}
+
+//stackoverflow.com/questions/4811822/get-a-ranges-start-and-end-offsets-relative-to-its-parent-container/4812022#4812022
+function getCaretPosition(element) {
+    var caretOffset = 0;
+    var doc = element.ownerDocument || element.document;
+    var win = doc.defaultView || doc.parentWindow;
+    var sel;
+    if (typeof win.getSelection != "undefined") {
+        sel = win.getSelection();
+        if (sel.rangeCount > 0) {
+            var range = win.getSelection().getRangeAt(0);
+            var preCaretRange = range.cloneRange();
+            preCaretRange.selectNodeContents(element);
+            preCaretRange.setEnd(range.endContainer, range.endOffset);
+            caretOffset = preCaretRange.toString().length;
+        }
+    } else if ((sel = doc.selection) && sel.type != "Control") {
+        var textRange = sel.createRange();
+        var preCaretTextRange = doc.body.createTextRange();
+        preCaretTextRange.moveToElementText(element);
+        preCaretTextRange.setEndPoint("EndToEnd", textRange);
+        caretOffset = preCaretTextRange.text.length;
+    }
+    return caretOffset;
 }
 
 //http://stackoverflow.com/questions/4467539/javascript-modulo-not-behaving
@@ -246,8 +255,7 @@ class SuggestionBox {
             if (indexOfTrigger != -1) {
                 var caret = getCaretPosition(jChatInput[0]);
                 if (caret > indexOfTrigger) {
-                    callback(jChatInput.html().substring(indexOfTrigger + 1, caret));
-
+                    callback(jChatInput.text().substring(indexOfTrigger + 1, caret));
                 }
             } else {
                 callback(null);
@@ -257,10 +265,11 @@ class SuggestionBox {
 
     _findPositionOfStringBeforeCaret(jTextInput, s) {
         var caretPos = getCaretPosition(jTextInput[0]);
-        var innerHTML = jTextInput.html();
+        var innerText = jTextInput.text();
         var theStringPos = -1;
-        for (var i = 0; i < innerHTML.length; i++) {
-            if (innerHTML[i] == s && i < caretPos) {
+        //console.log("Find "+s+" before caret pos "+caretPos);
+        for (var i = 0; i < innerText.length; i++) {
+            if (innerText[i] == s && i < caretPos) {
                 theStringPos = i;
             }
         }
@@ -313,9 +322,35 @@ class SuggestionBox {
         var newCaret = indexOfSymbol + replacement.length;
         if (insertSpace) {
             newCaret += 1;
-            replacement = replacement + "&nbsp;";
+            replacement = replacement + "\u00A0";
         }
-        textInput.html(textInput.html().replaceBetween(indexOfSymbol, indexOfCaret, replacement));
+
+        //console.log(textInput.text() + " symbol: " + indexOfSymbol + " caret: " + indexOfCaret);
+
+        // first, ensure we have no adjacent text nodes that possibly breaks our replacement
+        // text into two
+        textInput[0].normalize();
+
+        // next, find the text node containing the replacement text
+        // by this, we can safely skip other DOM elements created by YT (like img for emotes)
+        var lengthPassed = 0;
+        var replacementPerformed = false;
+
+        textInput.contents().filter(function () {
+            return this.nodeType === 3; // i.e. this.nodeType == TEXT_NODE
+        }).each(function (idx, elem) {
+            if (replacementPerformed) return;
+            if (indexOfSymbol >= elem.nodeValue.length + lengthPassed) {
+                lengthPassed += elem.nodeValue.length;
+            } else {
+                elem.nodeValue = elem.nodeValue.replaceBetween(
+                    indexOfSymbol - lengthPassed,
+                    indexOfCaret - lengthPassed,
+                    replacement);
+                replacementPerformed = true;
+            }
+        });
+
         setCaretPosition(textInput[0], newCaret);
     }
 }
