@@ -62,7 +62,7 @@ function include_keyword_replacement() {
             "SwiftRage": "😠",
             "TTours": "📷",
             "TwitchRPG": "🔨",
-            "VoHiYo": "🏯",
+            "VoHiYo": "💠",
             "VoteNay": "❌",
             "VoteYea": "⭕",
             "WutFace": "😧",
