@@ -27,7 +27,7 @@ function include_keyword_suggestions() {
         suggestBox.addTrigger(youtube.getJChatInputField(), ":", function (keywordPart) {
             var contents = [];
 
-            if (keywordPart && keywordPart.length >= 2) {
+            if (keywordPart && keywordPart.length >= 1) {
                 var root = trie.find(":" + keywordPart);
                 if (root != null) {
                     contents = root.getWords(MAX_SUGGESTIONS).map(function (k) {
