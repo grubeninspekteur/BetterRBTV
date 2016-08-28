@@ -5,6 +5,7 @@ var default_settings = {
     suggestEmote: true,
     hideAvatars: false,
     saveSpace: true,
+	coloredNames: true,
 	betterMentionHighlight: true,
 	pushNotifications: false,
 	lessVipHighlight: false,

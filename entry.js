@@ -113,6 +113,10 @@ chrome.storage.sync.get(default_settings, function (settings) {
         include_push_notifications();
     }
 
+    if (settings.coloredNames) {
+        include_colored_names();
+    }
+	
     if (settings.betterMentionHighlight) {
         include_better_mention_highlight();
     }
