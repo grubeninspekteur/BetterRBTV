@@ -1,16 +1,16 @@
 /**
- * A convenient object to interact with the YouTube Live page. <b>Do not instantiate an obect using the constructor.
+ * A convenient object to interact with the YouTube Live page. <b>Do not instantiate an object using the constructor.
  * The page may not yet have been loaded</b>. Instead, use the static methods onChatLoaded and onVideoLoaded. Their
  * respective callbacks will only be called when the specific part has been found on the page.
  * <p/>
  * Remember that YouTube Live pages may have their chat in a separate frame, or the video was embedded on another
  * site. To check which part of the page you're on, use the isLoaded() method. However, the best way is to assume
- * you only have access to one part of the page, and communicate with the other via messages send to the
+ * you only have access to one part of the page, and communicate with the other via messages sent to the
  * extension's background script.
  * <p/>
- * A last word on naming conventions: Whenever you request an unique object (i.e., one with an ID), you may either
+ * A last word on naming conventions: Whenever you request a unique object (i.e., one with an ID), you may either
  * use the getJ<name> variant to get the JQuery-extended version, or get<name> to get the DOM element. If not
- * specified otherwise, all iterators will call
+ * specified otherwise, all iterators will call callbacks with DOM elements.
  *
  * TODO currently only chat is detected; implement page and detection
  */
