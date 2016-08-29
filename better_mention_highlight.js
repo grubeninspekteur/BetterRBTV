@@ -35,6 +35,10 @@ function include_better_mention_highlight() {
 			.live-chat-widget .comment.alternate-row.brbtv-highlight-mention .byline {
 				color: rgba(255,255,255,0.54);
 			}
+			
+			.live-chat-widget .comment.brbtv-highlight-mention .content a.yt-user-name {
+				color: #fff !important;
+			}
 		`);
         youtube.registerChatMessageObserver(handleMention, true);
     });
