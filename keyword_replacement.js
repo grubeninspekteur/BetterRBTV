@@ -84,7 +84,7 @@ function include_keyword_replacement() {
                     return replacement;
                 });
                 if (replaced) {
-                    var replacedPosition = textInput.innerHTML.indexOf(whatWasReplaced);
+                    var replacedPosition = textInput.innerText.indexOf(whatWasReplaced);
                     textInput.innerHTML = theInnerHTML;
                     setCaretPosition(textInput, replacedPosition + replacement.length);
                 }
