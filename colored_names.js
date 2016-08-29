@@ -75,6 +75,7 @@ function include_colored_names() {
 		.live-chat-widget .comment .content a.yt-user-name[data-ytid^="UC7"] { color: #bb7722 !important; }
 		.live-chat-widget .comment .content a.yt-user-name[data-ytid^="UC8"] { color: #aa852e !important; }
 		.live-chat-widget .comment .content a.yt-user-name[data-ytid^="UC9"] { color: #de9b36 !important; }
+		.live-chat-widget .comment .content .comment-text a.yt-user-name { color: #fff !important;}
 		`);
 	});
 }
