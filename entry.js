@@ -116,6 +116,9 @@ chrome.storage.sync.get(default_settings, function (settings) {
 	
 	// put it before mention highlighting because it searches for .mention class inside comment, which the
 	// following function would already have removed
+	if (settings.soundNotifications) {
+        include_sound_notifications();
+    }
 	if (settings.pushNotifications) {
         include_push_notifications();
     }

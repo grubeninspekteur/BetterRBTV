@@ -27,6 +27,7 @@
 		"better_mention_highlight.js",
 		"pinnable_mentions.js",
 		"push_notifications.js",
+		"sound_notifications.js",
         "chat_filter.js",
         "user_filters.js",
         "keyword_replacement.js",
@@ -37,6 +38,9 @@
       "run_at": "document_idle",
       "all_frames": true
     }
+  ],
+  "web_accessible_resources": [
+	"sounds/*"
   ],
   "permissions": [
     "storage"
