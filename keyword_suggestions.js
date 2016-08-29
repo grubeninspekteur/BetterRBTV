@@ -7,13 +7,6 @@ function include_keyword_suggestions() {
             trie.add(keyword);
         }
 
-        // TODO remove, tis just a test
-        /*var root = trie.find(":w"); // should find :whale and others
-         var list = root.getWords(4);
-         for (var i = 0; i < list.length; i++) {
-         console.log(list[i]);
-         }*/
-
         var suggestBox = new SuggestionBox(
             "keyword",
             youtube.getJChatInputField(),
@@ -27,7 +20,7 @@ function include_keyword_suggestions() {
         suggestBox.addTrigger(youtube.getJChatInputField(), ":", function (keywordPart) {
             var contents = [];
 
-            if (keywordPart && keywordPart.length >= 2) {
+            if (keywordPart && keywordPart.length >= 1) {
                 var root = trie.find(":" + keywordPart);
                 if (root != null) {
                     contents = root.getWords(MAX_SUGGESTIONS).map(function (k) {

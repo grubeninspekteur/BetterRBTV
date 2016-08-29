@@ -2,6 +2,7 @@
   "manifest_version": 2,
   "name": "BetterRBTV",
   "description": "Komfortfunktionen für YouTube™ Live.",
+  "default_locale": "de",
   "version": "0.2.1",
   "icons": {
     "128": "icon.png"
@@ -16,8 +17,8 @@
         "lib/dateformat.js",
         "lib/trie.js",
         "lib/push.min.js",
-        "emoji_to_keyword.json",
-        "keyword_to_emoji.json",
+        "emoji_to_keyword.js",
+        "keyword_to_emoji.js",
         "util.js",
         "YouTubeLive.js",
         "default_settings.js",

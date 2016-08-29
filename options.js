@@ -142,18 +142,19 @@ function showStoredEmotePack() {
 function readPending() {
     // it's so fast we don't need a spinner
     //document.getElementById('loading-spinner').innerHTML = '<img src="' + chrome.extension.getURL('spinner.gif') + '" />';
-    document.getElementById('file-error').innerHTML = '';
-    document.getElementById('file-success').innerHTML = '';
+    document.getElementById('file-error').innerText = '';
+    document.getElementById('file-success').innerText = '';
     document.getElementById('select-pack').disabled = true;
 }
 
 function readError(error) {
-    document.getElementById('file-error').innerHTML = error;
+    document.getElementById('file-error').innerText = error;
+    console.error(error);
     loading_complete();
 }
 
 function readSuccess(msg) {
-    document.getElementById('file-success').innerHTML = msg;
+    document.getElementById('file-success').innerText = msg;
     loading_complete();
 }
 
@@ -204,9 +205,15 @@ function loadEmotePack(fileName, fileContents) {
                         var imageFileName = parts[1].trim();
                         if (!imageFileName.endsWith('.png')) {
                             readError("Can't use " + imageFileName + " - only .png files are currently supported!");
+                            return;
                         }
                         emoticons.push(emoticon);
-                        promises.push(zip.file(imageFileName).async('base64'));
+                        var zipFileImage = zip.file(imageFileName);
+                        if (!zipFileImage) {
+                            readError("Can't read image "+imageFileName+" from zip!");
+                            return;
+                        }
+                        promises.push(zipFileImage.async('base64'));
                     }
 
 
