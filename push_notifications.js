@@ -30,7 +30,7 @@ function createPushNotification(commentElem) {
 		if( Math.round( ((new Date) - 60000) / 1000 ) < $(commentElem).data('timestamp') ) {
 		
 			// search for mentions inside comment
-			var mention = $(commentElem).find('.mention');
+			var mention = $(commentElem).not('.author-viewing').find('.mention');
 			if (mention.length) {
 				
 				var commentId = $(commentElem).find('li.comment').attr('id');
