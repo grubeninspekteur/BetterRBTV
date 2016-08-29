@@ -7,6 +7,7 @@ var default_settings = {
     saveSpace: true,
 	coloredNames: true,
 	betterMentionHighlight: true,
+	pinnableMentions: false,
 	pushNotifications: false,
 	lessVipHighlight: false,
 	betterSeperateMessages: false,
