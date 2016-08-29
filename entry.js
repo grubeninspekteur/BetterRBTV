@@ -24,6 +24,7 @@ function addOtherCSS(items) {
         css += "#live-comments-controls .byline {display: none !important;}";
         css += ".live-chat-widget .comment:not(.new-member-announcement) .yt-user-name:after {content: ':'}";
         css += ".live-chat-widget .byline {margin-right: 0.5ch !important;}";
+        css += ".live-chat-widget .comment {padding: 4px 16px 4px 10px !important;}";
     }
 
     if (items.noGreenMemberAccent == true) {
