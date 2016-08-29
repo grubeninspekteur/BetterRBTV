@@ -7,7 +7,7 @@ function createPinnedMention(commentElem) {
 	if( Math.round( ((new Date) - 60000) / 1000 ) < $(commentElem).data('timestamp') ) {
 	
 		// search for mentions inside comment
-		var mention = $(commentElem).find('.mention');
+		var mention = $(commentElem).not('.author-viewing').find('.mention');
 		if (mention.length) {
 			
 			var userName = $(commentElem).find('.yt-user-name').text().trim();
@@ -25,8 +25,6 @@ function createPinnedMention(commentElem) {
 function include_pinnable_mentions() {
 
     YouTubeLive.onChatLoaded(function (youtube) {
-		
-		console.log("Yeah");
 		
 		// attach the container to the chat
 		// doesn't really matter where to prepend, I just chose a DIV that has already position: relative

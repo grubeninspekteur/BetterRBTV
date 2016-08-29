@@ -12,7 +12,6 @@ function include_colored_names() {
     YouTubeLive.onChatLoaded(function (youtube) {
         addCssToHead(
 		`
-		.live-chat-widget .comment .content a.yt-user-name {font-weight: bold;}
 		.live-chat-widget .comment .content a.yt-user-name[data-ytid^="UCA"] { color: #e0616a !important; }
 		.live-chat-widget .comment .content a.yt-user-name[data-ytid^="UCB"] { color: #52dc41 !important; }
 		.live-chat-widget .comment .content a.yt-user-name[data-ytid^="UCC"] { color: #8e40e8 !important; }
