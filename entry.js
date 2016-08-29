@@ -106,6 +106,10 @@ chrome.storage.sync.get(default_settings, function (settings) {
     if (settings.showTimestamp) {
         include_timestamp();
     }
+
+    if (settings.pinnableMentions) {
+        include_pinnable_mentions();
+    }
 	
 	// put it before mention highlighting because it searches for .mention class inside comment, which the
 	// following function would already have removed

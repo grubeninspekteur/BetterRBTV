@@ -13,6 +13,7 @@ function save_options() {
         hideAvatars: document.getElementById('hide-avatars').checked,
         coloredNames: document.getElementById('colored-names').checked,
         betterMentionHighlight: document.getElementById('better-mention-highlight').checked,
+        pinnableMentions: document.getElementById('pinnable-mentions').checked,
         pushNotifications: document.getElementById('push-notifications').checked,
         lessVipHighlight: document.getElementById('less-vip-highlight').checked,
         betterSeperateMessages: document.getElementById('better-seperate-messages').checked,
@@ -45,6 +46,7 @@ function restore_options() {
         document.getElementById('save-space').checked = items.saveSpace;
         document.getElementById('colored-names').checked = items.coloredNames;
         document.getElementById('better-mention-highlight').checked = items.betterMentionHighlight;
+        document.getElementById('pinnable-mentions').checked = items.pinnableMentions;
         document.getElementById('push-notifications').checked = items.pushNotifications;
         document.getElementById('less-vip-highlight').checked = items.lessVipHighlight;
         document.getElementById('better-seperate-messages').checked = items.betterSeperateMessages;

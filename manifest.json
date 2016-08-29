@@ -25,6 +25,7 @@
         "timestamp.js",
 		"colored_names.js",
 		"better_mention_highlight.js",
+		"pinnable_mentions.js",
 		"push_notifications.js",
         "chat_filter.js",
         "user_filters.js",
