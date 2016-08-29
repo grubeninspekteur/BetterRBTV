@@ -46,7 +46,7 @@ function include_keyword_replacement() {
             "OhMyDog": "🐕",
             "OMGScoots": "📙",
             "OpieOP": "🍧",
-            "PanicBasket": "🔥",
+            "panicBasket": "🔥",
             "PedoBear": "🐻",
             "PJSalt": "🍚",
             "PogChamp": "😯",
