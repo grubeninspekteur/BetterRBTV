@@ -22,6 +22,8 @@ function addOtherCSS(items) {
             ".live-chat-widget .comment.fan-funding-tip .avatar {width: 24px !important; height: 24px !important; padding-left: 4px !important; padding-right: 4px !important;}";
         // we know our name, thank you very much.
         css += "#live-comments-controls .byline {display: none !important;}";
+        css += ".live-chat-widget .yt-user-name:after {content: ':'}";
+        css += ".live-chat-widget .byline {margin-right: 0.5ch !important;}";
     }
 
     if (items.noGreenMemberAccent == true) {
