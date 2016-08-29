@@ -58,6 +58,10 @@ function include_pinnable_mentions() {
 			display: flex;
 			justify-content: space-between;
 		}
+		#brbtv-pinnedMentions-container li.pinnedMention:hover {
+			background-color: #009c8a;
+			cursor: pointer;
+		}
 		#brbtv-pinnedMentions-container li.pinnedMention .content-pinnedMention {
 			padding: 8px;
 			align-self: flex-start;
@@ -69,14 +73,15 @@ function include_pinnable_mentions() {
 			cursor: pointer;
 			opacity: 0.75;
 		}
+		#brbtv-pinnedMentions-container li.pinnedMention:hover .remove-pinnedMention,
 		#brbtv-pinnedMentions-container li.pinnedMention .remove-pinnedMention:hover {
 			opacity: 1;
 		}
 		`);
 		
 		// create an event listener, that will also work for dynamically created elements
-		$('#brbtv-pinnedMentions-container').on('click', '.remove-pinnedMention', function(e) {
-			$(e.target).parents('li.pinnedMention').remove();
+		$('#brbtv-pinnedMentions-container').on('click', 'li.pinnedMention', function(e) {
+			$(e.currentTarget).remove();
 		});
 		
         youtube.registerChatMessageObserver(createPinnedMention, false);
