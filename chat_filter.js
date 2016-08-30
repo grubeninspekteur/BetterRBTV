@@ -1,7 +1,7 @@
 function filterComment(pattern, comment) {
     var jComment = $(comment);
     if (jComment.hasClass('author-viewing')) return; // don't remove your own comments
-    if (pattern.test(jComment.find(".comment-text").text())) {
+    if (pattern.test(jComment.find(".comment-text").text().trim())) {
         jComment.remove();
     }
 }
