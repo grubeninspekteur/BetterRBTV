@@ -1,3 +1,25 @@
 {
-
+  "appDescription": {
+    "message": "Komfortfunktionen für YouTube™ Live und YouTube™ Gaming Live."
+  },
+  "userActionVisitProfile": {
+    "message": "Profil besuchen",
+    "description": "Label for a button in the user action menu to visit the user's profile."
+  },
+  "userActionHighlight": {
+    "message": "Hervorheben",
+    "description": "Label for a button in the user action menu to enable highlighting for that user."
+  },
+  "userActionUnHighlight": {
+    "message": "Nicht hervorheben",
+    "description": "Label for a button in the user action menu to disable highlighting for that user."
+  },
+  "userActionMute": {
+    "message": "Stummschalten",
+    "description": "Label for a button in the user action menu to add a user to the ignore list."
+  },
+  "userActionUnMute": {
+    "message": "Stummschaltung aufheben",
+    "description": "Label for a button in the user action menu to remove a user from the ignore list."
+  }
 }
