@@ -9,6 +9,7 @@ var default_settings = {
 	betterMentionHighlight: true,
 	pinnableMentions: false,
 	pushNotifications: false,
+	soundNotifications: false,
 	lessVipHighlight: false,
 	betterSeperateMessages: false,
     noGreenMemberAccent: false,
