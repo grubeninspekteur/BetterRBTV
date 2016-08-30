@@ -356,11 +356,3 @@ class SuggestionBox {
 }
 
 SuggestionBox.ANY_BOX_CREATED = false;
-
-/* Easter-Egg :) */
-if( document.querySelector('#text.ytg-subscribe-button') && window.location.href.indexOf("rocketbeanstv") > -1 ) {
-	if( document.querySelector('#text.ytg-subscribe-button').textContent === 'Abonnieren' ) {
-		document.querySelector('#text.ytg-subscribe-button').textContent = 'A-bohn-ieren';
-		document.querySelector('#text.ytg-subscribe-button').style.width = 'auto';
-	}
-}
