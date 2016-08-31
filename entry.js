@@ -36,6 +36,8 @@ function addOtherCSS(items) {
 	
     if (items.lessVipHighlight == true) {
         css += ".live-chat-widget .comment.fan-funding-tip, .live-chat-widget .comment.new-member-announcement, .live-chat-widget.dark .comment.fan-funding-tip, .live-chat-widget.dark .comment.new-member-announcement {background-color: initial !important;}";
+        css += ".live-chat-widget .comment.fan-funding-tip.pinned, .live-chat-widget .comment.new-member-announcement.pinned {background-color: #fff !important;}";
+        css += ".live-chat-widget.dark .comment.fan-funding-tip.pinned, .live-chat-widget.dark .comment.new-member-announcement.pinned {background-color: #1b1b1b !important;}";
         css += ".live-chat-widget .comment.new-member-announcement .byline {color: #0f9d58 !important;}";
         css += ".live-chat-widget .comment.fan-funding-tip, .live-chat-widget .comment.fan-funding-tip .comment-text, .live-chat-widget .comment.new-member-announcement .comment-text {color: rgba(0,0,0,0.54) !important;}";
         css += ".live-chat-widget.dark .comment.fan-funding-tip, .live-chat-widget.dark .comment.fan-funding-tip .comment-text, .live-chat-widget.dark .comment.new-member-announcement .comment-text {color: rgba(255,255,255,0.54) !important;}";
