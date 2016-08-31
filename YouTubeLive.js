@@ -74,7 +74,7 @@ class YouTubeLive {
     static _startLoadingChat() {
         if (YouTubeLive._currently_loading & YouTubeLive.CHAT) return;
         if (BRBTV_DEBUG) {
-            let url = $("link[rel='canonical']").attr('href');
+            let url = document.location.href;
             console.log("BRBTV: Started looking for chat on "+url);
         }
         YouTubeLive._currently_loading = YouTubeLive._currently_loading | YouTubeLive.CHAT;
@@ -83,23 +83,23 @@ class YouTubeLive {
                 rescheduleTimeout(callback);
                 return;
             }
-            var textInput = document.getElementById("live-comments-input-field");
+            var commentsList = document.getElementById("all-comments");
 
             // are we on Youtube live? Here, the chat loads later
-            if (document.getElementById("watch-sidebar-discussion") != null && textInput == null) {
+            if (document.getElementById("watch-sidebar-discussion") != null && commentsList == null) {
                 rescheduleTimeout(callback);
                 return;
             }
 
-            if (textInput != null) {
+            if (commentsList != null) {
                 if (BRBTV_DEBUG) {
-                    let url = $("link[rel='canonical']").attr('href');
+                    let url = document.location.href;
                     console.log("BRBTV: chat found on "+url);
                 }
                 callback();
             } else {
                 if (BRBTV_DEBUG) {
-                    let url = $("link[rel='canonical']").attr('href');
+                    let url = document.location.href;
                     console.log("BRBTV: No chat found, scripts will not run on "+url);
                 }
             }
