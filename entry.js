@@ -3,6 +3,9 @@ const BRBTV_DEBUG = true;
 function addOtherCSS(items) {
 
     var css = '';
+	
+	// small workaround: prevent text rendering issues when hovering over username badges
+	css += ".live-chat-widget {-webkit-backface-visibility: hidden;}";
 
     if (items.hideAvatars == true) {
         css += ".comment .avatar {display: none !important;}";
@@ -133,4 +136,4 @@ chrome.storage.sync.get(default_settings, function (settings) {
 
     include_chat_filter(settings);
     include_user_filter(settings);
-});
+});;

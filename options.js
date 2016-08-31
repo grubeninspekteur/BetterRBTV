@@ -28,7 +28,7 @@ function save_options() {
     }, function () {
         // Update status to let user know options were saved.
         var status = document.getElementById('status');
-        status.textContent = 'Einstellungen gespeichert.';
+        status.textContent = chrome.i18n.getMessage("optionsSaved");
         setTimeout(function () {
             status.textContent = '';
         }, 750);
@@ -98,7 +98,7 @@ function listFilteredUsers(filteredUsersArray, storageKey, jNoUsersFiltered, jFi
             let li = $("<li></li>");
             li.text(filteredUser.name + " (" + filteredUser.id + ") ");
             li.attr('data-yt-user-id', filteredUser.id);
-            let btn = $('<button class="remove-user-button">Entfernen</button>');
+            let btn = $('<button class="remove-user-button">'+ chrome.i18n.getMessage("filterListRemove") +'</button>');
             btn.click(function (e) {
                 let query = {};
                 query[storageKey] = [];
@@ -127,7 +127,7 @@ function showStoredEmotePack() {
     chrome.storage.local.get('emotePack', function (items) {
         var pack = items.emotePack;
         if (pack == null) {
-            document.getElementById('emote-pack-name').innerHTML = "Kein Emote-Pack installiert";
+            document.getElementById('emote-pack-name').innerHTML = chrome.i18n.getMessage("noEmotePackInstalled");
             document.getElementById('emote-pack-preview').innerHTML = '';
         } else {
             var preview = '';
@@ -176,7 +176,7 @@ function saveImages(name, emoticons, images, image_dimensions) {
     }
     chrome.storage.local.set({"emotePack": pack}, function () {
         showStoredEmotePack();
-        readSuccess("Emote-Pack geladen!");
+        readSuccess(chrome.i18n.getMessage("emotePackInstalled"));
     });
 }
 
@@ -187,7 +187,7 @@ function loadEmotePack(fileName, fileContents) {
             var mapFile = zip.file("map.txt");
 
             if (mapFile == null) {
-                readError("Emote-Pack beinhaltet keine map.txt!");
+                readError(chrome.i18n.getMessage("emotePackNoMapTxt"));
                 return;
             }
 
@@ -200,7 +200,7 @@ function loadEmotePack(fileName, fileContents) {
                     for (var i = 0; i < lines.length; i++) {
                         var parts = lines[i].trim().split(':');
                         if (parts.length != 2 || untrustedChars.test(parts[0])) {
-                            readError("map.txt: Fehler Zeile " + (i + 1));
+                            readError(chrome.i18n.getMessage("emotePackMapTxtErrorInLine") + (i + 1));
                             return;
                         }
 
@@ -208,13 +208,13 @@ function loadEmotePack(fileName, fileContents) {
                         var emoticon = parts[0].trim();
                         var imageFileName = parts[1].trim();
                         if (!imageFileName.endsWith('.png')) {
-                            readError("Can't use " + imageFileName + " - only .png files are currently supported!");
+                            readError(chrome.i18n.getMessage("emotePackNoSupport", imageFileName));
                             return;
                         }
                         emoticons.push(emoticon);
                         var zipFileImage = zip.file(imageFileName);
                         if (!zipFileImage) {
-                            readError("Can't read image "+imageFileName+" from zip!");
+                            readError(chrome.i18n.getMessage("emotePackCantRead", imageFileName));
                             return;
                         }
                         promises.push(zipFileImage.async('base64'));
@@ -249,11 +249,11 @@ function loadEmotePack(fileName, fileContents) {
                         })
                 },
                 function () {
-                    readError("map.txt konnte nicht gelesen werden!");
+                    readError(chrome.i18n.getMessage("emotePackCantReadMapTxt"));
                 });
         },
         function () {
-            readError('Zip-Datei konnte nicht entpackt werden');
+            readError(chrome.i18n.getMessage("emotePackCantUnzip"));
         });
 }
 
@@ -268,14 +268,14 @@ function choose_emote_pack(evt) {
         var reader = new FileReader();
         reader.onloadend = function () {
             if (reader.error != null) {
-                readError('Fehler beim Laden des Packs: ' + reader.error);
+                readError(chrome.i18n.getMessage("emotePackErrorLoading") + reader.error);
             } else {
                 loadEmotePack(file.name, reader.result);
             }
         };
         reader.readAsArrayBuffer(file);
     } else {
-        document.getElementById('loading-spinner').innerHTML = "Can't read file :( Chrome is blocking the file API as well now";
+        document.getElementById('loading-spinner').innerHTML = chrome.i18n.getMessage("emotePackCantReadFile");
     }
 }
 
