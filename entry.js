@@ -1,4 +1,4 @@
-const BRBTV_DEBUG = false;
+const BRBTV_DEBUG = true;
 
 function addOtherCSS(items) {
 
