@@ -77,7 +77,8 @@ function include_colored_names() {
 		.live-chat-widget .comment .content a.yt-user-name[data-ytid^="UC9"] { color: #de9b36 !important; }
 		.live-chat-widget .comment .content a.yt-user-name[data-ytid^="UC-"] { color: #e57e20 !important; }
 		.live-chat-widget .comment .content a.yt-user-name[data-ytid^="UC_"] { color: #46ad68 !important; }
-		.live-chat-widget .comment .content .comment-text a.yt-user-name { color: #fff !important;}
+		.live-chat-widget .comment .content .comment-text a.yt-user-name { color: #000 !important;}
+		.live-chat-widget.dark .comment .content .comment-text a.yt-user-name { color: #fff !important;}
 		`);
 	});
 }
