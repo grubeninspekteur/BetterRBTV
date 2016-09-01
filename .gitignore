@@ -1,2 +1,5 @@
 thumbs.db
 dist/*
+build/
+node_modules
+config.json
