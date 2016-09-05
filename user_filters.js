@@ -211,9 +211,6 @@ function include_user_filter(settings) {
 
             jUserLink.click(function (e) {
                 jUserMenu.empty();
-                let linkPosition = jUserLink.offset();
-                jUserMenu.css("top", linkPosition.top + jUserLink.height() + "px");
-                jUserMenu.css("left", linkPosition.left + "px");
 
                 let jVisitProfile = createMenuButton("brbtv-visit-button", chrome.i18n.getMessage("userActionVisitProfile"));
                 jVisitProfile.attr("href", jUserLink.attr('href'));
@@ -232,6 +229,13 @@ function include_user_filter(settings) {
                 }
                 e.preventDefault();
                 addHideMenuFunction(jUserLink);
+
+                let linkPosition = jUserLink.offset();
+                let topPosition = linkPosition.top + jUserLink.height();
+                if (topPosition + jUserMenu.height() > $("body").height()) topPosition = linkPosition.top - jUserMenu.height() - jUserLink.height();
+                jUserMenu.css("top", topPosition + "px");
+                jUserMenu.css("left", linkPosition.left + "px");
+
                 jUserMenu.addClass("show-brbtv-user-actions-menu");
             });
 
