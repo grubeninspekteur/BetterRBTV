@@ -3,6 +3,14 @@ if (!chrome.storage.sync) {
     chrome.storage.sync = chrome.storage.local;
 }
 
+// localization
+$("*[data-i18n]").each(function (idx, elem) {
+    elem.innerText = chrome.i18n.getMessage(elem.getAttribute("data-i18n"));
+});
+
+$("#select-pack").attr("value", chrome.i18n.getMessage("Opt_EmotePackButton"));
+// END localization
+
 // Saves options to chrome.storage.sync.
 function save_options() {
     chrome.storage.sync.set({
@@ -98,7 +106,7 @@ function listFilteredUsers(filteredUsersArray, storageKey, jNoUsersFiltered, jFi
             let li = $("<li></li>");
             li.text(filteredUser.name + " (" + filteredUser.id + ") ");
             li.attr('data-yt-user-id', filteredUser.id);
-            let btn = $('<button class="remove-user-button">'+ chrome.i18n.getMessage("filterListRemove") +'</button>');
+            let btn = $('<button class="remove-user-button">' + chrome.i18n.getMessage("filterListRemove") + '</button>');
             btn.click(function (e) {
                 let query = {};
                 query[storageKey] = [];

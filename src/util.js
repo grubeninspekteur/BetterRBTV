@@ -164,7 +164,7 @@ class SuggestionBox {
 			margin-top: 2.5em;
 		}
 		.brbtv-suggestion:first-child::before {
-			content: 'press TAB key to complete';
+			content: '` + chrome.i18n.getMessage("suggestBoxTabToComplete") + `';
 			display: block;
 			position: absolute;
 			top:0;

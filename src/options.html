@@ -12,6 +12,14 @@
             display: none;
         }
 
+        .emphasis {
+            font-style: italic;
+        }
+
+        .list-heading {
+            font-weight: bold;
+        }
+
         .remove-user-button {
             background: none;
             border: none;
@@ -28,39 +36,38 @@
 <body>
 <div id="tabs">
     <ul>
-        <li><a href="#tabs-1">Emotes</a></li>
-        <li><a href="#tabs-2">Erscheinung</a></li>
-        <li><a href="#tabs-3">Nachrichtenfilter</a></li>
+        <li><a href="#tabs-1" data-i18n="Opt_TabEmotes">Emotes</a></li>
+        <li><a href="#tabs-2" data-i18n="Opt_TabAppearance">Erscheinung</a></li>
+        <li><a href="#tabs-3" data-i18n="Opt_TabFilters">Nachrichtenfilter</a></li>
     </ul>
 
     <div id="tabs-1">
         <p>
             <label>
                 <input type="checkbox" id="keywords">
-                Twitch-Stützräder
+                <span data-i18n="Opt_TrainingWheels">Stützräder</span>
             </label><br/>
-            <em>Wandelt bekannte Schlüsselwörter von Twitch in Emoticons um.</em><br/>
-            <em>Achtung: Die Zuordnung der Schlüsselwörter wurde in Version 0.2.1 leicht geändert.
-            Bitte prüfe, ob du dein Emote-Pack aktualisieren musst.</em>
+            <span class="emphasis" data-i18n="Opt_TrainingWheelsDescription">Wandelt bekannte Schlüsselwörter einer anderen Streamingseite in Emoticons um.</span><br/>
+            <span class="emphasis" data-i18n="Opt_TrainingWheelsWarning">Achtung: Es gibt seit 0.2.3 neue Schlüsselwörter und Emoticons! Prüfe, ob du dein Emote-Pack aktualisieren musst.</span>
         </p>
 
         <p>
             <label>
                 <input type="checkbox" id="emote-suggest">
-                Emote-Vorschläge nach ":"
+                <span data-i18n="Opt_EmoteSuggestions">Emote-Vorschläge nach ":"</span>
             </label>
         </p>
 
         <p>
             <label>
                 <input type="checkbox" id="face-emotes">
-                Emote-Pack
+                <span data-i18n="Opt_EmotePack">Emote-Pack</span>
             </label><br/>
             <!--<span id="loading-spinner" width="12" height="12"></span>-->
             <input type="file" id="select-pack" accept=".zip" value="Emote-Pack laden"><span id="file-error"
                                                                                              style="color:red;"></span><span
                 id="file-success" style="color:green; font-weight: bold;"></span><br/>
-            Aktuell: <span id="emote-pack-name"></span>
+            <span data-i18n="Opt_EmotePackCurrent">Aktuell:</span> <span id="emote-pack-name"></span>
             <span id="emote-pack-preview"></span>
         </p>
     </div>
@@ -69,84 +76,84 @@
         <p>
             <label>
                 <input type="checkbox" id="user-suggest">
-                User-Vorschläge nach "@"
+                <span data-i18n="Opt_UserSuggest">User-Vorschläge nach "@"</span>
             </label>
         </p>
 
         <p>
             <label>
                 <input type="checkbox" id="show-timestamp">
-                Bei Nachrichten Erstellungszeit zeigen
+                <span data-i18n="Opt_Timestamp">Bei Nachrichten Erstellungszeit zeigen</span>
             </label>
         </p>
 
         <p>
             <label>
                 <input type="checkbox" id="save-space">
-                Zeigt Nachrichten platzsparender an
+                <span data-i18n="Opt_SaveSpace">Zeigt Nachrichten platzsparender an</span>
             </label>
         </p>
 
         <p>
             <label>
                 <input type="checkbox" id="hide-avatars">
-                Avatare verbergen
+                <span data-i18n="Opt_HideAvatars">Avatare verbergen</span>
             </label>
         </p>
 
         <p>
             <label>
                 <input type="checkbox" id="colored-names">
-                Farbige Usernamen
+                <span data-i18n="Opt_ColoredUsernames">Farbige Usernamen</span>
             </label>
         </p>
 		
         <p>
             <label>
                 <input type="checkbox" id="better-mention-highlight">
-                Bessere Sichtbarkeit von eigenen Usernamen-Erwähnungen (@...)
+                <span data-i18n="Opt_BetterMentionHighlight">Bessere Sichtbarkeit von eigenen Usernamen-Erwähnungen (@...)</span>
             </label>
         </p>
 		
         <p>
             <label>
                 <input type="checkbox" id="pinnable-mentions">
-                @Erwähnungen am oberen Chatrand dauerhaft anheften
+                <span data-i18n="Opt_PinMentions">@Erwähnungen am oberen Chatrand dauerhaft anheften</span>
             </label>
         </p>
 		
         <p>
             <label>
                 <input type="checkbox" id="push-notifications">
-                Desktop-Benachrichtigung anzeigen, wenn eine @Erwähnung in Abwesenheit erscheint
+                <span data-i18n="Opt_PushNotifications">Desktop-Benachrichtigung anzeigen, wenn eine @Erwähnung in Abwesenheit erscheint</span>
             </label>
         </p>
 		
         <p>
             <label>
                 <input type="checkbox" id="sound-notifications">
-                Einen Ton abspielen bei jeder @Erwähnung
+                <span data-i18n="Opt_SoundNotifications">Einen Ton abspielen bei jeder @Erwähnung</span>
             </label>
         </p>
 
         <p>
             <label>
                 <input type="checkbox" id="better-seperate-messages">
-                Chatnachrichten besser erkennbar voneinander trennen
+                <span data-i18n="Opt_BetterSeparateMessages">Nachrichten besser erkennbar voneinander trennen</span>
             </label>
         </p>
 
         <p>
             <label>
                 <input type="checkbox" id="less-vip-highlight">
-                weniger aufdringliche VIP-Meldungen
+                <span data-i18n="Opt_LessVIPHighlight">weniger aufdringliche VIP-Meldungen</span>
             </label>
         </p>
 
         <p>
             <label>
                 <input type="checkbox" id="no-green-member-accent">
-                Keine grüne Akzentleiste links bei Nachrichten von VIPs
+                <span data-i18n="Opt_NoGreenVIPBar">Keine grüne Akzentleiste links bei Nachrichten von VIPs</span>
             </label>
         </p>
     </div>
@@ -154,42 +161,43 @@
     <div id="tabs-3">
         <p>
             <label>
-                Nachrichtentext-Blacklist - Wörter per Leerzeichen trennen<br/>
+                <span data-i18n="Opt_MessageBlacklist">Nachrichtentext-Blacklist - Wörter per Leerzeichen trennen</span><br/>
                 <input type="text" placeholder="!cd !gpd ..." id="blocked-terms">
             </label>
             <label>
                 <input type="checkbox" id="blocked-terms-is-regex">
-                Regulärer Ausdruck
+                <span data-i18n="Opt_RegularExpression">Regulärer Ausdruck</span>
             </label>
         </p>
         <p>
-            Stummgeschaltete Benutzer
+            <span class="list-heading" data-i18n="Opt_MutedUsersHeading">Stummgeschaltete Benutzer</span>
         </p>
         <div id="no-muted-users">
-            <em>Keine. Schalte Benutzer über das Menü beim Klick auf den Namen stumm.</em>
+            <span class="emphasis" data-i18n="Opt_MutedUsersNone">Keine. Schalte Benutzer über das Menü beim Klick auf den Namen stumm.</span>
         </div>
         <ul id="muted-users" class="hid">
 
         </ul>
         <p>
-            Hervorgehobene Benutzer
+            <span class="list-heading" data-i18n="Opt_HighlightedUsersHeading">Hervorgehobene Benutzer</span>
         </p>
         <div id="no-highlighted-users">
-            <em>Keine. Hebe Benutzer über das Menü beim Klick auf den Namen hervor.</em>
+            <span class="emphasis" data-i18n="Opt_HighlightedUsersNone">Keine. Hebe Benutzer über das Menü beim Klick auf den Namen hervor.</span>
         </div>
         <ul id="highlighted-users" class="hid">
 
         </ul>
+        <br/>
         <label>
-            <em>Du kennst bereits die ID eines Nutzers, den du stalken willst? Einfach hier eingeben!</em><br/>
+            <span class="emphasis" data-i18n="Opt_HighlightedUserAddDescription">Du kennst bereits die ID eines Nutzers, den du stalken willst? Einfach hier eingeben!</span><br/>
             <input type="text" id="add-custom-highlight-id" placeholder="Channel-Id" >
-            <button id="add-custom-highlight-button">Hinzufügen</button>
+            <button id="add-custom-highlight-button" data-i18n="Opt_HighlightedUserAddButton">Hinzufügen</button>
 
         </label>
     </div>
 </div>
 
-<button id="save">Speichern</button>
+<button id="save" data-i18n="Opt_SaveButton">Speichern</button>
 <div id="status"></div>
 
 <script src="default_settings.js"></script>

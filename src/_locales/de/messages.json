@@ -1,0 +1,184 @@
+{
+  "appDescription": {
+    "message": "Komfortfunktionen für YouTube™ Live und YouTube™ Gaming Live."
+  },
+  "optionsSaved": {
+    "message": "Einstellungen gespeichert.",
+    "description": "Confirmation text after settings were saved."
+  },
+  "noEmotePackInstalled": {
+    "message": "Kein Emote-Pack installiert",
+    "description": "Text that is displayed when no emote pack is installed."
+  },
+  "emotePackInstalled": {
+    "message": "Emote-Pack geladen!",
+    "description": "Text that is displayed after an emote pack is successfully installed."
+  },
+  "emotePackNoMapTxt": {
+    "message": "Emote-Pack beinhaltet keine map.txt!",
+    "description": "Text that is displayed as a warning that an emote pack contains no map.txt file."
+  },
+  "emotePackMapTxtErrorInLine": {
+    "message": "map.txt: Fehler Zeile ",
+    "description": "Text that is displayed as a warning about which line in the map.txt contains an error."
+  },
+  "emotePackNoSupport": {
+    "message": "$FILENAME$ kann nicht verwendet werden - nur .png-Dateien werden zur Zeit unterstützt!",
+    "description": "Warning that the supplied file is not supported.",
+    "placeholders": {
+      "filename": {
+        "content": "$1"
+      }
+    }
+  },
+  "emotePackCantRead": {
+    "message": "Die Bilddatei $FILENAME$ konnte nicht aus der Zip-Datei gelesen werden!",
+    "description": "Warning that the supplied file could not be read.",
+    "placeholders": {
+      "filename": {
+        "content": "$1"
+      }
+    }
+  },
+  "emotePackCantUnzip": {
+    "message": "Zip-Datei konnte nicht entpackt werden",
+    "description": "Warning that the supplied zip file could not be unzipped."
+  },
+  "emotePackCantReadMapTxt": {
+    "message": "map.txt konnte nicht gelesen werden!",
+    "description": "Warning that the map.txt file could not be read."
+  },
+  "emotePackErrorLoading": {
+    "message": "Fehler beim Laden des Packs: ",
+    "description": "Warning that the (following) emote pack could not load."
+  },
+  "emotePackCantReadFile": {
+    "message": "Datei konnte nicht gelesen werden :( Chrome blockiert nun auch die Datei API.",
+    "description": "Warning that the file could not be read and chrome is blocking the file API."
+  },
+  "filterListRemove": {
+    "message": "Entfernen",
+    "description": "Label for a button in the extension settings to remove a user name from the filter list."
+  },
+  "Opt_BetterMentionHighlight": {
+    "message": "Bessere Sichtbarkeit von eigenen Usernamen-Erwähnungen (@...)"
+  },
+  "Opt_BetterSeparateMessages": {
+    "message": "Nachrichten besser erkennbar voneinander trennen"
+  },
+  "Opt_ColoredUsernames": {
+    "message": "Farbige Usernamen"
+  },
+  "Opt_EmotePack": {
+    "message": "Emote-Pack"
+  },
+  "Opt_EmotePackButton": {
+    "message": "Emote-Pack laden"
+  },
+  "Opt_EmotePackCurrent": {
+    "message": "Aktuell:"
+  },
+  "Opt_EmoteSuggestions": {
+    "message": "Emote-Vorschläge nach \":\""
+  },
+  "Opt_HideAvatars": {
+    "message": "Avatare verbergen"
+  },
+  "Opt_HighlightedUserAddDescription": {
+    "message": "Du kennst bereits die ID eines Nutzers, den du stalken willst? Einfach hier eingeben!"
+  },
+  "Opt_HighlightedUserAddButton": {
+    "message": "Hinzufügen"
+  },
+  "Opt_HighlightedUsersHeading": {
+    "message": "Hervorgehobene Benutzer"
+  },
+  "Opt_HighlightedUsersNone": {
+    "message": "Keine. Hebe Benutzer über das Menü beim Klick auf den Namen hervor."
+  },
+  "Opt_LessVIPHighlight": {
+    "message": "weniger aufdringliche VIP-Meldungen"
+  },
+  "Opt_MessageBlacklist": {
+    "message": "Nachrichtentext-Blacklist - Wörter per Leerzeichen trennen"
+  },
+  "Opt_MutedUsersHeading": {
+    "message": "Stummgeschaltete Benutzer"
+  },
+  "Opt_MutedUsersNone": {
+    "message": "Keine. Schalte Benutzer über das Menü beim Klick auf den Namen stumm."
+  },
+  "Opt_NoGreenVIPBar": {
+    "message": "Keine grüne Akzentleiste links bei Nachrichten von VIPs"
+  },
+  "Opt_PinMentions": {
+    "message": "@Erwähnungen am oberen Chatrand dauerhaft anheften"
+  },
+  "Opt_PushNotifications": {
+    "message": "Desktop-Benachrichtigung anzeigen, wenn eine @Erwähnung in Abwesenheit erscheint"
+  },
+  "Opt_RegularExpression": {
+    "message": "Regulärer Ausdruck"
+  },
+  "Opt_SaveButton": {
+    "message": "Speichern"
+  },
+  "Opt_SaveSpace": {
+    "message": "Zeigt Nachrichten platzsparender an"
+  },
+  "Opt_SoundNotifications": {
+    "message": "Einen Ton abspielen bei jeder @Erwähnung"
+  },
+  "Opt_TabEmotes": {
+    "message": "Emotes"
+  },
+  "Opt_TabAppearance": {
+    "message": "Erscheinung"
+  },
+  "Opt_TabFilters": {
+    "message": "Nachrichtenfilter"
+  },
+  "Opt_Timestamp": {
+    "message": "Bei Nachrichten Erstellungszeit zeigen"
+  },
+  "Opt_TrainingWheels": {
+    "message": "Stützräder",
+    "description": "Name for the option to automatically replace certain keywords."
+  },
+  "Opt_TrainingWheelsDescription": {
+    "message": "Wandelt bekannte Schlüsselwörter einer anderen Streamingseite in Emoticons um."
+  },
+  "Opt_TrainingWheelsWarning": {
+    "message": "Achtung: Es gibt seit 0.2.3 neue Schlüsselwörter und Emoticons! Prüfe, ob du dein Emote-Pack aktualisieren musst."
+  },
+  "Opt_UserSuggest": {
+    "message": "User-Vorschläge nach \"@\""
+  },
+  "suggestBoxTabToComplete": {
+    "message" : "TAB zum Vervollständigen"
+  },
+  "userActionVisitProfile": {
+    "message": "Profil besuchen",
+    "description": "Label for a button in the user action menu to visit the user's profile."
+  },
+  "userActionHighlight": {
+    "message": "Hervorheben",
+    "description": "Label for a button in the user action menu to enable highlighting for that user."
+  },
+  "userActionUnHighlight": {
+    "message": "Nicht hervorheben",
+    "description": "Label for a button in the user action menu to disable highlighting for that user."
+  },
+  "userActionMute": {
+    "message": "Stummschalten",
+    "description": "Label for a button in the user action menu to add a user to the ignore list."
+  },
+  "userActionUnMute": {
+    "message": "Stummschaltung aufheben",
+    "description": "Label for a button in the user action menu to remove a user from the ignore list."
+  },
+  "warningVersion123": {
+    "message": "Neue Emote-Schlüsselwörter hinzugefügt - prüfe, ob du ein neues Pack herunterladen musst! (Klicken zum Schließen)",
+    "description": "A one-time warning for all users from 0.2.2 onwards with active emote packs; recommends to replace them."
+  }
+}

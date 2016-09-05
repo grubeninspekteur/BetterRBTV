@@ -1,4 +1,5 @@
 var default_settings = {
+    lastMessageConfirmedVersion: 0,
     twitchKeywordReplacement: true,
     faceEmotes: true,
     suggestUser: true,
