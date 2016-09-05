@@ -1,4 +1,5 @@
 const BRBTV_DEBUG = true;
+const BRBTV_COMMIT_VERSION = 123; // last commit # for which a message was generated containing useful information
 
 function addOtherCSS(items) {
 
@@ -56,7 +57,7 @@ function addOtherCSS(items) {
 function addFaceEmotes(settings) {
     if (settings.faceEmotes == true) {
         chrome.storage.local.get("emotePack", function (items) {
-            if (items.emotePack == null) return;
+            if (items.emotePack != null) {
             var css = '';
             for (var i = 0; i < items.emotePack.images.length; i++) {
                 var img = items.emotePack.images[i];
@@ -70,6 +71,22 @@ function addFaceEmotes(settings) {
                     + img.height + 'px !important;} ';
             }
             if (!addCssToHead(css)) console.warn("BRBTV error: Could not add style to head");
+
+            if (settings.lastMessageConfirmedVersion < 123) {
+                let theWarning = $("<div></div>");
+                theWarning.css("background-color", "blue");
+                theWarning.css("color", "white");
+                theWarning.css("cursor", "pointer");
+                theWarning.text("Neue Emote-Schlüsselwörter hinzugefügt - prüfe, ob du ein neues Pack herunterladen musst! (Klicken zum Schließen)");
+                theWarning.click(function (e) {
+                    chrome.storage.sync.set({"lastMessageConfirmedVersion": BRBTV_COMMIT_VERSION});
+                    theWarning.css("display", "none");
+                });
+                $("body").prepend(theWarning);
+            }
+        } else {
+                chrome.storage.sync.set({"lastMessageConfirmedVersion": BRBTV_COMMIT_VERSION}); // dismiss the warning since user has not yet installed an emote pack
+        }
         });
     }
 }
