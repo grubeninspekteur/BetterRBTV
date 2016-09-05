@@ -155,6 +155,42 @@ function include_user_filter(settings) {
             $("body").on("click", hideMenuFunction);
         }
 
+        function insertDoubleclickedAuthor(e) {
+            jUserMenu.removeClass("show-brbtv-user-actions-menu");
+
+            var replacement = '@' + $(e.currentTarget).text() + "\u00A0";
+            var jTextInput = youtube.getJChatInputField();
+            if (jTextInput.length) {
+                let caretPosition = getCaretPosition(jTextInput[0]);
+                jTextInput[0].normalize();
+
+                // next, find the text node containing the caret
+                // by this, we can safely skip other DOM elements created by YT (like img for emotes)
+                var lengthPassed = 0;
+                var replacementPerformed = false;
+
+
+                jTextInput.contents().filter(function () {
+                    return this.nodeType === 3; // i.e. this.nodeType == TEXT_NODE
+                }).each(function (idx, elem) {
+                    if (replacementPerformed) return;
+                    if (caretPosition >= elem.nodeValue.length + lengthPassed) {
+                        lengthPassed += elem.nodeValue.length;
+                    } else {
+                        elem.nodeValue = elem.nodeValue.replaceBetween(
+                            caretPosition - lengthPassed,
+                            caretPosition - lengthPassed,
+                            replacement);
+                        replacementPerformed = true;
+                    }
+                });
+
+                if (!replacementPerformed) jTextInput.append(document.createTextNode(replacement));
+                setCaretPosition(jTextInput[0], caretPosition + replacement.length);
+                jTextInput.focus();
+            }
+        }
+
         youtube.registerChatMessageObserver(function (message) {
             let jMessage = $(message);
             // don't show menu for yourself or VIP announcements
@@ -198,70 +234,10 @@ function include_user_filter(settings) {
                 addHideMenuFunction(jUserLink);
                 jUserMenu.addClass("show-brbtv-user-actions-menu");
             });
-			
-			
-			// insert the name as a mention on doubleclick
-			jUserLink.dblclick( function(e) {
-				
-				jUserMenu.removeClass("show-brbtv-user-actions-menu");
-				
-				var replacement = '@' + $(e.currentTarget).text() + '&nbsp;';
-				var textInput = youtube.getChatInputField();
-				if (textInput) {
 
-					
-					
-					/* TODO
-					*  works roughly, but maybe someday we can use YouTube-own functions for this,
-					*  like the one that inserts emojis to the input field when clicking on them
-					*  
-					*  bug: when inserting multiple names, sometimes new names get inserted at the beginning
-					*
-					*  adapted in parts from http://stackoverflow.com/questions/6690752/insert-html-at-caret-in-a-contenteditable-div/6691294#6691294
-					*/
-					
-					textInput.focus();
 
-					window.setTimeout(function() {
-						
-						var sel, range;
-						if (window.getSelection) {
-							// IE9 and non-IE
-							sel = window.getSelection();
-							if (sel.getRangeAt && sel.rangeCount) {
-								range = sel.getRangeAt(0);
-								range.deleteContents();
-
-								// Range.createContextualFragment() would be useful here but is
-								// only relatively recently standardized and is not supported in
-								// some browsers (IE9, for one)
-								var el = document.createElement("div");
-								el.innerHTML = replacement;
-								var frag = document.createDocumentFragment(), node, lastNode;
-								while ( (node = el.firstChild) ) {
-									lastNode = frag.appendChild(node);
-								}
-								range.insertNode(frag);
-
-								// Preserve the selection
-								if (lastNode) {
-									range = range.cloneRange();
-									range.setStartAfter(lastNode);
-									range.collapse(true);
-									sel.removeAllRanges();
-									sel.addRange(range);
-								}
-							}
-						} else if (document.selection && document.selection.type != "Control") {
-							// IE < 9
-							document.selection.createRange().pasteHTML(replacement);
-						}
-	
-					}, 1);
-
-				}
-				
-			});
+            // insert the name as a mention on doubleclick
+            jUserLink.dblclick(insertDoubleclickedAuthor);
 
         }, true);
     });
