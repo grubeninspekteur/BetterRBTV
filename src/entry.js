@@ -77,7 +77,7 @@ function addFaceEmotes(settings) {
                 theWarning.css("background-color", "blue");
                 theWarning.css("color", "white");
                 theWarning.css("cursor", "pointer");
-                theWarning.text("Neue Emote-Schlüsselwörter hinzugefügt - prüfe, ob du ein neues Pack herunterladen musst! (Klicken zum Schließen)");
+                theWarning.text(chrome.i18n.getMessage("Warning_Version123"));
                 theWarning.click(function (e) {
                     chrome.storage.sync.set({"lastMessageConfirmedVersion": BRBTV_COMMIT_VERSION});
                     theWarning.css("display", "none");
