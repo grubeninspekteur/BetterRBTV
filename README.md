@@ -1,12 +1,14 @@
-# BetterRBTV Google Chrome Extension
-Erweiterungen für den YouTube-Live-Chat.
+# BetterRBTV Browser Extension
+Comfort functions for YouTube™ Live and YouTube™ Gaming Live.
 
 ## Features
-* Ersetzung von Twitch-Keywords
-* Timestamps für Nachrichten
-* Avatare verbergen
-* Autocomplete von Benutzernamen nach "@"
-* Chatnachrichten filtern
+* Replacement of keywords known from another well-known streaming site
+* Timestamp for messages
+* Colored names
+* Hide avatars
+* User, emote autocompletion
+* Save space
+* Ignore/highlight users, filter chat messages
 
 ## Development
 
@@ -15,6 +17,8 @@ Erweiterungen für den YouTube-Live-Chat.
 To use the [Gulp-Tasks](gulpjs.com) you need to:
 1. Install [NPM](http://blog.npmjs.org/post/85484771375/how-to-install-npm)
 2. Run `$ npm install`
+
+If you install npm from your package manager, you may have to `sudo ln -s /usr/bin/nodejs /usr/bin/node`
 
 ### Configuration
 We use a `config.json` file in the roote directory for configuration.
