@@ -155,4 +155,4 @@ chrome.storage.sync.get(default_settings, function (settings) {
 
     include_chat_filter(settings);
     include_user_filter(settings);
-});;
+});
