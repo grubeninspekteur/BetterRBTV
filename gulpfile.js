@@ -37,14 +37,14 @@ gulp.task('updateManifest', function() {
 });
 
 gulp.task('chrome', function() {
-  return gulp.src('./src/*')
+  return gulp.src('./src/**')
     .pipe(zip('better-rbtv-' + version + '.zip'))
     .pipe(gulp.dest('./dist/chrome'));
 });
 
 gulp.task('firefox', function() {
   var manifestFilter = filter('**/manifest.json', {restore: true});
-  return gulp.src('./src/*')
+  return gulp.src('./src/**')
     .pipe(manifestFilter)
     .pipe(jeditor({
       'applications': {
