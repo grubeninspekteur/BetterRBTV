@@ -91,7 +91,7 @@
     "message": "Add"
   },
   "Opt_HighlightedUsersHeading": {
-    "message": "Higlighted users"
+    "message": "Highlighted users"
   },
   "Opt_HighlightedUsersNone": {
     "message": "None. Highlight users via the menu opened by clicking on their names."
@@ -158,7 +158,7 @@
     "message" : "Press TAB to complete"
   },
   "userActionVisitProfile": {
-    "message": "Vist profile",
+    "message": "Visit profile",
     "description": "Label for a button in the user action menu to visit the user's profile."
   },
   "userActionHighlight": {
