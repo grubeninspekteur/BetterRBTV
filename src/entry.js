@@ -135,6 +135,10 @@ chrome.storage.sync.get(default_settings, function (settings) {
         include_keyword_suggestions();
     }
 
+    if (settings.recentEmotes) {
+        include_recent_emotes();
+    }
+
     if (settings.showTimestamp) {
         include_timestamp();
     }

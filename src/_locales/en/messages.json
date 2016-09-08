@@ -81,6 +81,9 @@
   "Opt_EmoteSuggestions": {
     "message": "Suggest emotes after ':'"
   },
+  "Opt_RecentEmotes": {
+    "message": "Show recently used emotes under a custom tab in the emote picker (BETA-Feature)"
+  },
   "Opt_HideAvatars": {
     "message": "Hide avatars"
   },

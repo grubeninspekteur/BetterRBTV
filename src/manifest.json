@@ -23,6 +23,7 @@
       "default_settings.js",
       "timestamp.js",
       "colored_names.js",
+      "recent_emotes.js",
       "better_mention_highlight.js",
       "pinnable_mentions.js",
       "push_notifications.js",
