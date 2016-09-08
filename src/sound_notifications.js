@@ -10,6 +10,7 @@ function createSoundNotification(commentElem) {
 	if( Math.round( ((new Date) - 60000) / 1000 ) < $comment.data('timestamp') && $.contains(document, $comment[0]) ) {
 	
 		// search for mentions inside comment
+		var mention = $comment.not('.author-viewing').find('.mention');
 		if (mention.length) {
 
 			notificationSound.play();
