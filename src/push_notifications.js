@@ -26,17 +26,19 @@ function createPushNotification(commentElem) {
 	// = fires only when tab is not visible
 	if (isHidden()) {
 		
+		$comment = $(commentElem);
+		
 		// when initiated and it iterates the existing comments, only check comments from within the last 60 seconds
-		if( Math.round( ((new Date) - 60000) / 1000 ) < $(commentElem).data('timestamp') ) {
+		if( Math.round( ((new Date) - 60000) / 1000 ) < $comment.data('timestamp') && $.contains(document, $comment[0]) ) {
 		
 			// search for mentions inside comment
-			var mention = $(commentElem).not('.author-viewing').find('.mention');
+			var mention = $comment.not('.author-viewing').find('.mention');
 			if (mention.length) {
 				
-				var commentId = $(commentElem).find('li.comment').attr('id');
-				var userName = $(commentElem).find('.yt-user-name').text().trim();
-				var commentMsg = $(commentElem).find('.comment-text').text().trim();
-				var userIcon = $(commentElem).find('.avatar img').data('thumb');
+				var commentId = $comment.find('li.comment').attr('id');
+				var userName = $comment.find('.yt-user-name').text().trim();
+				var commentMsg = $comment.find('.comment-text').text().trim();
+				var userIcon = $comment.find('.avatar img').data('thumb');
 				
 				Push.create(userName, {
 					body: commentMsg,
