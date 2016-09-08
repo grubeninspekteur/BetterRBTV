@@ -109,8 +109,6 @@ function include_recent_emotes() {
 		});
 		
 		chrome.storage.onChanged.addListener(function (changes, namespace) {
-			
-			console.log(changes);
 
             if( changes["brbtvRecentEmotes"].newValue.length ) {
 				
