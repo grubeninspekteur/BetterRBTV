@@ -119,6 +119,12 @@ chrome.storage.sync.get(default_settings, function (settings) {
         addFaceEmotes(settings);
         addEmojiTooltips();
     });
+	
+	// moved higher up so comments get filtered and removed earlier
+	include_chat_filter(settings);
+    include_user_filter(settings);
+	
+	
 
     if (settings.suggestUser) {
         include_user_suggestions();
@@ -153,6 +159,4 @@ chrome.storage.sync.get(default_settings, function (settings) {
         include_better_mention_highlight();
     }
 
-    include_chat_filter(settings);
-    include_user_filter(settings);
 });

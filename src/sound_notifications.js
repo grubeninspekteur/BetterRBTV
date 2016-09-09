@@ -4,14 +4,13 @@ notificationSound.loop = false;
 
 function createSoundNotification(commentElem) {
 
-
+	$comment = $(commentElem);
 	
-		
 	// when initiated and it iterates the existing comments, only check comments from within the last 60 seconds
-	if( Math.round( ((new Date) - 60000) / 1000 ) < $(commentElem).data('timestamp') ) {
+	if( Math.round( ((new Date) - 60000) / 1000 ) < $comment.data('timestamp') && $.contains(document, $comment[0]) ) {
 	
 		// search for mentions inside comment
-		var mention = $(commentElem).not('.author-viewing').find('.mention');
+		var mention = $comment.not('.author-viewing').find('.mention');
 		if (mention.length) {
 
 			notificationSound.play();
@@ -24,8 +23,6 @@ function createSoundNotification(commentElem) {
 }
 
 function include_sound_notifications() {
-	
-	
 
     YouTubeLive.onChatLoaded(function (youtube) {
         youtube.registerChatMessageObserver(createSoundNotification, false);

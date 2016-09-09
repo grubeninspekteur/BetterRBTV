@@ -2,16 +2,18 @@
 var pinnedMentionsContainer = $('<ul id="brbtv-pinnedMentions-container"></ul>');
 
 function createPinnedMention(commentElem) {
+	
+	$comment = $(commentElem);
 
 	// when initiated and it iterates the existing comments, only check comments from within the last 60 seconds
-	if( Math.round( ((new Date) - 60000) / 1000 ) < $(commentElem).data('timestamp') ) {
+	if( Math.round( ((new Date) - 60000) / 1000 ) < $comment.data('timestamp') && $.contains(document, $comment[0]) ) {
 	
 		// search for mentions inside comment
-		var mention = $(commentElem).not('.author-viewing').find('.mention');
+		var mention = $comment.not('.author-viewing').find('.mention');
 		if (mention.length) {
 			
-			var userName = $(commentElem).find('.yt-user-name').text().trim();
-			var commentMsg = $(commentElem).find('.comment-text').text().trim();
+			var userName = $comment.find('.yt-user-name').text().trim();
+			var commentMsg = $comment.find('.comment-text').text().trim();
 			
 			// create pinned mention and attach it to the container
 			pinnedMentionsContainer.append('<li class="pinnedMention"><div class="content-pinnedMention">'+userName+': '+commentMsg+'</div><div class="remove-pinnedMention">&times;</div></li>');
