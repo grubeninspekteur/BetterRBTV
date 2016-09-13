@@ -24,7 +24,7 @@ function include_keyword_suggestions() {
                 var root = trie.find(":" + keywordPart);
                 if (root != null) {
                     contents = root.getWords(MAX_SUGGESTIONS).map(function (k) {
-                        return $('<span><span class="brbtv-emoji-preview yt-emoji-icon yt-emoji-' + keyword_to_emoji[k] + '"></span>' + k + '</span>')
+                        return $("<span>").append("<span>", {"class": "brbtv-emoji-preview yt-emoji-icon yt-emoji-" + keyword_to_emoji[k]}).text(k);
                     });
                 }
             }
