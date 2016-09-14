@@ -167,8 +167,8 @@ class YouTubeLive {
         if (!this._chatMutationObserver) {
             var self = this;
             this._chatMutationObserver = new MutationObserver(function (mutations) {
+                var scrollbarRecord = self._recordChatScrollbar();
                 mutations.forEach(function (mutation) {
-                    var scrollbarRecord = self._recordChatScrollbar();
                     for (let i = 0; i < mutation.addedNodes.length; i++) {
                         if ($(mutation.addedNodes[i]).hasClass("comment")) {
                             for (let o = 0; o < self._chatObservers.length; o++) {
@@ -176,8 +176,8 @@ class YouTubeLive {
                             }
                         }
                     }
-                    self._fixChatScrollbar(scrollbarRecord);
                 });
+                self._fixChatScrollbar(scrollbarRecord);
             });
 
             this._chatMutationObserver.observe(this.jAllComments[0], {childList: true});
