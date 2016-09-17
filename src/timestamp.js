@@ -1,7 +1,11 @@
 function addTimestamp(commentElem) {
     if (commentElem.hasAttribute("data-timestamp") && !commentElem.classList.contains("new-member-announcement")) {
         var date = new Date(parseInt(commentElem.getAttribute("data-timestamp")) * 1000);
-        $(commentElem).find(".avatar").before('<span class="comment-time" title="' + date.format() + '">' + date.format("HH:MM") + '</span>');
+        $(commentElem).find(".avatar").before(
+            $("<span>", {
+                "class": "comment-time",
+                "title": date.format()
+            }).text(date.format("HH:MM")));
     }
 }
 

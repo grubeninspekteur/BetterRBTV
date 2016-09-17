@@ -16,8 +16,13 @@ function createPinnedMention(commentElem) {
 			var commentMsg = $comment.find('.comment-text').text().trim();
 			
 			// create pinned mention and attach it to the container
-			pinnedMentionsContainer.append('<li class="pinnedMention"><div class="content-pinnedMention">'+userName+': '+commentMsg+'</div><div class="remove-pinnedMention">&times;</div></li>');
-			
+			pinnedMentionsContainer.append(
+				$("<li>", {class: "pinnedMention"}).append(
+					$("<div>", {class: "content-pinnendMention"}).text(userName + ': ' + commentMsg)
+				).append(
+					$("<div>", {class: "remove-pinnedMention"}).text("×")
+				)
+			);
 		}
 		
 	}

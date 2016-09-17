@@ -105,10 +105,11 @@ function listFilteredUsers(filteredUsersArray, storageKey, jNoUsersFiltered, jFi
 
         for (let i = 0; i < filteredUsersArray.length; i++) {
             let filteredUser = filteredUsersArray[i];
-            let li = $("<li></li>");
+            let li = $("<li>");
             li.text(filteredUser.name + " (" + filteredUser.id + ") ");
             li.attr('data-yt-user-id', filteredUser.id);
-            let btn = $('<button class="remove-user-button">' + chrome.i18n.getMessage("filterListRemove") + '</button>');
+            let btn = $('<button class="remove-user-button"></button>');
+            btn.text(chrome.i18n.getMessage("filterListRemove"));
             btn.click(function (e) {
                 let query = {};
                 query[storageKey] = [];
@@ -136,39 +137,41 @@ function listFilteredUsers(filteredUsersArray, storageKey, jNoUsersFiltered, jFi
 function showStoredEmotePack() {
     chrome.storage.local.get('emotePack', function (items) {
         var pack = items.emotePack;
+        var jEmotePackPreview = $('#emote-pack-preview');
+        jEmotePackPreview.empty();
         if (pack == null) {
-            document.getElementById('emote-pack-name').innerHTML = chrome.i18n.getMessage("noEmotePackInstalled");
-            document.getElementById('emote-pack-preview').innerHTML = '';
+            document.getElementById('emote-pack-name').textContent = chrome.i18n.getMessage("noEmotePackInstalled");
         } else {
-            var preview = '';
-            for (var i = 0; i < pack.images.length; i++) {
-                var img = pack.images[i];
-                preview += '<span style="font-size:25px">' + img.emote + '</span> =' + ' <img width="' + img.width + '" height="' + img.height + '" src="data:image/png;base64,' + img.base64 + '" /> ';
-                if (i + 1 < pack.images.length) preview += ", ";
+            for (let i = 0; i < pack.images.length; i++) {
+                let img = pack.images[i];
+                let emote = $('<span></span>');
+                emote.addClass("emote-preview-unicode");
+                emote.text(img.emote);
+                jEmotePackPreview.append(emote).append(" = ");
+                let jImg = $('<img>', {"width": img.width, "height": img.height, "src": "data:image/png;base64,"+img.base64});
+                jEmotePackPreview.append(jImg).append(" ");
+                if (i + 1 < pack.images.length) jEmotePackPreview.append(", ");
                 //if (i % 4 == 3) preview += "<br/>";
             }
-            document.getElementById('emote-pack-name').innerHTML = pack.name + "<br/>";
-            document.getElementById('emote-pack-preview').innerHTML = preview;
+            $('#emote-pack-name').text(pack.name).append("<br>");
         }
     });
 }
 
 function readPending() {
-    // it's so fast we don't need a spinner
-    //document.getElementById('loading-spinner').innerHTML = '<img src="' + chrome.extension.getURL('spinner.gif') + '" />';
-    document.getElementById('file-error').innerText = '';
-    document.getElementById('file-success').innerText = '';
+    document.getElementById('file-error').textContent = '';
+    document.getElementById('file-success').textContent = '';
     document.getElementById('select-pack').disabled = true;
 }
 
 function readError(error) {
-    document.getElementById('file-error').innerText = error;
+    document.getElementById('file-error').textContent = error;
     console.error(error);
     loading_complete();
 }
 
 function readSuccess(msg) {
-    document.getElementById('file-success').innerText = msg;
+    document.getElementById('file-success').textContent = msg;
     loading_complete();
 }
 
@@ -268,7 +271,6 @@ function loadEmotePack(fileName, fileContents) {
 }
 
 function loading_complete() {
-    //document.getElementById('loading-spinner').innerHTML = '';
     document.getElementById('select-pack').disabled = false;
 }
 function choose_emote_pack(evt) {
@@ -285,7 +287,7 @@ function choose_emote_pack(evt) {
         };
         reader.readAsArrayBuffer(file);
     } else {
-        document.getElementById('loading-spinner').innerHTML = chrome.i18n.getMessage("emotePackCantReadFile");
+        document.getElementById('loading-spinner').textContent = chrome.i18n.getMessage("emotePackCantReadFile");
     }
 }
 

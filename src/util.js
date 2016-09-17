@@ -48,13 +48,14 @@ class None {
 
 function addCssToHead(css) {
     if (css != null && css != '') {
-        var brbtvStyle = document.getElementById('rbtv-style-optional');
+        var brbtvStyle = document.getElementById('brbtv-style-optional');
 
         if (brbtvStyle != null) {
             brbtvStyle.innerHTML += " " + css;
             return true;
         } else {
             var style = document.createElement('style');
+            style.id = 'brbtv-style-optional';
             var head = document.getElementsByTagName('head')[0];
             style.innerHTML = css;
             if (head) {
@@ -189,9 +190,8 @@ class SuggestionBox {
             addCssToHead(cssToAdd);
             SuggestionBox.ANY_BOX_CREATED = true;
         }
-
-        $("#live-comments-controls").prepend("<div id='brbtv-suggest-" + boxName + "'></div>");
-        this._jSuggestBox = $("#brbtv-suggest-" + boxName);
+        this._jSuggestBox = $("<div>", {id: "brbtv-suggest-" + boxName});
+        $("#live-comments-controls").prepend(this._jSuggestBox);
         this._jSuggestBox.addClass("brbtv-suggestion-box");
         this._jSuggestBox.addClass("hid");
         jTextInput.keydown(function (e) {

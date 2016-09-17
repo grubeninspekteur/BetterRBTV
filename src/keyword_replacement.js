@@ -114,19 +114,25 @@ function include_keyword_replacement() {
         var textInput = youtube.getChatInputField();
         if (textInput) {
             textInput.addEventListener("keyup", function (event) {
-                var replaced = false;
-                var replacement = '';
-                var whatWasReplaced = '';
-                var theInnerHTML = textInput.innerHTML.replace(emotePattern, function (token) {
-                    replaced = true;
-                    whatWasReplaced = token;
-                    replacement = emote_map[token];
-                    return replacement;
-                });
-                if (replaced) {
-                    var replacedPosition = textInput.innerText.indexOf(whatWasReplaced);
-                    textInput.innerHTML = theInnerHTML;
-                    setCaretPosition(textInput, replacedPosition + replacement.length);
+                var result = emotePattern.exec(textInput.textContent);
+                if (result) {
+                    var keyword = result[0];
+                    // find first text node containing the position
+                    let lengthPassed = 0;
+                    for (let i = 0; i < textInput.childNodes.length; i++) {
+                        if (textInput.childNodes[i].nodeType != 3) continue;
+                        if (result.index > textInput.childNodes[i].nodeValue.length + lengthPassed) {
+                            lengthPassed += textInput.childNodes[i].nodeValue.length;
+                        } else {
+                            replacement = emote_map[keyword];
+                            textInput.childNodes[i].nodeValue = textInput.childNodes[i].nodeValue.replaceBetween(
+                                result.index - lengthPassed,
+                                result.index - lengthPassed + keyword.length,
+                                replacement);
+                            setCaretPosition(textInput, result.index + replacement.length);
+                            return;
+                        }
+                    }
                 }
             });
         }

@@ -1,6 +1,9 @@
 function include_user_filter(settings) {
     function createMenuButton(group, label) {
-        return $('<a href="#" class="brbtv-user-actions-item yt-ui-menu-item ' + group + '">' + label + '</a>');
+        return $("<a>", {
+            "href": "#",
+            "class": "brbtv-user-actions-item yt-ui-menu-item " + group
+        }).text(label);
     }
 
     const ADD_ACTION = true;
@@ -45,7 +48,7 @@ function include_user_filter(settings) {
             }
         });
 
-        var jUserMenu = $('<div id="brbtv-user-actions-menu" class="yt-uix-menu-content yt-ui-menu-content"></div>');
+        var jUserMenu = $("<div>", {"id": "brbtv-user-actions-menu", "class": "yt-uix-menu-content yt-ui-menu-content"});
         $("body").prepend(jUserMenu);
 
         function updateChromeStore(jUserLink, ytId, storageKey, isAddToList) {

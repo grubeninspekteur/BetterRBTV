@@ -8,10 +8,10 @@ function resetAuthors(youtube) {
     youtube.iteratePastChatMessages(function (message) {
         $(message).not(".author-is-owner").find("span.author a.yt-user-name").each(function (i, elem) {
 
-                var authorNameLc = elem.innerText.toLowerCase();
+                var authorNameLc = elem.textContent.toLowerCase();
             if (!newAuthorSet.has(authorNameLc)) {
                 newAuthorSet.add(authorNameLc);
-                newAuthorTrie.add(authorNameLc, {name: elem.innerText});
+                newAuthorTrie.add(authorNameLc, {name: elem.textContent});
             }
         });
     });
