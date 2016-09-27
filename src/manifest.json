@@ -39,7 +39,8 @@
     "all_frames": true
   }],
   "web_accessible_resources": [
-    "sounds/*"
+    "sounds/*",
+	"img/*"
   ],
   "permissions": [
     "storage"
