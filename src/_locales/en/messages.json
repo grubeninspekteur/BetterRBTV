@@ -157,6 +157,9 @@
   "Opt_UserSuggest": {
     "message": "Suggest users after '@'"
   },
+  "recentEmojisNone": {
+    "message": "Start using emojis and your most recently used will be displayed here."
+  },
   "suggestBoxTabToComplete": {
     "message" : "Press TAB to complete"
   },
