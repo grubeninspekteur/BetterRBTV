@@ -42,6 +42,13 @@ class YouTubeLive {
         return Boolean(type & this._type);
     }
 
+    static resetPage() {
+        YouTubeLive._instance = null;
+        YouTubeLive._tried_loading = 0; // which parts of the page have already been checked for
+        YouTubeLive._currently_loading = 0; // which parts of the page are currently checked for
+        YouTubeLive._on_chat_loaded_callbacks = [];
+    }
+
     static onVideoLoaded(callback) {
         // TODO implement
         throw "NOT YET IMPLEMENTED";
@@ -79,6 +86,9 @@ class YouTubeLive {
         }
         YouTubeLive._currently_loading = YouTubeLive._currently_loading | YouTubeLive.CHAT;
         function chatTimeoutOccurred(callback) {
+            // the following line is necessary since we could carry over a timeout across an AJAX change on the main YouTube site
+            if (!(YouTubeLive._currently_loading) & YouTubeLive.CHAT) return;
+
             if (document.readyState != 'complete') {
                 rescheduleTimeout(callback);
                 return;

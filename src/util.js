@@ -68,6 +68,10 @@ function addCssToHead(css) {
     }
 }
 
+function removeCssFromHead() {
+    $("#brbtv-style-optional").remove();
+}
+
 //http://stackoverflow.com/questions/6249095/how-to-set-caretcursor-position-in-contenteditable-element-div
 function setCaretPosition(el, position) {
     var range = document.createRange();

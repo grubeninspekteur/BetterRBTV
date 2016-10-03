@@ -109,59 +109,74 @@ if (!chrome.storage.sync) {
     chrome.storage.sync = chrome.storage.local;
 }
 
-chrome.storage.sync.get(default_settings, function (settings) {
-    if (settings.twitchKeywordReplacement) {
-        include_keyword_replacement(settings);
-    }
+function initializeYoutube() {
+    YouTubeLive.resetPage();
+    removeCssFromHead();
 
-    // only bother inserting css if we are on YouTube Live
-    YouTubeLive.onChatLoaded(function (youtube) {
-        addOtherCSS(settings);
-        addFaceEmotes(settings);
-        addEmojiTooltips();
+    chrome.storage.sync.get(default_settings, function (settings) {
+        if (settings.twitchKeywordReplacement) {
+            include_keyword_replacement(settings);
+        }
+
+        // only bother inserting css if we are on YouTube Live
+        YouTubeLive.onChatLoaded(function (youtube) {
+            addOtherCSS(settings);
+            addFaceEmotes(settings);
+            addEmojiTooltips();
+        });
+
+        // moved higher up so comments get filtered and removed earlier
+        include_chat_filter(settings);
+        include_user_filter(settings);
+
+
+        if (settings.suggestUser) {
+            include_user_suggestions(settings.addColonAfterInsertedUser);
+        }
+
+        if (settings.suggestEmote) {
+            include_keyword_suggestions();
+        }
+
+        if (settings.recentEmotes) {
+            include_recent_emotes();
+        }
+
+        if (settings.showTimestamp) {
+            include_timestamp();
+        }
+
+        if (settings.pinnableMentions) {
+            include_pinnable_mentions();
+        }
+
+        // put it before mention highlighting because it searches for .mention class inside comment, which the
+        // following function would already have removed
+        if (settings.soundNotifications) {
+            include_sound_notifications();
+        }
+        if (settings.pushNotifications) {
+            include_push_notifications();
+        }
+
+        if (settings.coloredNames) {
+            include_colored_names();
+        }
+
+        if (settings.betterMentionHighlight) {
+            include_better_mention_highlight();
+        }
+
     });
-	
-	// moved higher up so comments get filtered and removed earlier
-	include_chat_filter(settings);
-    include_user_filter(settings);
-	
-	
+}
 
-    if (settings.suggestUser) {
-        include_user_suggestions(settings.addColonAfterInsertedUser);
-    }
-
-    if (settings.suggestEmote) {
-        include_keyword_suggestions();
-    }
-
-    if (settings.recentEmotes) {
-        include_recent_emotes();
-    }
-
-    if (settings.showTimestamp) {
-        include_timestamp();
-    }
-
-    if (settings.pinnableMentions) {
-        include_pinnable_mentions();
-    }
-	
-	// put it before mention highlighting because it searches for .mention class inside comment, which the
-	// following function would already have removed
-	if (settings.soundNotifications) {
-        include_sound_notifications();
-    }
-	if (settings.pushNotifications) {
-        include_push_notifications();
-    }
-
-    if (settings.coloredNames) {
-        include_colored_names();
-    }
-	
-    if (settings.betterMentionHighlight) {
-        include_better_mention_highlight();
-    }
-
-});
+initializeYoutube();
+// listen to AJAX change events
+let page = document.getElementById("page");
+if (page) {
+    let observer = new MutationObserver(function (mutations) {
+        if (BRBTV_DEBUG) console.log("page changed to " + document.location.href);
+        initializeYoutube();
+    });
+    observer.observe(page, {attributes: true});
+}
