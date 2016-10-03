@@ -42,6 +42,13 @@ class YouTubeLive {
         return Boolean(type & this._type);
     }
 
+    static resetPage() {
+        YouTubeLive._instance = null;
+        YouTubeLive._tried_loading = 0; // which parts of the page have already been checked for
+        YouTubeLive._currently_loading = 0; // which parts of the page are currently checked for
+        YouTubeLive._on_chat_loaded_callbacks = [];
+    }
+
     static onVideoLoaded(callback) {
         // TODO implement
         throw "NOT YET IMPLEMENTED";
@@ -79,6 +86,9 @@ class YouTubeLive {
         }
         YouTubeLive._currently_loading = YouTubeLive._currently_loading | YouTubeLive.CHAT;
         function chatTimeoutOccurred(callback) {
+            // the following line is necessary since we could carry over a timeout across an AJAX change on the main YouTube site
+            if (!(YouTubeLive._currently_loading) & YouTubeLive.CHAT) return;
+
             if (document.readyState != 'complete') {
                 rescheduleTimeout(callback);
                 return;
@@ -167,8 +177,8 @@ class YouTubeLive {
         if (!this._chatMutationObserver) {
             var self = this;
             this._chatMutationObserver = new MutationObserver(function (mutations) {
+                var scrollbarRecord = self._recordChatScrollbar();
                 mutations.forEach(function (mutation) {
-                    var scrollbarRecord = self._recordChatScrollbar();
                     for (let i = 0; i < mutation.addedNodes.length; i++) {
                         if ($(mutation.addedNodes[i]).hasClass("comment")) {
                             for (let o = 0; o < self._chatObservers.length; o++) {
@@ -176,8 +186,8 @@ class YouTubeLive {
                             }
                         }
                     }
-                    self._fixChatScrollbar(scrollbarRecord);
                 });
+                self._fixChatScrollbar(scrollbarRecord);
             });
 
             this._chatMutationObserver.observe(this.jAllComments[0], {childList: true});

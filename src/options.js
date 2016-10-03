@@ -12,24 +12,8 @@ $("#select-pack").attr("value", chrome.i18n.getMessage("Opt_EmotePackButton"));
 // END localization
 
 // Saves options to chrome.storage.sync.
-function save_options() {
+function save_blocked_terms() {
     chrome.storage.sync.set({
-        twitchKeywordReplacement: document.getElementById('keywords').checked,
-        faceEmotes: document.getElementById('face-emotes').checked,
-        suggestUser: document.getElementById('user-suggest').checked,
-        suggestEmote: document.getElementById('emote-suggest').checked,
-        recentEmotes: document.getElementById('recent-emotes').checked,
-        hideAvatars: document.getElementById('hide-avatars').checked,
-        coloredNames: document.getElementById('colored-names').checked,
-        betterMentionHighlight: document.getElementById('better-mention-highlight').checked,
-        pinnableMentions: document.getElementById('pinnable-mentions').checked,
-        pushNotifications: document.getElementById('push-notifications').checked,
-        soundNotifications: document.getElementById('sound-notifications').checked,
-        lessVipHighlight: document.getElementById('less-vip-highlight').checked,
-        betterSeperateMessages: document.getElementById('better-seperate-messages').checked,
-        noGreenMemberAccent: document.getElementById('no-green-member-accent').checked,
-        saveSpace: document.getElementById('save-space').checked,
-        showTimestamp: document.getElementById('show-timestamp').checked,
         blockedTerms: {
             termString: document.getElementById('blocked-terms').value.trim(),
             isRegex: document.getElementById('blocked-terms-is-regex').checked
@@ -48,22 +32,15 @@ function save_options() {
 // stored in chrome.storage.
 function restore_options() {
     chrome.storage.sync.get(default_settings, function (items) {
-        document.getElementById('keywords').checked = items.twitchKeywordReplacement;
-        document.getElementById('face-emotes').checked = items.faceEmotes;
-        document.getElementById('user-suggest').checked = items.suggestUser;
-        document.getElementById('emote-suggest').checked = items.suggestEmote;
-        document.getElementById('recent-emotes').checked = items.recentEmotes;
-        document.getElementById('hide-avatars').checked = items.hideAvatars;
-        document.getElementById('save-space').checked = items.saveSpace;
-        document.getElementById('colored-names').checked = items.coloredNames;
-        document.getElementById('better-mention-highlight').checked = items.betterMentionHighlight;
-        document.getElementById('pinnable-mentions').checked = items.pinnableMentions;
-        document.getElementById('push-notifications').checked = items.pushNotifications;
-        document.getElementById('sound-notifications').checked = items.soundNotifications;
-        document.getElementById('less-vip-highlight').checked = items.lessVipHighlight;
-        document.getElementById('better-seperate-messages').checked = items.betterSeperateMessages;
-        document.getElementById('no-green-member-accent').checked = items.noGreenMemberAccent;
-        document.getElementById('show-timestamp').checked = items.showTimestamp;
+        $('.auto-saving').each(function (index, elem) {
+            elem.checked = items[elem.getAttribute('data-storage-key')];
+            $(elem).change(function () {
+                let query = {};
+                query[elem.getAttribute('data-storage-key')] = elem.checked;
+                chrome.storage.sync.set(query);
+            })
+        });
+
         document.getElementById('blocked-terms').value = items.blockedTerms.termString;
         document.getElementById('blocked-terms-is-regex').checked = items.blockedTerms.isRegex;
 
@@ -293,7 +270,7 @@ function choose_emote_pack(evt) {
 
 document.addEventListener('DOMContentLoaded', restore_options);
 document.getElementById('save').addEventListener('click',
-    save_options);
+    save_blocked_terms);
 document.getElementById('select-pack').addEventListener('change',
     choose_emote_pack);
 

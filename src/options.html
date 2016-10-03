@@ -48,7 +48,7 @@
     <div id="tabs-1">
         <p>
             <label>
-                <input type="checkbox" id="keywords">
+                <input type="checkbox" id="keywords" class="auto-saving" data-storage-key="twitchKeywordReplacement">
                 <span data-i18n="Opt_TrainingWheels">Stützräder</span>
             </label><br/>
             <span class="emphasis" data-i18n="Opt_TrainingWheelsDescription">Wandelt bekannte Schlüsselwörter einer anderen Streamingseite in Emoticons um.</span><br/>
@@ -57,21 +57,21 @@
 
         <p>
             <label>
-                <input type="checkbox" id="emote-suggest">
+                <input type="checkbox" id="emote-suggest" class="auto-saving" data-storage-key="suggestEmote">
                 <span data-i18n="Opt_EmoteSuggestions">Emote-Vorschläge nach ":"</span>
             </label>
         </p>
 
         <p>
             <label>
-                <input type="checkbox" id="recent-emotes">
+                <input type="checkbox" id="recent-emotes" class="auto-saving" data-storage-key="recentEmotes">
                 <span data-i18n="Opt_RecentEmotes">Zeige kürzlich benutzte Emotes in einem eigenen Tab in der Emote-Auswahl an (BETA-Feature)</span>
             </label>
         </p>
 
         <p>
             <label>
-                <input type="checkbox" id="face-emotes">
+                <input type="checkbox" id="face-emotes" class="auto-saving" data-storage-key="faceEmotes">
                 <span data-i18n="Opt_EmotePack">Emote-Pack</span>
             </label><br/>
             <!--<span id="loading-spinner" width="12" height="12"></span>-->
@@ -86,84 +86,91 @@
     <div id="tabs-2">
         <p>
             <label>
-                <input type="checkbox" id="user-suggest">
+                <input type="checkbox" id="user-suggest" class="auto-saving" data-storage-key="suggestUser">
                 <span data-i18n="Opt_UserSuggest">User-Vorschläge nach "@"</span>
             </label>
         </p>
 
         <p>
             <label>
-                <input type="checkbox" id="show-timestamp">
+                <input type="checkbox" id="user-input-add-colon" class="auto-saving" data-storage-key="addColonAfterInsertedUser">
+                <span data-i18n="Opt_UserAddColon">Doppelpunkt nach automatisch eingefügten Usern</span>
+            </label>
+        </p>
+
+        <p>
+            <label>
+                <input type="checkbox" id="show-timestamp" class="auto-saving" data-storage-key="showTimestamp">
                 <span data-i18n="Opt_Timestamp">Bei Nachrichten Erstellungszeit zeigen</span>
             </label>
         </p>
 
         <p>
             <label>
-                <input type="checkbox" id="save-space">
+                <input type="checkbox" id="save-space" class="auto-saving" data-storage-key="saveSpace">
                 <span data-i18n="Opt_SaveSpace">Zeigt Nachrichten platzsparender an</span>
             </label>
         </p>
 
         <p>
             <label>
-                <input type="checkbox" id="hide-avatars">
+                <input type="checkbox" id="hide-avatars" class="auto-saving" data-storage-key="hideAvatars">
                 <span data-i18n="Opt_HideAvatars">Avatare verbergen</span>
             </label>
         </p>
 
         <p>
             <label>
-                <input type="checkbox" id="colored-names">
+                <input type="checkbox" id="colored-names" class="auto-saving" data-storage-key="coloredNames">
                 <span data-i18n="Opt_ColoredUsernames">Farbige Usernamen</span>
             </label>
         </p>
 		
         <p>
             <label>
-                <input type="checkbox" id="better-mention-highlight">
+                <input type="checkbox" id="better-mention-highlight" class="auto-saving" data-storage-key="betterMentionHighlight">
                 <span data-i18n="Opt_BetterMentionHighlight">Bessere Sichtbarkeit von eigenen Usernamen-Erwähnungen (@...)</span>
             </label>
         </p>
 		
         <p>
             <label>
-                <input type="checkbox" id="pinnable-mentions">
+                <input type="checkbox" id="pinnable-mentions" class="auto-saving" data-storage-key="pinnableMentions">
                 <span data-i18n="Opt_PinMentions">@Erwähnungen am oberen Chatrand dauerhaft anheften</span>
             </label>
         </p>
 		
         <p>
             <label>
-                <input type="checkbox" id="push-notifications">
+                <input type="checkbox" id="push-notifications" class="auto-saving" data-storage-key="pushNotifications">
                 <span data-i18n="Opt_PushNotifications">Desktop-Benachrichtigung anzeigen, wenn eine @Erwähnung in Abwesenheit erscheint</span>
             </label>
         </p>
 		
         <p>
             <label>
-                <input type="checkbox" id="sound-notifications">
+                <input type="checkbox" id="sound-notifications" class="auto-saving" data-storage-key="soundNotifications">
                 <span data-i18n="Opt_SoundNotifications">Einen Ton abspielen bei jeder @Erwähnung</span>
             </label>
         </p>
 
         <p>
             <label>
-                <input type="checkbox" id="better-seperate-messages">
+                <input type="checkbox" id="better-seperate-messages" class="auto-saving" data-storage-key="betterSeperateMessages">
                 <span data-i18n="Opt_BetterSeparateMessages">Nachrichten besser erkennbar voneinander trennen</span>
             </label>
         </p>
 
         <p>
             <label>
-                <input type="checkbox" id="less-vip-highlight">
+                <input type="checkbox" id="less-vip-highlight" class="auto-saving" data-storage-key="lessVipHighlight">
                 <span data-i18n="Opt_LessVIPHighlight">weniger aufdringliche VIP-Meldungen</span>
             </label>
         </p>
 
         <p>
             <label>
-                <input type="checkbox" id="no-green-member-accent">
+                <input type="checkbox" id="no-green-member-accent" class="auto-saving" data-storage-key="noGreenMemberAccent">
                 <span data-i18n="Opt_NoGreenVIPBar">Keine grüne Akzentleiste links bei Nachrichten von VIPs</span>
             </label>
         </p>
@@ -179,6 +186,8 @@
                 <input type="checkbox" id="blocked-terms-is-regex">
                 <span data-i18n="Opt_RegularExpression">Regulärer Ausdruck</span>
             </label>
+            <button id="save" data-i18n="Opt_SaveButton">Speichern</button>
+        <div id="status"></div>
         </p>
         <p>
             <span class="list-heading" data-i18n="Opt_MutedUsersHeading">Stummgeschaltete Benutzer</span>
@@ -207,9 +216,6 @@
         </label>
     </div>
 </div>
-
-<button id="save" data-i18n="Opt_SaveButton">Speichern</button>
-<div id="status"></div>
 
 <script src="default_settings.js"></script>
 <script src="lib/jszip.min.js"></script>

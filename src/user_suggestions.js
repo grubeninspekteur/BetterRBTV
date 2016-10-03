@@ -19,7 +19,7 @@ function resetAuthors(youtube) {
     authorSet = newAuthorSet;
 }
 
-function include_user_suggestions() {
+function include_user_suggestions(addColon) {
     function suggestAuthors(suggestBox, name) {
         var suggestedAuthorElements = [];
 
@@ -43,7 +43,11 @@ function include_user_suggestions() {
 
     function completeAuthorSuggestion(suggestBox, authorName, youtube) {
         if (authorName) {
-            suggestBox.replaceSuggestion(youtube.getJChatInputField(), "@", "@" + authorName, true);
+            var completedString = "@" + authorName;
+            if (addColon) {
+                completedString += ":";
+            }
+            suggestBox.replaceSuggestion(youtube.getJChatInputField(), "@", completedString, true);
         }
     }
 
