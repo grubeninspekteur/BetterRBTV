@@ -157,6 +157,9 @@
   "Opt_UserSuggest": {
     "message": "User-Vorschläge nach \"@\""
   },
+  "Opt_UserAddColon": {
+    "message": "Doppelpunkt nach automatisch eingefügten Usern"
+  },
   "recentEmojisNone": {
     "message": "Beginne mit der Verwendung von Emojis, und die kürzlich verwendeten werden hier aufgelistet."
   },

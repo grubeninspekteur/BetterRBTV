@@ -166,7 +166,11 @@ function include_user_filter(settings) {
         function insertDoubleclickedAuthor(e) {
             jUserMenu.removeClass("show-brbtv-user-actions-menu");
 
-            var replacement = '@' + $(e.currentTarget).text() + "\u00A0";
+            var replacement = '@' + $(e.currentTarget).text();
+            if (settings.addColonAfterInsertedUser) {
+                replacement += ":";
+            }
+            replacement += "\u00A0";
             var jTextInput = youtube.getJChatInputField();
             if (jTextInput.length) {
                 let caretPosition = getCaretPosition(jTextInput[0]);

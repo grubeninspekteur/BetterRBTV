@@ -157,6 +157,9 @@
   "Opt_UserSuggest": {
     "message": "Suggest users after '@'"
   },
+  "Opt_UserAddColon": {
+    "message": "Add colon after user names added automatically"
+  },
   "recentEmojisNone": {
     "message": "Start using emojis and your most recently used will be displayed here."
   },

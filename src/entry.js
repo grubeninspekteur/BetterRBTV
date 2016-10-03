@@ -128,7 +128,7 @@ chrome.storage.sync.get(default_settings, function (settings) {
 	
 
     if (settings.suggestUser) {
-        include_user_suggestions();
+        include_user_suggestions(settings.addColonAfterInsertedUser);
     }
 
     if (settings.suggestEmote) {

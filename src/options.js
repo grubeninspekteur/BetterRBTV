@@ -17,6 +17,7 @@ function save_options() {
         twitchKeywordReplacement: document.getElementById('keywords').checked,
         faceEmotes: document.getElementById('face-emotes').checked,
         suggestUser: document.getElementById('user-suggest').checked,
+        addColonAfterInsertedUser: document.getElementById('user-input-add-colon').checked,
         suggestEmote: document.getElementById('emote-suggest').checked,
         recentEmotes: document.getElementById('recent-emotes').checked,
         hideAvatars: document.getElementById('hide-avatars').checked,
@@ -51,6 +52,7 @@ function restore_options() {
         document.getElementById('keywords').checked = items.twitchKeywordReplacement;
         document.getElementById('face-emotes').checked = items.faceEmotes;
         document.getElementById('user-suggest').checked = items.suggestUser;
+        document.getElementById('user-input-add-colon').checked = items.addColonAfterInsertedUser;
         document.getElementById('emote-suggest').checked = items.suggestEmote;
         document.getElementById('recent-emotes').checked = items.recentEmotes;
         document.getElementById('hide-avatars').checked = items.hideAvatars;
