@@ -4,6 +4,7 @@ var default_settings = {
     faceEmotes: true,
     suggestUser: true,
     suggestEmote: true,
+    recentEmotes: false,
     hideAvatars: false,
     saveSpace: true,
 	coloredNames: true,

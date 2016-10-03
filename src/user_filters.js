@@ -16,7 +16,12 @@ function include_user_filter(settings) {
             "position: absolute;}\n";
         theCss += ".brbtv-user-actions-item {color: black !important;}";
         theCss += ".show-brbtv-user-actions-menu {display: block !important;}";
+        theCss += ".brbtv-highlighted-message {background-color: rgb(204, 0, 0) !important; border-top: 0 !important; border-bottom: 0 !important;}";
+        theCss += ".brbtv-highlighted-message .comment-time, .brbtv-highlighted-message .byline {color: rgba(255,255,255,0.54) !important;}";
+        theCss += ".brbtv-highlighted-message .mention {background-color: transparent !important;}";
+        theCss += ".brbtv-highlighted-message .comment-text {color: #fff !important;}";
         theCss += ".brbtv-highlighted-message .accent-bar {background-color: rgb(204, 0, 0) !important;}";
+        theCss += ".live-chat-widget li.comment.brbtv-highlighted-message .content a.yt-user-name {color: #fff !important;}";
         theCss += ".brbtv-muted-message .yt-user-name {text-decoration: line-through !important;}";
         addCssToHead(theCss);
 

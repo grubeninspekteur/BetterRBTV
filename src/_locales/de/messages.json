@@ -81,6 +81,9 @@
   "Opt_EmoteSuggestions": {
     "message": "Emote-Vorschläge nach \":\""
   },
+  "Opt_RecentEmotes": {
+    "message": "Zeige kürzlich benutzte Emotes in einem eigenen Tab in der Emote-Auswahl an (BETA-Feature)"
+  },
   "Opt_HideAvatars": {
     "message": "Avatare verbergen"
   },
