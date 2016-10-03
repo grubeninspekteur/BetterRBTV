@@ -173,10 +173,20 @@ function initializeYoutube() {
 initializeYoutube();
 // listen to AJAX change events
 let page = document.getElementById("page");
+let videoIdPattern = /video-[a-zA-Z0-9]+/;
+var lastSeenVideoId = "";
+
 if (page) {
     let observer = new MutationObserver(function (mutations) {
-        if (BRBTV_DEBUG) console.log("page changed to " + document.location.href);
-        initializeYoutube();
+        let match = videoIdPattern.exec(page.className);
+        if (match) {
+            if (match[0] != lastSeenVideoId) {
+                lastSeenVideoId = match[0];
+                if (BRBTV_DEBUG) console.log("video changed to " + lastSeenVideoId);
+                initializeYoutube();
+            }
+        }
+
     });
     observer.observe(page, {attributes: true});
 }
