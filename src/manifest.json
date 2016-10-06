@@ -12,7 +12,9 @@
       "*://*.youtube.com/*"
     ],
     "exclude_matches": [
-      "*://*.youtube.com/subscribe_embed*"
+      "*://*.youtube.com/subscribe_embed*",
+      "*://*.youtube.com/embed*",
+      "*://*.youtube.com/yt/*"
     ],
     "js": [
       "lib/jquery-3.1.0.slim.min.js",
