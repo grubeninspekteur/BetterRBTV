@@ -53,8 +53,13 @@ function include_user_filter(settings) {
             }
         });
 
-        var jUserMenu = $("<div>", {"id": "brbtv-user-actions-menu", "class": "yt-uix-menu-content yt-ui-menu-content"});
-        $("body").prepend(jUserMenu);
+        if (!$("#brbtv-user-actions-menu").length) {
+            var jUserMenu = $("<div>", {
+                "id": "brbtv-user-actions-menu",
+                "class": "yt-uix-menu-content yt-ui-menu-content"
+            });
+            $("body").prepend(jUserMenu);
+        }
 
         function updateChromeStore(jUserLink, ytId, storageKey, isAddToList) {
             let query = {};
