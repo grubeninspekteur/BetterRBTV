@@ -12,14 +12,10 @@ function createSoundNotification(commentElem) {
 		// search for mentions inside comment
 		var mention = $comment.not('.author-viewing').find('.mention');
 		if (mention.length) {
-
 			notificationSound.play();
-			
 		}
-		
 	}
-	
-	
+	delete $comment;
 }
 
 function include_sound_notifications() {

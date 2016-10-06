@@ -35,7 +35,7 @@ function include_user_filter(settings) {
             highlightedUsers.add(settings.highlightedUsers[i].id);
         }
 
-        chrome.storage.onChanged.addListener(function (changes, namespace) {
+        youtube.addStorageListener(function (changes, namespace) {
             var ignoredUserChange = changes["ignoredUsers"];
             if (ignoredUserChange) {
                 mutedUsers = new Set();
@@ -54,11 +54,12 @@ function include_user_filter(settings) {
         });
 
         if (!$("#brbtv-user-actions-menu").length) {
-            var jUserMenu = $("<div>", {
+            let jUserMenu = $("<div>", {
                 "id": "brbtv-user-actions-menu",
                 "class": "yt-uix-menu-content yt-ui-menu-content"
             });
             $("body").prepend(jUserMenu);
+            delete jUserMenu;
         }
 
         function updateChromeStore(jUserLink, ytId, storageKey, isAddToList) {
@@ -98,7 +99,7 @@ function include_user_filter(settings) {
                 }
                 e.preventDefault();
             });
-            jUserMenu.append(jHighlightUser);
+            $("#brbtv-user-actions-menu").append(jHighlightUser);
         }
 
         function addUnhighlightUserButton(ytId, jUserLink) {
@@ -117,7 +118,7 @@ function include_user_filter(settings) {
                 }
                 e.preventDefault();
             });
-            jUserMenu.append(jUnhighlightUser);
+            $("#brbtv-user-actions-menu").append(jUnhighlightUser);
         }
 
         function addMuteButton(ytId, jUserLink) {
@@ -136,7 +137,7 @@ function include_user_filter(settings) {
                 }
                 e.preventDefault();
             });
-            jUserMenu.append(jMuteUser);
+            $("#brbtv-user-actions-menu").append(jMuteUser);
         }
 
         function addUnmuteButton(ytId, jUserLink) {
@@ -155,13 +156,13 @@ function include_user_filter(settings) {
                 }
                 e.preventDefault();
             });
-            jUserMenu.append(jMuteUser);
+            $("#brbtv-user-actions-menu").append(jMuteUser);
         }
 
         function addHideMenuFunction(jUserLink) {
             var hideMenuFunction = function (e) {
                 if (e.target != jUserLink[0]) {
-                    jUserMenu.removeClass("show-brbtv-user-actions-menu");
+                    $("#brbtv-user-actions-menu").removeClass("show-brbtv-user-actions-menu");
                     $(this).off("click", hideMenuFunction);
                 }
             };
@@ -169,7 +170,7 @@ function include_user_filter(settings) {
         }
 
         function insertDoubleclickedAuthor(e) {
-            jUserMenu.removeClass("show-brbtv-user-actions-menu");
+            $("#brbtv-user-actions-menu").removeClass("show-brbtv-user-actions-menu");
 
             var replacement = '@' + $(e.currentTarget).text();
             if (settings.addColonAfterInsertedUser) {
@@ -227,6 +228,8 @@ function include_user_filter(settings) {
             }
 
             jUserLink.click(function (e) {
+                let jUserLink = $(e.target);
+                let jUserMenu = $("#brbtv-user-actions-menu");
                 jUserMenu.empty();
 
                 let jVisitProfile = createMenuButton("brbtv-visit-button", chrome.i18n.getMessage("userActionVisitProfile"));
@@ -259,6 +262,8 @@ function include_user_filter(settings) {
 
             // insert the name as a mention on doubleclick
             jUserLink.dblclick(insertDoubleclickedAuthor);
+
+            jUserLink = null;
 
         }, true);
     });

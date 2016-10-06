@@ -185,6 +185,9 @@ if (page) {
                 if (BRBTV_DEBUG) console.log("video changed to " + lastSeenVideoId);
                 initializeYoutube();
             }
+        } else {
+            YouTubeLive.resetPage();
+            removeCssFromHead();
         }
 
     });

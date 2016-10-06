@@ -18,6 +18,8 @@ class YouTubeLive {
 
     constructor() {
         this._chatObservers = [];
+        this._intervals = [];
+        this._storageListeners = [];
         this._chatMutationObserver = null;
         this._type = 0; // we are using bit flags internally
     }
@@ -43,6 +45,24 @@ class YouTubeLive {
     }
 
     static resetPage() {
+        if (YouTubeLive._instance != null) {
+            if (YouTubeLive._instance._chatMutationObserver != null) {
+                YouTubeLive._instance._chatMutationObserver.disconnect();
+            }
+            for (let interval of YouTubeLive._instance._intervals) {
+                clearInterval(interval);
+            }
+
+            for (let listener of YouTubeLive._instance._storageListeners) {
+                chrome.storage.onChanged.removeListener(listener);
+            }
+
+            YouTubeLive._instance._intervals = [];
+            YouTubeLive._instance._storageListeners = [];
+            YouTubeLive._instance._chatObservers = [];
+            delete YouTubeLive._instance.jHidingMessage;
+            delete YouTubeLive._instance.jCommentsScroller;
+        }
         YouTubeLive._instance = null;
         YouTubeLive._tried_loading = 0; // which parts of the page have already been checked for
         YouTubeLive._currently_loading = 0; // which parts of the page are currently checked for
@@ -74,8 +94,7 @@ class YouTubeLive {
     _initializeUniqueChatElements() {
         this.jHidingMessage = $("#live-comments-setting-bottom-scroll");
         this.jCommentsScroller = $("#comments-scroller");
-        this.jAllComments = $("#all-comments");
-        this.jChatInputField = $("#live-comments-input-field");
+
     }
 
     static _startLoadingChat() {
@@ -143,7 +162,7 @@ class YouTubeLive {
      * @returns {JQuery|jQuery|HTMLElement|*}
      */
     getJChatInputField() {
-        return this.jChatInputField;
+        return $("#live-comments-input-field");
     }
 
     /**
@@ -152,8 +171,9 @@ class YouTubeLive {
      * @returns {HTMLElement|*}
      */
     getChatInputField() {
-        if (this.jChatInputField.length) {
-            return this.jChatInputField[0];
+        let jChatInputField = $("#live-comments-input-field");
+        if (jChatInputField.length) {
+            return jChatInputField[0];
         } else {
             return null;
         }
@@ -190,8 +210,22 @@ class YouTubeLive {
                 self._fixChatScrollbar(scrollbarRecord);
             });
 
-            this._chatMutationObserver.observe(this.jAllComments[0], {childList: true});
+            this._chatMutationObserver.observe($("#all-comments")[0], {childList: true});
         }
+    }
+
+    /**
+     * Creates a timer that is automatically deleted when the chat context is left.
+     */
+    setInterval(callback, interval) {
+        this._intervals.push(setInterval(callback, interval));
+    }
+
+    /**
+     * Adds a storage listener that is automatically detached when the chat context is left.
+     */
+    addStorageListener(callback) {
+        this._storageListeners.push(chrome.storage.onChanged.addListener(callback));
     }
 
     _ensureChat() {
@@ -206,7 +240,7 @@ class YouTubeLive {
     iteratePastChatMessages(messageObserver) {
         this._ensureChat();
         var scrollbarRecord = this._recordChatScrollbar();
-        this.jAllComments.find(".comment").each(function (idx, elem) {
+        $("#all-comments").find(".comment").each(function (idx, elem) {
             messageObserver(elem);
         });
         this._fixChatScrollbar(scrollbarRecord);

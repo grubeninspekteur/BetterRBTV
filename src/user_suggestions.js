@@ -1,25 +1,25 @@
-var authorTrie = new Trie();
-var authorSet = new Set();
+function include_user_suggestions(addColon) {
+    var authorTrie = new Trie();
+    var authorSet = new Set();
 
-function resetAuthors(youtube) {
-    var newAuthorTrie = new Trie();
-    var newAuthorSet = new Set();
+    function resetAuthors(youtube) {
+        var newAuthorTrie = new Trie();
+        var newAuthorSet = new Set();
 
-    youtube.iteratePastChatMessages(function (message) {
-        $(message).not(".author-is-owner").find("span.author a.yt-user-name").each(function (i, elem) {
+        youtube.iteratePastChatMessages(function (message) {
+            $(message).not(".author-is-owner").find("span.author a.yt-user-name").each(function (i, elem) {
 
                 var authorNameLc = elem.textContent.toLowerCase();
-            if (!newAuthorSet.has(authorNameLc)) {
-                newAuthorSet.add(authorNameLc);
-                newAuthorTrie.add(authorNameLc, {name: elem.textContent});
-            }
+                if (!newAuthorSet.has(authorNameLc)) {
+                    newAuthorSet.add(authorNameLc);
+                    newAuthorTrie.add(authorNameLc, {name: elem.textContent});
+                }
+            });
         });
-    });
-    authorTrie = newAuthorTrie;
-    authorSet = newAuthorSet;
-}
+        authorTrie = newAuthorTrie;
+        authorSet = newAuthorSet;
+    }
 
-function include_user_suggestions(addColon) {
     function suggestAuthors(suggestBox, name) {
         var suggestedAuthorElements = [];
 
@@ -58,7 +58,7 @@ function include_user_suggestions(addColon) {
         resetAuthors(youtube);
 
         // make sure we remove authorTrie from time to time so we don't get a list of x-thousand users
-        setInterval(function () {
+        youtube.setInterval(function () {
             resetAuthors(youtube)
         }, 60000); // 1 minute
 

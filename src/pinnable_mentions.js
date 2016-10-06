@@ -1,9 +1,6 @@
-// create the general mentions container
-var pinnedMentionsContainer = $('<ul id="brbtv-pinnedMentions-container"></ul>');
-
 function createPinnedMention(commentElem) {
 	
-	$comment = $(commentElem);
+	let $comment = $(commentElem);
 
 	// when initiated and it iterates the existing comments, only check comments from within the last 60 seconds
 	if( Math.round( ((new Date) - 60000) / 1000 ) < $comment.data('timestamp') && $.contains(document, $comment[0]) ) {
@@ -16,7 +13,7 @@ function createPinnedMention(commentElem) {
 			var commentMsg = $comment.find('.comment-text').text().trim();
 			
 			// create pinned mention and attach it to the container
-			pinnedMentionsContainer.append(
+			$("#brbtv-pinnedMentions-container").append(
 				$("<li>", {class: "pinnedMention"}).append(
 					$("<div>", {class: "content-pinnendMention"}).text(userName + ': ' + commentMsg)
 				).append(
@@ -27,6 +24,7 @@ function createPinnedMention(commentElem) {
 		
 	}
 
+	delete $comment;
 }
 
 function include_pinnable_mentions() {
@@ -35,7 +33,11 @@ function include_pinnable_mentions() {
 		
 		// attach the container to the chat
 		// doesn't really matter where to prepend, I just chose a DIV that has already position: relative
-		$('#live-comments-section > .relative').prepend( pinnedMentionsContainer );
+		if (!$("#brbtv-pinnedMentions-container").length) {
+			$('#live-comments-section > .relative').prepend('<ul id="brbtv-pinnedMentions-container"></ul>');
+		} else {
+			$("#brbtv-pinnedMentions").empty();
+		}
 		
 		// inject CSS
 		addCssToHead(`
