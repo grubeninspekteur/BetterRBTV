@@ -45,9 +45,12 @@ class YouTubeLive {
     }
 
     static resetPage() {
+        $("body").off(); // removes the event handler added to the body for hiding the user action menu
+
         if (YouTubeLive._instance != null) {
             if (YouTubeLive._instance._chatMutationObserver != null) {
                 YouTubeLive._instance._chatMutationObserver.disconnect();
+                delete YouTubeLive._instance._chatMutationObserver;
             }
             for (let interval of YouTubeLive._instance._intervals) {
                 clearInterval(interval);
@@ -62,6 +65,8 @@ class YouTubeLive {
             YouTubeLive._instance._chatObservers = [];
             delete YouTubeLive._instance.jHidingMessage;
             delete YouTubeLive._instance.jCommentsScroller;
+
+            SuggestionBox.removeAllInstances();
         }
         YouTubeLive._instance = null;
         YouTubeLive._tried_loading = 0; // which parts of the page have already been checked for
@@ -162,7 +167,7 @@ class YouTubeLive {
      * @returns {JQuery|jQuery|HTMLElement|*}
      */
     getJChatInputField() {
-        return $("#live-comments-input-field");
+        return ($(this.getChatInputField()));
     }
 
     /**
@@ -171,12 +176,7 @@ class YouTubeLive {
      * @returns {HTMLElement|*}
      */
     getChatInputField() {
-        let jChatInputField = $("#live-comments-input-field");
-        if (jChatInputField.length) {
-            return jChatInputField[0];
-        } else {
-            return null;
-        }
+        return document.getElementById("live-comments-input-field");
     }
 
     /**
@@ -225,7 +225,8 @@ class YouTubeLive {
      * Adds a storage listener that is automatically detached when the chat context is left.
      */
     addStorageListener(callback) {
-        this._storageListeners.push(chrome.storage.onChanged.addListener(callback));
+        chrome.storage.onChanged.addListener(callback);
+        this._storageListeners.push(callback);
     }
 
     _ensureChat() {

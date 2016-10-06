@@ -11,20 +11,23 @@ function createPinnedMention(commentElem) {
 			
 			var userName = $comment.find('.yt-user-name').text().trim();
 			var commentMsg = $comment.find('.comment-text').text().trim();
-			
-			// create pinned mention and attach it to the container
-			$("#brbtv-pinnedMentions-container").append(
-				$("<li>", {class: "pinnedMention"}).append(
-					$("<div>", {class: "content-pinnendMention"}).text(userName + ': ' + commentMsg)
-				).append(
-					$("<div>", {class: "remove-pinnedMention"}).text("×")
-				)
+
+			let pinnedMention = $("<li>", {class: "pinnedMention"}).append(
+				$("<div>", {class: "content-pinnendMention"}).text(userName + ': ' + commentMsg)
+			).append(
+				$("<div>", {class: "remove-pinnedMention"}).text("×")
 			);
+
+			// create pinned mention and attach it to the container
+			$("#brbtv-pinnedMentions-container").append(pinnedMention);
+			pinnedMention.addEventListener('click', function (e) {
+				$(e.target).remove();
+			});
 		}
 		
 	}
 
-	delete $comment;
+	$comment = null;
 }
 
 function include_pinnable_mentions() {
@@ -87,11 +90,6 @@ function include_pinnable_mentions() {
 			opacity: 1;
 		}
 		`);
-		
-		// create an event listener, that will also work for dynamically created elements
-		$('#brbtv-pinnedMentions-container').on('click', 'li.pinnedMention', function(e) {
-			$(e.currentTarget).remove();
-		});
 		
         youtube.registerChatMessageObserver(createPinnedMention, false);
     });

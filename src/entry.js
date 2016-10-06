@@ -110,7 +110,6 @@ if (!chrome.storage.sync) {
 }
 
 function initializeYoutube() {
-    YouTubeLive.resetPage();
     removeCssFromHead();
 
     chrome.storage.sync.get(default_settings, function (settings) {
@@ -183,11 +182,13 @@ if (page) {
             if (match[0] != lastSeenVideoId) {
                 lastSeenVideoId = match[0];
                 if (BRBTV_DEBUG) console.log("video changed to " + lastSeenVideoId);
+                YouTubeLive.resetPage();
                 initializeYoutube();
             }
-        } else {
+        } else if (lastSeenVideoId) {
             YouTubeLive.resetPage();
             removeCssFromHead();
+            lastSeenVideoId = "";
         }
 
     });

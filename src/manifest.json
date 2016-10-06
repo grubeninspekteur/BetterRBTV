@@ -24,6 +24,7 @@
       "emoji_to_keyword.js",
       "keyword_to_emoji.js",
       "util.js",
+      "SuggestionBox.js",
       "YouTubeLive.js",
       "default_settings.js",
       "timestamp.js",

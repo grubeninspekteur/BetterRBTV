@@ -58,7 +58,7 @@ function include_user_filter(settings) {
                 "id": "brbtv-user-actions-menu",
                 "class": "yt-uix-menu-content yt-ui-menu-content"
             });
-            $("body").prepend(jUserMenu);
+            $("#comments-view").prepend(jUserMenu);
             delete jUserMenu;
         }
 
@@ -85,7 +85,7 @@ function include_user_filter(settings) {
 
         function addHighlightUserButton(ytId, jUserLink) {
             let jHighlightUser = createMenuButton("brbtv-highlight-button", chrome.i18n.getMessage("userActionHighlight"));
-            jHighlightUser.click(function (e) {
+            jHighlightUser[0].addEventListener('click', function (e) {
                 if (!highlightedUsers.has(ytId)) {
                     highlightedUsers.add(ytId);
                     updateChromeStore(jUserLink, ytId, "highlightedUsers", ADD_ACTION);
@@ -104,7 +104,7 @@ function include_user_filter(settings) {
 
         function addUnhighlightUserButton(ytId, jUserLink) {
             let jUnhighlightUser = createMenuButton("brbtv-unhighlight-button", chrome.i18n.getMessage("userActionUnHighlight"));
-            jUnhighlightUser.click(function (e) {
+            jUnhighlightUser[0].addEventListener('click', function (e) {
                 if (highlightedUsers.has(ytId)) {
                     highlightedUsers.delete(ytId);
                     updateChromeStore(jUserLink, ytId, "highlightedUsers", REMOVE_ACTION);
@@ -123,7 +123,7 @@ function include_user_filter(settings) {
 
         function addMuteButton(ytId, jUserLink) {
             let jMuteUser = createMenuButton("brbtv-mute-button", chrome.i18n.getMessage("userActionMute"));
-            jMuteUser.click(function (e) {
+            jMuteUser[0].addEventListener('click', function (e) {
                 if (!mutedUsers.has(ytId)) {
                     mutedUsers.add(ytId);
                     updateChromeStore(jUserLink, ytId, "ignoredUsers", ADD_ACTION);
@@ -142,7 +142,7 @@ function include_user_filter(settings) {
 
         function addUnmuteButton(ytId, jUserLink) {
             let jMuteUser = createMenuButton("brbtv-unmute-button", chrome.i18n.getMessage("userActionUnMute"));
-            jMuteUser.click(function (e) {
+            jMuteUser[0].addEventListener('click', function (e) {
                 if (mutedUsers.has(ytId)) {
                     mutedUsers.delete(ytId);
                     updateChromeStore(jUserLink, ytId, "ignoredUsers", REMOVE_ACTION);
@@ -166,7 +166,7 @@ function include_user_filter(settings) {
                     $(this).off("click", hideMenuFunction);
                 }
             };
-            $("body").on("click", hideMenuFunction);
+            $("body").on("click", hideMenuFunction); // necessary exception from no-jQuery-handlers rule: we have to detach it globally after page change
         }
 
         function insertDoubleclickedAuthor(e) {
@@ -227,7 +227,7 @@ function include_user_filter(settings) {
                 jMessage.addClass("brbtv-highlighted-message");
             }
 
-            jUserLink.click(function (e) {
+            jUserLink[0].addEventListener('click', function (e) {
                 let jUserLink = $(e.target);
                 let jUserMenu = $("#brbtv-user-actions-menu");
                 jUserMenu.empty();
@@ -261,7 +261,7 @@ function include_user_filter(settings) {
 
 
             // insert the name as a mention on doubleclick
-            jUserLink.dblclick(insertDoubleclickedAuthor);
+            //TODO debug jUserLink[0].addEventListener('dblclick', insertDoubleclickedAuthor);
 
             jUserLink = null;
 
