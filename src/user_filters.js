@@ -261,7 +261,7 @@ function include_user_filter(settings) {
 
 
             // insert the name as a mention on doubleclick
-            //TODO debug jUserLink[0].addEventListener('dblclick', insertDoubleclickedAuthor);
+            jUserLink[0].addEventListener('dblclick', insertDoubleclickedAuthor);
 
             jUserLink = null;
 
