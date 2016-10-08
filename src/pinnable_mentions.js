@@ -20,9 +20,9 @@ function createPinnedMention(commentElem) {
 
 			// create pinned mention and attach it to the container
 			$("#brbtv-pinnedMentions-container").append(pinnedMention);
-			pinnedMention[0].addEventListener('click', function (e) {
-				$(e.target).remove();
-			});
+			pinnedMention[0].addEventListener('click', function(pinnedMention) {return function (e) {
+				$(pinnedMention).remove();
+			}}(pinnedMention[0]));
 		}
 		
 	}
