@@ -53,6 +53,8 @@ function createPushNotification(commentElem) {
 			}
 			
 		}
+
+		delete $comment;
 	
 	}
 }

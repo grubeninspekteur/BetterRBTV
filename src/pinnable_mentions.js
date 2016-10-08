@@ -1,9 +1,6 @@
-// create the general mentions container
-var pinnedMentionsContainer = $('<ul id="brbtv-pinnedMentions-container"></ul>');
-
 function createPinnedMention(commentElem) {
 	
-	$comment = $(commentElem);
+	let $comment = $(commentElem);
 
 	// when initiated and it iterates the existing comments, only check comments from within the last 60 seconds
 	if( Math.round( ((new Date) - 60000) / 1000 ) < $comment.data('timestamp') && $.contains(document, $comment[0]) ) {
@@ -14,19 +11,23 @@ function createPinnedMention(commentElem) {
 			
 			var userName = $comment.find('.yt-user-name').text().trim();
 			var commentMsg = $comment.find('.comment-text').text().trim();
-			
-			// create pinned mention and attach it to the container
-			pinnedMentionsContainer.append(
-				$("<li>", {class: "pinnedMention"}).append(
-					$("<div>", {class: "content-pinnendMention"}).text(userName + ': ' + commentMsg)
-				).append(
-					$("<div>", {class: "remove-pinnedMention"}).text("×")
-				)
+
+			let pinnedMention = $("<li>", {class: "pinnedMention"}).append(
+				$("<div>", {class: "content-pinnendMention"}).text(userName + ': ' + commentMsg)
+			).append(
+				$("<div>", {class: "remove-pinnedMention"}).text("×")
 			);
+
+			// create pinned mention and attach it to the container
+			$("#brbtv-pinnedMentions-container").append(pinnedMention);
+			pinnedMention[0].addEventListener('click', function(pinnedMention) {return function (e) {
+				$(pinnedMention).remove();
+			}}(pinnedMention[0]));
 		}
 		
 	}
 
+	$comment = null;
 }
 
 function include_pinnable_mentions() {
@@ -35,7 +36,11 @@ function include_pinnable_mentions() {
 		
 		// attach the container to the chat
 		// doesn't really matter where to prepend, I just chose a DIV that has already position: relative
-		$('#live-comments-section > .relative').prepend( pinnedMentionsContainer );
+		if (!$("#brbtv-pinnedMentions-container").length) {
+			$('#live-comments-section > .relative').prepend('<ul id="brbtv-pinnedMentions-container"></ul>');
+		} else {
+			$("#brbtv-pinnedMentions").empty();
+		}
 		
 		// inject CSS
 		addCssToHead(`
@@ -85,11 +90,6 @@ function include_pinnable_mentions() {
 			opacity: 1;
 		}
 		`);
-		
-		// create an event listener, that will also work for dynamically created elements
-		$('#brbtv-pinnedMentions-container').on('click', 'li.pinnedMention', function(e) {
-			$(e.currentTarget).remove();
-		});
 		
         youtube.registerChatMessageObserver(createPinnedMention, false);
     });

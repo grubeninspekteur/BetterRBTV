@@ -35,7 +35,7 @@ function include_user_filter(settings) {
             highlightedUsers.add(settings.highlightedUsers[i].id);
         }
 
-        chrome.storage.onChanged.addListener(function (changes, namespace) {
+        youtube.addStorageListener(function (changes, namespace) {
             var ignoredUserChange = changes["ignoredUsers"];
             if (ignoredUserChange) {
                 mutedUsers = new Set();
@@ -53,8 +53,14 @@ function include_user_filter(settings) {
             }
         });
 
-        var jUserMenu = $("<div>", {"id": "brbtv-user-actions-menu", "class": "yt-uix-menu-content yt-ui-menu-content"});
-        $("body").prepend(jUserMenu);
+        if (!$("#brbtv-user-actions-menu").length) {
+            let jUserMenu = $("<div>", {
+                "id": "brbtv-user-actions-menu",
+                "class": "yt-uix-menu-content yt-ui-menu-content"
+            });
+            $("#comments-view").prepend(jUserMenu);
+            delete jUserMenu;
+        }
 
         function updateChromeStore(jUserLink, ytId, storageKey, isAddToList) {
             let query = {};
@@ -79,7 +85,7 @@ function include_user_filter(settings) {
 
         function addHighlightUserButton(ytId, jUserLink) {
             let jHighlightUser = createMenuButton("brbtv-highlight-button", chrome.i18n.getMessage("userActionHighlight"));
-            jHighlightUser.click(function (e) {
+            jHighlightUser[0].addEventListener('click', function (e) {
                 if (!highlightedUsers.has(ytId)) {
                     highlightedUsers.add(ytId);
                     updateChromeStore(jUserLink, ytId, "highlightedUsers", ADD_ACTION);
@@ -93,12 +99,12 @@ function include_user_filter(settings) {
                 }
                 e.preventDefault();
             });
-            jUserMenu.append(jHighlightUser);
+            $("#brbtv-user-actions-menu").append(jHighlightUser);
         }
 
         function addUnhighlightUserButton(ytId, jUserLink) {
             let jUnhighlightUser = createMenuButton("brbtv-unhighlight-button", chrome.i18n.getMessage("userActionUnHighlight"));
-            jUnhighlightUser.click(function (e) {
+            jUnhighlightUser[0].addEventListener('click', function (e) {
                 if (highlightedUsers.has(ytId)) {
                     highlightedUsers.delete(ytId);
                     updateChromeStore(jUserLink, ytId, "highlightedUsers", REMOVE_ACTION);
@@ -112,12 +118,12 @@ function include_user_filter(settings) {
                 }
                 e.preventDefault();
             });
-            jUserMenu.append(jUnhighlightUser);
+            $("#brbtv-user-actions-menu").append(jUnhighlightUser);
         }
 
         function addMuteButton(ytId, jUserLink) {
             let jMuteUser = createMenuButton("brbtv-mute-button", chrome.i18n.getMessage("userActionMute"));
-            jMuteUser.click(function (e) {
+            jMuteUser[0].addEventListener('click', function (e) {
                 if (!mutedUsers.has(ytId)) {
                     mutedUsers.add(ytId);
                     updateChromeStore(jUserLink, ytId, "ignoredUsers", ADD_ACTION);
@@ -131,12 +137,12 @@ function include_user_filter(settings) {
                 }
                 e.preventDefault();
             });
-            jUserMenu.append(jMuteUser);
+            $("#brbtv-user-actions-menu").append(jMuteUser);
         }
 
         function addUnmuteButton(ytId, jUserLink) {
             let jMuteUser = createMenuButton("brbtv-unmute-button", chrome.i18n.getMessage("userActionUnMute"));
-            jMuteUser.click(function (e) {
+            jMuteUser[0].addEventListener('click', function (e) {
                 if (mutedUsers.has(ytId)) {
                     mutedUsers.delete(ytId);
                     updateChromeStore(jUserLink, ytId, "ignoredUsers", REMOVE_ACTION);
@@ -150,21 +156,21 @@ function include_user_filter(settings) {
                 }
                 e.preventDefault();
             });
-            jUserMenu.append(jMuteUser);
+            $("#brbtv-user-actions-menu").append(jMuteUser);
         }
 
         function addHideMenuFunction(jUserLink) {
             var hideMenuFunction = function (e) {
                 if (e.target != jUserLink[0]) {
-                    jUserMenu.removeClass("show-brbtv-user-actions-menu");
+                    $("#brbtv-user-actions-menu").removeClass("show-brbtv-user-actions-menu");
                     $(this).off("click", hideMenuFunction);
                 }
             };
-            $("body").on("click", hideMenuFunction);
+            $("body").on("click", hideMenuFunction); // necessary exception from no-jQuery-handlers rule: we have to detach it globally after page change
         }
 
         function insertDoubleclickedAuthor(e) {
-            jUserMenu.removeClass("show-brbtv-user-actions-menu");
+            $("#brbtv-user-actions-menu").removeClass("show-brbtv-user-actions-menu");
 
             var replacement = '@' + $(e.currentTarget).text();
             if (settings.addColonAfterInsertedUser) {
@@ -221,7 +227,9 @@ function include_user_filter(settings) {
                 jMessage.addClass("brbtv-highlighted-message");
             }
 
-            jUserLink.click(function (e) {
+            jUserLink[0].addEventListener('click', function (e) {
+                let jUserLink = $(e.target);
+                let jUserMenu = $("#brbtv-user-actions-menu");
                 jUserMenu.empty();
 
                 let jVisitProfile = createMenuButton("brbtv-visit-button", chrome.i18n.getMessage("userActionVisitProfile"));
@@ -253,7 +261,9 @@ function include_user_filter(settings) {
 
 
             // insert the name as a mention on doubleclick
-            jUserLink.dblclick(insertDoubleclickedAuthor);
+            jUserLink[0].addEventListener('dblclick', insertDoubleclickedAuthor);
+
+            jUserLink = null;
 
         }, true);
     });

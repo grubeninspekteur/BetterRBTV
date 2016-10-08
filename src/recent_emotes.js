@@ -118,7 +118,7 @@ function include_recent_emotes() {
                 $('.live-comments-emoji-picker .live-comments-emoji-type-button .emoji-brbtvRecent').addClass('active');
             }
         });
-        chrome.storage.onChanged.addListener(function (changes, namespace) {
+        youtube.addStorageListener(function (changes, namespace) {
 
             if (changes[STORAGE_KEY]) {
                 updateRecentEmojisTab(changes[STORAGE_KEY].newValue);
