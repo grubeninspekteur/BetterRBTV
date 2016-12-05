@@ -78,12 +78,6 @@
   "Opt_EmotePackCurrent": {
     "message": "Current:"
   },
-  "Opt_EmoteSuggestions": {
-    "message": "Suggest emotes after ':'"
-  },
-  "Opt_RecentEmotes": {
-    "message": "Show recently used emotes under a custom tab in the emote picker (BETA-Feature)"
-  },
   "Opt_HideAvatars": {
     "message": "Hide avatars"
   },
@@ -141,9 +135,6 @@
   "Opt_TabFilters": {
     "message": "Message filters"
   },
-  "Opt_Timestamp": {
-    "message": "Show message timestamps"
-  },
   "Opt_TrainingWheels": {
     "message": "Training wheels",
     "description": "Name for the option to automatically replace certain keywords."
@@ -152,23 +143,7 @@
     "message": "Converts keywords from another well known streaming site into suiting emojis."
   },
   "Opt_TrainingWheelsWarning": {
-    "message": "Caution: There are new keywords starting with version 0.2.3! Please check whether you need a new emote pack from your provider."
-  },
-  "Opt_UserSuggest": {
-    "message": "Suggest users after '@'"
-  },
-  "Opt_UserAddColon": {
-    "message": "Add colon after user names added automatically"
-  },
-  "recentEmojisNone": {
-    "message": "Start using emojis and your most recently used will be displayed here."
-  },
-  "suggestBoxTabToComplete": {
-    "message" : "Press TAB to complete"
-  },
-  "userActionVisitProfile": {
-    "message": "Visit profile",
-    "description": "Label for a button in the user action menu to visit the user's profile."
+    "message": "Caution: the mapping from keywords to emojis has been changed in version 0.2.3.2. You may require a new emote pack from your provider."
   },
   "userActionHighlight": {
     "message": "Highlight",
