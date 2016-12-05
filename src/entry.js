@@ -15,21 +15,38 @@ function addOtherCSS(items) {
     }
 
     if (items.saveSpace == true) {
-        css += ".live-chat-widget .author-is-moderator .byline, " +
-            ".live-chat-widget .author-is-member .byline, " +
-            ".live-chat-widget .author-is-owner .byline, " +
-            ".live-chat-widget .comment.fan-funding-tip .byline, " +
-            ".live-chat-widget .comment.new-member-announcement .byline {display: inline !important;}";
-        css += ".live-chat-widget .author-is-moderator .avatar, " +
-            ".live-chat-widget .author-is-member .avatar, " +
-            ".live-chat-widget .author-is-owner .avatar, " +
-            ".live-chat-widget .comment.fan-funding-tip .avatar {width: 24px !important; height: 24px !important; padding-left: 4px !important; padding-right: 4px !important;}";
-        // we know our name, thank you very much.
-        css += "#live-comments-controls .byline {display: none !important;}";
-        css += ".live-chat-widget .comment:not(.new-member-announcement) .yt-user-name:after {content: ':'}";
-        css += ".live-chat-widget .byline {margin-right: 0.5ch !important;}";
-        css += ".live-chat-widget .comment {padding: 4px 16px 4px 10px !important;}";
-        css += ".live-chat-widget .comments-textarea { min-height: 32px !important; }";
+		css += 
+		`
+		.yt-live-chat-text-message-renderer-0 {
+			padding: 6px 24px 6px 10px;
+		}
+		.yt-live-chat-text-message-renderer-0 #author-photo.yt-live-chat-text-message-renderer {
+			width: 24px;
+			height: 24px;
+			margin-right: 10px;
+		}
+
+		/** Message Input **/
+
+		.yt-live-chat-message-input-renderer-0 {
+			padding: 6px 10px;
+		}
+
+		.yt-live-chat-message-input-renderer-0 #top.yt-live-chat-message-input-renderer,
+		.yt-live-chat-message-input-renderer-0 #pickers.yt-live-chat-message-input-renderer,
+		.yt-live-chat-message-input-renderer-0 #error-message.yt-live-chat-message-input-renderer {
+			margin: 0;
+		}
+		/* smaller avatar */
+		.yt-live-chat-message-input-renderer-0 #avatar.yt-live-chat-message-input-renderer {
+			height: 24px;
+			width: 24px;
+		}
+		/* remove own user name */
+		.yt-live-chat-message-input-renderer-0 #author.yt-live-chat-message-input-renderer {
+			display: none;
+		}
+		`;
     }
 
     if (items.noGreenMemberAccent == true) {
@@ -48,8 +65,16 @@ function addOtherCSS(items) {
         css += ".live-chat-widget.dark .comment:hover .comment-text a {color:#fff !important;}";
     }
     if (items.betterSeperateMessages == true) {
-        css += ".live-chat-widget .comment {border-bottom: 1px solid rgba(0,0,0,0.2);}";
-        css += ".live-chat-widget.dark .comment {border-top: 1px solid rgba(255,255,255,0.2); border-bottom: 1px solid rgba(0,0,0,0.6); }";
+        css += 
+		`
+		.yt-live-chat-text-message-renderer-0 {
+			border-bottom: 1px solid #111;
+			border-top: 1px solid #333;
+		}
+		.yt-live-chat-text-message-renderer-0:nth-last-child(even) {
+			background-color: rgba(100,100,100,0.1);
+		}
+		`;
     }
 
     addCssToHead(css);
@@ -119,7 +144,8 @@ function initializeYoutube() {
         include_chat_filter(settings);
         include_user_filter(settings);
 
-        /*if (settings.pinnableMentions) {
+        /*
+		if (settings.pinnableMentions) {
             include_pinnable_mentions();
         }
 
@@ -131,11 +157,11 @@ function initializeYoutube() {
         if (settings.pushNotifications) {
             include_push_notifications();
         }
-
+		*/
         if (settings.coloredNames) {
             include_colored_names();
-        }*/
-
+        }
+		
         if (settings.betterMentionHighlight) {
             include_better_mention_highlight();
         }
