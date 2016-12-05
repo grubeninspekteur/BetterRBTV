@@ -81,6 +81,7 @@ function include_keyword_replacement() {
             "rbtvMarco": "😿",
             "rbtvMTV": "⬛",
             "rbtvNils": "😼",
+            "rbtvReinke": "🤴",
             "rbtvRoyalBudi": "😇",
             "rbtvRoyalEddy": "😣",
             "rbtvRoyalNils": "☺",
