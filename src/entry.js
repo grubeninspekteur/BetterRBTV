@@ -116,8 +116,8 @@ function initializeYoutube() {
         });
 
         // moved higher up so comments get filtered and removed earlier
-        /*include_chat_filter(settings);
-        include_user_filter(settings);
+        include_chat_filter(settings);
+        /*include_user_filter(settings);
 
         if (settings.pinnableMentions) {
             include_pinnable_mentions();

@@ -1,7 +1,8 @@
 function filterComment(pattern, comment) {
     var jComment = $(comment);
-    if (jComment.hasClass('author-viewing')) return; // don't remove your own comments
-    if (pattern.test(jComment.find(".comment-text").text().trim())) {
+    // Fixme apparently there is no way of knowing whether this is our own message or someone else's
+    //if (jComment.hasClass('author-viewing')) return; // don't remove your own comments
+    if (pattern.test(jComment.find("#message").text().trim())) {
         jComment.remove();
     }
 }

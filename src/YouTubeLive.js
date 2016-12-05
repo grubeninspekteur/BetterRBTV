@@ -202,7 +202,7 @@ class YouTubeLive {
                 var scrollbarRecord = self._recordChatScrollbar();
                 mutations.forEach(function (mutation) {
                     for (let i = 0; i < mutation.addedNodes.length; i++) {
-                        if ($(mutation.addedNodes[i]).hasClass("comment")) {
+                        if ($(mutation.addedNodes[i]).hasClass("yt-live-chat-item-list-renderer")) {
                             for (let o = 0; o < self._chatObservers.length; o++) {
                                 self._chatObservers[o](mutation.addedNodes[i]);
                             }
@@ -212,7 +212,7 @@ class YouTubeLive {
                 self._fixChatScrollbar(scrollbarRecord);
             });
 
-            this._chatMutationObserver.observe($("#all-comments")[0], {childList: true});
+            this._chatMutationObserver.observe($("yt-live-chat-renderer #chat-messages #item-list #items")[0], {childList: true});
         }
     }
 
@@ -243,7 +243,7 @@ class YouTubeLive {
     iteratePastChatMessages(messageObserver) {
         this._ensureChat();
         var scrollbarRecord = this._recordChatScrollbar();
-        $("#all-comments").find(".comment").each(function (idx, elem) {
+        $("yt-live-chat-renderer #chat-messages #item-list #items > .yt-live-chat-item-list-renderer").each(function (idx, elem) {
             messageObserver(elem);
         });
         this._fixChatScrollbar(scrollbarRecord);
