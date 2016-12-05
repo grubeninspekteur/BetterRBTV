@@ -78,12 +78,6 @@
   "Opt_EmotePackCurrent": {
     "message": "Aktuell:"
   },
-  "Opt_EmoteSuggestions": {
-    "message": "Emote-Vorschläge nach \":\""
-  },
-  "Opt_RecentEmotes": {
-    "message": "Zeige kürzlich benutzte Emotes in einem eigenen Tab in der Emote-Auswahl an (BETA-Feature)"
-  },
   "Opt_HideAvatars": {
     "message": "Avatare verbergen"
   },
@@ -141,9 +135,6 @@
   "Opt_TabFilters": {
     "message": "Nachrichtenfilter"
   },
-  "Opt_Timestamp": {
-    "message": "Bei Nachrichten Erstellungszeit zeigen"
-  },
   "Opt_TrainingWheels": {
     "message": "Stützräder",
     "description": "Name for the option to automatically replace certain keywords."
@@ -152,23 +143,7 @@
     "message": "Wandelt bekannte Schlüsselwörter einer anderen Streamingseite in Emoticons um."
   },
   "Opt_TrainingWheelsWarning": {
-    "message": "Achtung: Es gibt seit 0.2.3 neue Schlüsselwörter und Emoticons! Prüfe, ob du dein Emote-Pack aktualisieren musst."
-  },
-  "Opt_UserSuggest": {
-    "message": "User-Vorschläge nach \"@\""
-  },
-  "Opt_UserAddColon": {
-    "message": "Doppelpunkt nach automatisch eingefügten Usern"
-  },
-  "recentEmojisNone": {
-    "message": "Beginne mit der Verwendung von Emojis, und die kürzlich verwendeten werden hier aufgelistet."
-  },
-  "suggestBoxTabToComplete": {
-    "message" : "TAB zum Vervollständigen"
-  },
-  "userActionVisitProfile": {
-    "message": "Profil besuchen",
-    "description": "Label for a button in the user action menu to visit the user's profile."
+    "message": "Achtung: Die Zuordnung von Keywords zu Emotes hat sich mit Version 0.2.3.2 geändert. Du musst gegebenenfalls dein Emote-Pack aktualisieren."
   },
   "userActionHighlight": {
     "message": "Hervorheben",

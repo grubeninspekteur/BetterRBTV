@@ -97,8 +97,8 @@ class YouTubeLive {
     }
 
     _initializeUniqueChatElements() {
-        this.jHidingMessage = $("#live-comments-setting-bottom-scroll");
-        this.jCommentsScroller = $("#comments-scroller");
+        this.jHidingMessage = $('#contents > paper-icon-button[icon="yt-icons:down_arrow"]');
+        this.jCommentsScroller = $("#items");
 
     }
 
@@ -117,15 +117,17 @@ class YouTubeLive {
                 rescheduleTimeout(callback);
                 return;
             }
-            var commentsList = document.getElementById("all-comments");
 
-            // are we on Youtube live? Here, the chat loads later
-            if (document.getElementById("watch-sidebar-discussion") != null && commentsList == null) {
+            var liveChats = document.getElementsByTagName("yt-live-chat-renderer");
+
+            if (liveChats.length && !document.getElementsByTagName("yt-live-chat-text-input-field-renderer").length) {
+                // input area not yet loaded
                 rescheduleTimeout(callback);
                 return;
             }
 
-            if (commentsList != null) {
+            if (liveChats.length) {
+
                 if (BRBTV_DEBUG) {
                     let url = document.location.href;
                     console.log("BRBTV: chat found on "+url);
@@ -167,7 +169,7 @@ class YouTubeLive {
      * @returns {JQuery|jQuery|HTMLElement|*}
      */
     getJChatInputField() {
-        return ($(this.getChatInputField()));
+        return $("yt-live-chat-text-input-field-renderer > #input");
     }
 
     /**
@@ -176,7 +178,7 @@ class YouTubeLive {
      * @returns {HTMLElement|*}
      */
     getChatInputField() {
-        return document.getElementById("live-comments-input-field");
+        return this.getJChatInputField()[0];
     }
 
     /**

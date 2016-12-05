@@ -92,17 +92,6 @@ function addFaceEmotes(settings) {
     }
 }
 
-function addEmojiTooltips() {
-    $(".live-comments-emoji-picker").find(".yt-emoji-icon").each(function (index, elem) {
-        keyword = emoji_to_keyword[elem.getAttribute("key")];
-        if (keyword) {
-            elem.setAttribute("title", keyword);
-        } else {
-            elem.setAttribute("title", "-no keyword-");
-        }
-    });
-}
-
 // *** ENTRY POINT ***
 // Non Chrome browsers: if sync is not available, redirect to local storage
 if (!chrome.storage.sync) {
@@ -121,29 +110,11 @@ function initializeYoutube() {
         YouTubeLive.onChatLoaded(function (youtube) {
             addOtherCSS(settings);
             addFaceEmotes(settings);
-            addEmojiTooltips();
         });
 
         // moved higher up so comments get filtered and removed earlier
-        include_chat_filter(settings);
+        /*include_chat_filter(settings);
         include_user_filter(settings);
-
-
-        if (settings.suggestUser) {
-            include_user_suggestions(settings.addColonAfterInsertedUser);
-        }
-
-        if (settings.suggestEmote) {
-            include_keyword_suggestions();
-        }
-
-        if (settings.recentEmotes) {
-            include_recent_emotes();
-        }
-
-        if (settings.showTimestamp) {
-            include_timestamp();
-        }
 
         if (settings.pinnableMentions) {
             include_pinnable_mentions();
@@ -164,7 +135,7 @@ function initializeYoutube() {
 
         if (settings.betterMentionHighlight) {
             include_better_mention_highlight();
-        }
+        }*/
 
     });
 }
