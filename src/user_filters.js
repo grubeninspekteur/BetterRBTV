@@ -1,7 +1,7 @@
 function include_user_filter(settings) {
     function createMenuButton(group, label) {
-        return $("<a>", {
-            "href": "#",
+        return $("<button>", {
+            "type": "button",
             "class": "brbtv-user-actions-item yt-ui-menu-item " + group
         }).text(label);
     }
@@ -10,23 +10,69 @@ function include_user_filter(settings) {
     const REMOVE_ACTION = false;
 
     YouTubeLive.onChatLoaded(function (youtube) {
-        var theCss = "#brbtv-user-actions-menu {" +
-            "background-color: rgba(0, 0, 0, 0.498039);" +
-            "display: none;" +
-            "position: absolute;" +
-            "outline: none; position: fixed; left: 1747.39px; top: 315px; z-index: 103;}\n";
-        theCss += "#brbtv-user-actions-menu ytg-menu-popup-renderer {outline: none; box-sizing: border-box; max-width: 160.609px; max-height: 96px;}";
-        theCss += ".brbtv-user-actions-item {color: white; font-family: Roboto, Arial, sans-serif; font-size: 15px; display: block;}";
-        theCss += ".show-brbtv-user-actions-menu {display: block !important;}";
-        theCss += ".brbtv-highlighted-message {background-color: rgb(204, 0, 0) !important; border-top: 0 !important; border-bottom: 0 !important;}";
-        theCss += ".brbtv-highlighted-message .comment-time, .brbtv-highlighted-message .byline {color: rgba(255,255,255,0.54) !important;}";
-        theCss += ".brbtv-highlighted-message .mention {background-color: transparent !important;}";
-        theCss += ".brbtv-highlighted-message .comment-text {color: #fff !important;}";
-        theCss += ".brbtv-highlighted-message .accent-bar {background-color: rgb(204, 0, 0) !important;}";
-        theCss += ".brbtv-highlighted-message #author-name a {color: #fff !important;}";
-        theCss += ".brbtv-muted-message .yt-user-name {text-decoration: line-through !important;}";
-
-        theCss += ".brbtv-author-link {cursor: pointer; color: inherit;}";
+        var theCss = `
+		#brbtv-user-actions-menu {
+            display: none;
+            outline: none;
+			position: fixed;
+			left: 1747.39px;
+			top: 315px;
+			z-index: 103;
+			background-color: #333;
+			padding: 6px 0;
+		}
+		#brbtv-user-actions-menu.show {
+			display: block;
+		}
+		
+        #brbtv-user-actions-menu ytg-menu-popup-renderer {
+			outline: none;
+			box-sizing: border-box;
+			max-width: 160.609px;
+			max-height: 96px;
+		}
+		.brbtv-user-actions-item {
+			color: white;
+			font-family: Roboto, Arial, sans-serif;
+			font-size: 15px;
+			display: flex;
+			cursor: pointer;
+			padding: 3px 6px;
+			height: 32px;
+			width: 100%;
+			padding: 0 10px;
+		}
+		.brbtv-user-actions-item:hover {
+			background-color: #444;
+		}
+        .brbtv-highlighted-message {
+			background-color: rgb(204, 0, 0) !important;
+			border-top: 1px solid rgb(204, 0, 0) !important;
+			border-bottom: 1px solid rgb(204, 0, 0) !important;
+		}
+        .brbtv-highlighted-message .comment-time,
+		.brbtv-highlighted-message .byline {
+			color: rgba(255,255,255,0.54) !important;
+		}
+        .brbtv-highlighted-message .mention {
+			background-color: transparent !important;
+		}
+        .brbtv-highlighted-message .comment-text {
+			color: #fff !important;
+		}
+        .brbtv-highlighted-message .accent-bar {
+			background-color: rgb(204, 0, 0) !important;
+		}
+        .brbtv-highlighted-message #author-name {
+			color: #fff !important;
+		}
+        .brbtv-muted-message .yt-user-name {
+			text-decoration: line-through !important;
+		}
+		.brbtv-author-link {
+			cursor: pointer; color: inherit; padding: 0;
+		}
+		`;
         addCssToHead(theCss);
 
         var mutedUsers = new Set();
@@ -177,7 +223,7 @@ function include_user_filter(settings) {
         function addHideMenuFunction(jUserLink) {
             var hideMenuFunction = function (e) {
                 if (e.target != jUserLink[0]) {
-                    $("#brbtv-user-actions-menu").removeClass("show-brbtv-user-actions-menu");
+                    $("#brbtv-user-actions-menu").removeClass("show");
                     $(this).off("click", hideMenuFunction);
                 }
             };
@@ -185,7 +231,7 @@ function include_user_filter(settings) {
         }
 
         function insertDoubleclickedAuthor(e) {
-            $("#brbtv-user-actions-menu").removeClass("show-brbtv-user-actions-menu");
+            $("#brbtv-user-actions-menu").removeClass("show");
 
             var replacement = '@' + $(e.currentTarget).text();
 
@@ -256,7 +302,7 @@ function include_user_filter(settings) {
             jUserMenu.css("top", topPosition + "px");
             jUserMenu.css("left", linkPosition.left + "px");
 
-            jUserMenu.addClass("show-brbtv-user-actions-menu");
+            jUserMenu.addClass("show");
         }
 
         youtube.registerChatMessageObserver(function (message) {
@@ -279,9 +325,9 @@ function include_user_filter(settings) {
                 return;
             }
 
-            let jUserLink = $("<a>", {
-                href: "#",
-                class: "brbtv-author-link"
+            let jUserLink = $("<button>", {
+				"type": "button",
+                "class": "brbtv-author-link"
             }).text(authorName);
 
             jMessage.find("#author-name").html(jUserLink);
