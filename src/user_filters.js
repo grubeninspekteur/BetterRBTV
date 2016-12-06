@@ -11,18 +11,22 @@ function include_user_filter(settings) {
 
     YouTubeLive.onChatLoaded(function (youtube) {
         var theCss = "#brbtv-user-actions-menu {" +
-            "background-color: white;" +
+            "background-color: rgba(0, 0, 0, 0.498039);" +
             "display: none;" +
-            "position: absolute;}\n";
-        theCss += ".brbtv-user-actions-item {color: black !important;}";
+            "position: absolute;" +
+            "outline: none; position: fixed; left: 1747.39px; top: 315px; z-index: 103;}\n";
+        theCss += "#brbtv-user-actions-menu ytg-menu-popup-renderer {outline: none; box-sizing: border-box; max-width: 160.609px; max-height: 96px;}";
+        theCss += ".brbtv-user-actions-item {color: white; font-family: Roboto, Arial, sans-serif; font-size: 15px; display: block;}";
         theCss += ".show-brbtv-user-actions-menu {display: block !important;}";
         theCss += ".brbtv-highlighted-message {background-color: rgb(204, 0, 0) !important; border-top: 0 !important; border-bottom: 0 !important;}";
         theCss += ".brbtv-highlighted-message .comment-time, .brbtv-highlighted-message .byline {color: rgba(255,255,255,0.54) !important;}";
         theCss += ".brbtv-highlighted-message .mention {background-color: transparent !important;}";
         theCss += ".brbtv-highlighted-message .comment-text {color: #fff !important;}";
         theCss += ".brbtv-highlighted-message .accent-bar {background-color: rgb(204, 0, 0) !important;}";
-        theCss += ".live-chat-widget li.comment.brbtv-highlighted-message .content a.yt-user-name {color: #fff !important;}";
+        theCss += ".brbtv-highlighted-message #author-name a {color: #fff !important;}";
         theCss += ".brbtv-muted-message .yt-user-name {text-decoration: line-through !important;}";
+
+        theCss += ".brbtv-author-link {cursor: pointer; color: inherit;}";
         addCssToHead(theCss);
 
         var mutedUsers = new Set();
@@ -55,10 +59,9 @@ function include_user_filter(settings) {
 
         if (!$("#brbtv-user-actions-menu").length) {
             let jUserMenu = $("<div>", {
-                "id": "brbtv-user-actions-menu",
-                "class": "yt-uix-menu-content yt-ui-menu-content"
+                "id": "brbtv-user-actions-menu"
             });
-            $("#comments-view").prepend(jUserMenu);
+            $("yt-live-chat-renderer").prepend(jUserMenu);
             delete jUserMenu;
         }
 
@@ -83,6 +86,14 @@ function include_user_filter(settings) {
             });
         }
 
+        function isMessageByUser(jChatMessage, userId) {
+            let parts = userId.split(" ");
+            let photoSrc = parts[0];
+            let authorName = parts.slice(1).join(" ");
+
+            return jChatMessage.find('#author-photo[src="' + photoSrc + '"]').length && jChatMessage.find("#author-name").text() == authorName;
+        }
+
         function addHighlightUserButton(ytId, jUserLink) {
             let jHighlightUser = createMenuButton("brbtv-highlight-button", chrome.i18n.getMessage("userActionHighlight"));
             jHighlightUser[0].addEventListener('click', function (e) {
@@ -92,14 +103,18 @@ function include_user_filter(settings) {
 
                     youtube.iteratePastChatMessages(function (message) {
                         let jIteratedMessage = $(message);
-                        if (jIteratedMessage.find("a.yt-user-name[data-ytid='" + ytId + "']").length) {
+                        if (isMessageByUser(jIteratedMessage, ytId)) {
                             jIteratedMessage.addClass("brbtv-highlighted-message");
                         }
                     });
                 }
                 e.preventDefault();
             });
-            $("#brbtv-user-actions-menu").append(jHighlightUser);
+            addMenuItem(jHighlightUser);
+        }
+
+        function addMenuItem(jItem) {
+            $("#brbtv-user-actions-menu").append(jItem);
         }
 
         function addUnhighlightUserButton(ytId, jUserLink) {
@@ -111,14 +126,14 @@ function include_user_filter(settings) {
 
                     youtube.iteratePastChatMessages(function (message) {
                         let jIteratedMessage = $(message);
-                        if (jIteratedMessage.find("a.yt-user-name[data-ytid='" + ytId + "']").length) {
+                        if (isMessageByUser(jIteratedMessage, ytId)) {
                             jIteratedMessage.removeClass("brbtv-highlighted-message");
                         }
                     });
                 }
                 e.preventDefault();
             });
-            $("#brbtv-user-actions-menu").append(jUnhighlightUser);
+            addMenuItem(jUnhighlightUser);
         }
 
         function addMuteButton(ytId, jUserLink) {
@@ -130,14 +145,14 @@ function include_user_filter(settings) {
 
                     youtube.iteratePastChatMessages(function (message) {
                         let jIteratedMessage = $(message);
-                        if (jIteratedMessage.find("a.yt-user-name[data-ytid='" + ytId + "']").length) {
+                        if (isMessageByUser(jIteratedMessage, ytId)) {
                             jIteratedMessage.addClass("brbtv-muted-message");
                         }
                     });
                 }
                 e.preventDefault();
             });
-            $("#brbtv-user-actions-menu").append(jMuteUser);
+            addMenuItem(jMuteUser);
         }
 
         function addUnmuteButton(ytId, jUserLink) {
@@ -149,14 +164,14 @@ function include_user_filter(settings) {
 
                     youtube.iteratePastChatMessages(function (message) {
                         let jIteratedMessage = $(message);
-                        if (jIteratedMessage.find("a.yt-user-name[data-ytid='" + ytId + "']").length) {
+                        if (isMessageByUser(jIteratedMessage, ytId)) {
                             jIteratedMessage.removeClass("brbtv-muted-message");
                         }
                     });
                 }
                 e.preventDefault();
             });
-            $("#brbtv-user-actions-menu").append(jMuteUser);
+            addMenuItem(jMuteUser);
         }
 
         function addHideMenuFunction(jUserLink) {
@@ -173,9 +188,7 @@ function include_user_filter(settings) {
             $("#brbtv-user-actions-menu").removeClass("show-brbtv-user-actions-menu");
 
             var replacement = '@' + $(e.currentTarget).text();
-            if (settings.addColonAfterInsertedUser) {
-                replacement += ":";
-            }
+
             replacement += "\u00A0";
             var jTextInput = youtube.getJChatInputField();
             if (jTextInput.length) {
@@ -206,22 +219,31 @@ function include_user_filter(settings) {
                 if (!replacementPerformed) jTextInput.append(document.createTextNode(replacement));
                 setCaretPosition(jTextInput[0], caretPosition + replacement.length);
                 jTextInput.focus();
+                jTextInput[0].dispatchEvent(new CustomEvent("input"));
             }
         }
 
         youtube.registerChatMessageObserver(function (message) {
             let jMessage = $(message);
-            // don't show menu for yourself or VIP announcements
-            if (jMessage.hasClass("author-viewing") || jMessage.hasClass("new-member-announcement")) return;
 
-            var jUserLink = jMessage.find("a.yt-user-name");
-            if (!jUserLink.length) return;
-            let ytId = jUserLink.attr('data-ytid');
+            // TODO find new-member-announcement equivalent in new chat
+            if (jMessage.hasClass("new-member-announcement")) return;
+
+            let authorPhotoSrc = jMessage.find('img[id="author-photo"]').attr("src");
+            let authorName = jMessage.find("#author-name").text();
+            let ytId = authorPhotoSrc + " " + authorName;
 
             if (mutedUsers.has(ytId)) {
                 jMessage.remove();
                 return;
             }
+
+            let jUserLink = $("<a>", {
+                href: "#",
+                class: "brbtv-author-link"
+            }).text(authorName);
+
+            jMessage.find("#author-name").html(jUserLink);
 
             if (highlightedUsers.has(ytId)) {
                 jMessage.addClass("brbtv-highlighted-message");
@@ -232,9 +254,9 @@ function include_user_filter(settings) {
                 let jUserMenu = $("#brbtv-user-actions-menu");
                 jUserMenu.empty();
 
-                let jVisitProfile = createMenuButton("brbtv-visit-button", chrome.i18n.getMessage("userActionVisitProfile"));
-                jVisitProfile.attr("href", jUserLink.attr('href'));
-                jUserMenu.append(jVisitProfile);
+                //let jVisitProfile = createMenuButton("brbtv-visit-button", chrome.i18n.getMessage("userActionVisitProfile"));
+                //jVisitProfile.attr("href", jUserLink.attr('href'));
+                //jUserMenu.append(jVisitProfile);
 
                 if (highlightedUsers.has(ytId)) {
                     addUnhighlightUserButton(ytId, jUserLink);

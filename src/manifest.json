@@ -39,7 +39,8 @@
   }],
   "web_accessible_resources": [
     "sounds/*",
-	"img/*"
+	"img/*",
+    "page_bridge.js"
   ],
   "permissions": [
     "storage"

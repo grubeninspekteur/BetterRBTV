@@ -1,17 +1,15 @@
 const BRBTV_DEBUG = true;
-const BRBTV_COMMIT_VERSION = 123; // last commit # for which a message was generated containing useful information
+const BRBTV_COMMIT_VERSION = 174; // last commit # for which a message was generated containing useful information
 
 function addOtherCSS(items) {
 
     var css = '';
-	
-	// small workaround: prevent text rendering issues when hovering over username badges
-	css += ".live-chat-widget {-webkit-backface-visibility: hidden;}";
+
+    // small workaround: prevent text rendering issues when hovering over username badges
+    css += ".live-chat-widget {-webkit-backface-visibility: hidden;}";
 
     if (items.hideAvatars == true) {
-        css += ".comment .avatar {display: none !important;}";
-        // without seeing avatars, you shouldn't be able to report them
-        css += ".comment-action-report-profile-image {display: none !important;}";
+        css += "#author-photo {display: none;}";
     }
 
     if (items.saveSpace == true) {
@@ -52,7 +50,7 @@ function addOtherCSS(items) {
     if (items.noGreenMemberAccent == true) {
         css += ".live-chat-widget.enable-memberships .comment.author-is-member:not(.brbtv-highlighted-message) .accent-bar  {display: none !important;}";
     }
-	
+
     if (items.lessVipHighlight == true) {
         css += ".live-chat-widget .comment.fan-funding-tip, .live-chat-widget .comment.new-member-announcement, .live-chat-widget.dark .comment.fan-funding-tip, .live-chat-widget.dark .comment.new-member-announcement {background-color: initial !important;}";
         css += ".live-chat-widget .comment.fan-funding-tip.pinned, .live-chat-widget .comment.new-member-announcement.pinned {background-color: #fff !important;}";
@@ -84,38 +82,25 @@ function addFaceEmotes(settings) {
     if (settings.faceEmotes == true) {
         chrome.storage.local.get("emotePack", function (items) {
             if (items.emotePack != null) {
-            var css = '';
-            for (var i = 0; i < items.emotePack.images.length; i++) {
-                var img = items.emotePack.images[i];
+                var css = '';
+                for (var i = 0; i < items.emotePack.images.length; i++) {
+                    var img = items.emotePack.images[i];
 
-                // use CSS to push img out of box - see https://css-tricks.com/replace-the-image-in-an-img-with-css/
-                css += 'yt-live-chat-text-message-renderer #message img[alt="'+ img.emote +'"], yt-emoji-picker-category-renderer #emoji img[alt="'+ img.emote +'"] {' +
-                    'display: inline-block !important; -moz-box-sizing: border-box !important; box-sizing: border-box !important;' +
-                    'background: no-repeat url( data:image/png;base64,'
-                    + img.base64
-                    + ') !important; width: '
-                    + img.width
-                    + 'px !important; height: '
-                    + img.height + 'px !important;' +
-                    'padding-left: ' + img.width + 'px !important; } ';
-            }
-            if (!addCssToHead(css)) console.warn("BRBTV error: Could not add style to head");
-
-            if (settings.lastMessageConfirmedVersion < 123) {
-                let theWarning = $("<div></div>");
-                theWarning.css("background-color", "blue");
-                theWarning.css("color", "white");
-                theWarning.css("cursor", "pointer");
-                theWarning.text(chrome.i18n.getMessage("Warning_Version123"));
-                theWarning.click(function (e) {
-                    chrome.storage.sync.set({"lastMessageConfirmedVersion": BRBTV_COMMIT_VERSION});
-                    theWarning.css("display", "none");
-                });
-                $("body").prepend(theWarning);
-            }
-        } else {
+                    // use CSS to push img out of box - see https://css-tricks.com/replace-the-image-in-an-img-with-css/
+                    css += 'yt-live-chat-text-message-renderer #message img[alt="' + img.emote + '"], yt-emoji-picker-category-renderer #emoji img[alt="' + img.emote + '"] {' +
+                        'display: inline-block !important; -moz-box-sizing: border-box !important; box-sizing: border-box !important;' +
+                        'background: no-repeat url( data:image/png;base64,'
+                        + img.base64
+                        + ') !important; width: '
+                        + img.width
+                        + 'px !important; height: '
+                        + img.height + 'px !important;' +
+                        'padding-left: ' + img.width + 'px !important; } ';
+                }
+                if (!addCssToHead(css)) console.warn("BRBTV error: Could not add style to head");
+            } else {
                 chrome.storage.sync.set({"lastMessageConfirmedVersion": BRBTV_COMMIT_VERSION}); // dismiss the warning since user has not yet installed an emote pack
-        }
+            }
         });
     }
 }
@@ -130,6 +115,14 @@ function initializeYoutube() {
     removeCssFromHead();
 
     chrome.storage.sync.get(default_settings, function (settings) {
+        if (settings.lastMessageConfirmedVersion < BRBTV_COMMIT_VERSION) {
+            // delete old-style ytIds
+            chrome.storage.sync.set({"lastMessageConfirmedVersion": BRBTV_COMMIT_VERSION});
+            chrome.storage.sync.set({"ignoredUsers" : []});
+            chrome.storage.sync.set({"highlightedUsers" : []});
+            console.log("BRBTV: Deleted unique ID based highlights & mutes");
+        }
+
         if (settings.twitchKeywordReplacement) {
             include_keyword_replacement(settings);
         }
@@ -161,7 +154,7 @@ function initializeYoutube() {
         if (settings.coloredNames) {
             include_colored_names();
         }
-		
+
         if (settings.betterMentionHighlight) {
             include_better_mention_highlight();
         }
