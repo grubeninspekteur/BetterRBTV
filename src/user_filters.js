@@ -223,6 +223,42 @@ function include_user_filter(settings) {
             }
         }
 
+        function showActionMenu(e) {
+            let jUserLink = $(e.target);
+            let jMessage = jUserLink.closest("yt-live-chat-text-message-renderer");
+            let jUserMenu = $("#brbtv-user-actions-menu");
+            let authorPhotoSrc = jMessage.find('img[id="author-photo"]').attr("src");
+            let authorName = jMessage.find("#author-name").text();
+            let ytId = authorPhotoSrc + " " + authorName;
+            jUserMenu.empty();
+
+            //let jVisitProfile = createMenuButton("brbtv-visit-button", chrome.i18n.getMessage("userActionVisitProfile"));
+            //jVisitProfile.attr("href", jUserLink.attr('href'));
+            //jUserMenu.append(jVisitProfile);
+
+            if (highlightedUsers.has(ytId)) {
+                addUnhighlightUserButton(ytId, jUserLink);
+            } else {
+                addHighlightUserButton(ytId, jUserLink);
+            }
+
+            if (!mutedUsers.has(ytId)) {
+                addMuteButton(ytId, jUserLink);
+            } else {
+                addUnmuteButton(ytId, jUserLink);
+            }
+            e.preventDefault();
+            addHideMenuFunction(jUserLink);
+
+            let linkPosition = jUserLink.offset();
+            let topPosition = linkPosition.top + jUserLink.height();
+            if (topPosition + jUserMenu.height() > $("body").height()) topPosition = linkPosition.top - jUserMenu.height() - jUserLink.height();
+            jUserMenu.css("top", topPosition + "px");
+            jUserMenu.css("left", linkPosition.left + "px");
+
+            jUserMenu.addClass("show-brbtv-user-actions-menu");
+        }
+
         youtube.registerChatMessageObserver(function (message) {
             let jMessage = $(message);
 
@@ -232,6 +268,11 @@ function include_user_filter(settings) {
             let authorPhotoSrc = jMessage.find('img[id="author-photo"]').attr("src");
             let authorName = jMessage.find("#author-name").text();
             let ytId = authorPhotoSrc + " " + authorName;
+
+            // don't show menu if we don't have a photo to work with
+            if (authorPhotoSrc == "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7") {
+                return;
+            }
 
             if (mutedUsers.has(ytId)) {
                 jMessage.remove();
@@ -249,37 +290,7 @@ function include_user_filter(settings) {
                 jMessage.addClass("brbtv-highlighted-message");
             }
 
-            jUserLink[0].addEventListener('click', function (e) {
-                let jUserLink = $(e.target);
-                let jUserMenu = $("#brbtv-user-actions-menu");
-                jUserMenu.empty();
-
-                //let jVisitProfile = createMenuButton("brbtv-visit-button", chrome.i18n.getMessage("userActionVisitProfile"));
-                //jVisitProfile.attr("href", jUserLink.attr('href'));
-                //jUserMenu.append(jVisitProfile);
-
-                if (highlightedUsers.has(ytId)) {
-                    addUnhighlightUserButton(ytId, jUserLink);
-                } else {
-                    addHighlightUserButton(ytId, jUserLink);
-                }
-
-                if (!mutedUsers.has(ytId)) {
-                    addMuteButton(ytId, jUserLink);
-                } else {
-                    addUnmuteButton(ytId, jUserLink);
-                }
-                e.preventDefault();
-                addHideMenuFunction(jUserLink);
-
-                let linkPosition = jUserLink.offset();
-                let topPosition = linkPosition.top + jUserLink.height();
-                if (topPosition + jUserMenu.height() > $("body").height()) topPosition = linkPosition.top - jUserMenu.height() - jUserLink.height();
-                jUserMenu.css("top", topPosition + "px");
-                jUserMenu.css("left", linkPosition.left + "px");
-
-                jUserMenu.addClass("show-brbtv-user-actions-menu");
-            });
+            jUserLink[0].addEventListener('click', showActionMenu);
 
 
             // insert the name as a mention on doubleclick
