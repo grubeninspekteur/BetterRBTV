@@ -10,6 +10,8 @@ function filterComment(pattern, comment) {
 function include_chat_filter(settings) {
     if (settings.blockedTerms.termString == '') return;
     YouTubeLive.onChatLoaded(function(youtube) {
+        var ownName = $("yt-live-chat-message-input-renderer").find("#author-name").text();
+
         var pattern;
         if (settings.blockedTerms.isRegex) {
             pattern = new RegExp(settings.blockedTerms.termString);
@@ -18,6 +20,8 @@ function include_chat_filter(settings) {
         }
 
         youtube.registerChatMessageObserver(function (elem) {
+            // don't delete your own messages
+            if ($(elem).find("#author-name").text() == ownName) return;
             filterComment(pattern, elem);
         }, true);
     });
