@@ -126,6 +126,12 @@ class YouTubeLive {
                 return;
             }
 
+            if (!liveChats.length && $("ytg-watch-page[show-live-chat]")) {
+                // YT Gaming loaded in background tab
+                rescheduleTimeout(callback);
+                return;
+            }
+
             if (liveChats.length) {
 
                 if (BRBTV_DEBUG) {
