@@ -139,10 +139,9 @@ function initializeYoutube() {
         include_chat_filter(settings);
         include_user_filter(settings);
 
-        /*
 		if (settings.pinnableMentions) {
             include_pinnable_mentions();
-        }*/
+        }
 
         // put it before mention highlighting because it searches for .mention class inside comment, which the
         // following function would already have removed
