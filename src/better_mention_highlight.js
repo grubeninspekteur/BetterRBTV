@@ -20,6 +20,7 @@ function include_better_mention_highlight() {
 			
 			yt-live-chat-text-message-renderer.brbtv-highlight-mention #author-name {
 			    color: white !important;
+			}
 		`);
         youtube.registerChatMessageObserver(handleMention, true);
     });
