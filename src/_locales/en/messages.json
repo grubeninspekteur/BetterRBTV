@@ -105,9 +105,6 @@
   "Opt_MutedUsersNone": {
     "message": "None. Mute users via the menu opened by clicking on their names."
   },
-  "Opt_NoGreenVIPBar": {
-    "message": "No green accent bar for sponsors"
-  },
   "Opt_PinMentions": {
     "message": "Pin @mentions permanently at the top"
   },

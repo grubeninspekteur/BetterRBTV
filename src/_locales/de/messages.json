@@ -105,9 +105,6 @@
   "Opt_MutedUsersNone": {
     "message": "Keine. Schalte Benutzer über das Menü beim Klick auf den Namen stumm."
   },
-  "Opt_NoGreenVIPBar": {
-    "message": "Keine grüne Akzentleiste links bei Nachrichten von VIPs"
-  },
   "Opt_PinMentions": {
     "message": "@Erwähnungen am oberen Chatrand dauerhaft anheften"
   },

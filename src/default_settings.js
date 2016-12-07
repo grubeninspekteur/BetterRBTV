@@ -13,7 +13,6 @@ var default_settings = {
 	soundNotifications: false,
 	lessVipHighlight: false,
 	betterSeperateMessages: false,
-    noGreenMemberAccent: false,
     blockedTerms: {
         termString: '',
         isRegex: false

@@ -47,10 +47,6 @@ function addOtherCSS(items) {
 		`;
     }
 
-    if (items.noGreenMemberAccent == true) {
-        css += ".live-chat-widget.enable-memberships .comment.author-is-member:not(.brbtv-highlighted-message) .accent-bar  {display: none !important;}";
-    }
-
     if (items.lessVipHighlight == true) {
         css += ".live-chat-widget .comment.fan-funding-tip, .live-chat-widget .comment.new-member-announcement, .live-chat-widget.dark .comment.fan-funding-tip, .live-chat-widget.dark .comment.new-member-announcement {background-color: initial !important;}";
         css += ".live-chat-widget .comment.fan-funding-tip.pinned, .live-chat-widget .comment.new-member-announcement.pinned {background-color: #fff !important;}";
@@ -124,7 +120,7 @@ function initializeYoutube() {
             chrome.storage.sync.set({"hideAvatars": false});
 
             // remove obsolete options
-            chrome.storage.sync.remove(["showTimestamp", "suggestEmote", "suggestUser"]);
+            chrome.storage.sync.remove(["showTimestamp", "suggestEmote", "suggestUser", "noGreenMemberAccent"]);
 
             console.log("BRBTV: Deleted unique ID based highlights & mutes, disabled hide avatars, cleared up unneeded options");
         }
