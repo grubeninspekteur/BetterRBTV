@@ -132,7 +132,7 @@ function include_keyword_replacement() {
                                 result.index - lengthPassed + keyword.length,
                                 replacement);
                             setCaretPosition(textInput, result.index + replacement.length);
-                            // fire input change event so
+                            // fire input change event so the polymer can update its internal copy of the comment text
                             textInput.dispatchEvent(new CustomEvent("input"));
 
                             return;

@@ -79,7 +79,7 @@
     "message": "Aktuell:"
   },
   "Opt_HideAvatars": {
-    "message": "Avatare verbergen"
+    "message": "Avatare verbergen (Hinweis: wenn aktiviert, können alte Nachrichten nicht stummgeschaltet/hervorgehoben werden)"
   },
   "Opt_HighlightedUserAddDescription": {
     "message": "Du kennst bereits die ID eines Nutzers, den du stalken willst? Einfach hier eingeben!"

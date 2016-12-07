@@ -98,7 +98,7 @@ class YouTubeLive {
 
     _initializeUniqueChatElements() {
         this.jHidingMessage = $('#contents > paper-icon-button[icon="yt-icons:down_arrow"]');
-        this.jCommentsScroller = $("#items");
+        this.jCommentsScroller = $("yt-live-chat-renderer #chat #items");
 
     }
 
@@ -261,7 +261,7 @@ class YouTubeLive {
      * @private
      */
     _recordChatScrollbar() {
-        return !this.jHidingMessage.hasClass("hid");
+        return !this.jHidingMessage[0].hasAttribute("disabled");
     }
 
     /**

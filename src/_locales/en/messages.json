@@ -79,7 +79,7 @@
     "message": "Current:"
   },
   "Opt_HideAvatars": {
-    "message": "Hide avatars"
+    "message": "Hide avatars (Note: if enabled, old messages can't be highlighted or muted)"
   },
   "Opt_HighlightedUserAddDescription": {
     "message": "You already know the unique ID of a user you want to stalk? Just enter it here!"

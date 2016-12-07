@@ -98,8 +98,6 @@ function addFaceEmotes(settings) {
                         'padding-left: ' + img.width + 'px !important; } ';
                 }
                 if (!addCssToHead(css)) console.warn("BRBTV error: Could not add style to head");
-            } else {
-                chrome.storage.sync.set({"lastMessageConfirmedVersion": BRBTV_COMMIT_VERSION}); // dismiss the warning since user has not yet installed an emote pack
             }
         });
     }
@@ -116,11 +114,19 @@ function initializeYoutube() {
 
     chrome.storage.sync.get(default_settings, function (settings) {
         if (settings.lastMessageConfirmedVersion < BRBTV_COMMIT_VERSION) {
-            // delete old-style ytIds
             chrome.storage.sync.set({"lastMessageConfirmedVersion": BRBTV_COMMIT_VERSION});
+
+            // delete old-style ytIds
             chrome.storage.sync.set({"ignoredUsers" : []});
             chrome.storage.sync.set({"highlightedUsers" : []});
-            console.log("BRBTV: Deleted unique ID based highlights & mutes");
+
+            // disable hide avatars so user sees warning about problems with mute/highlight
+            chrome.storage.sync.set({"hideAvatars": false});
+
+            // remove obsolete options
+            chrome.storage.sync.remove(["showTimestamp", "suggestEmote", "suggestUser"]);
+
+            console.log("BRBTV: Deleted unique ID based highlights & mutes, disabled hide avatars, cleared up unneeded options");
         }
 
         if (settings.twitchKeywordReplacement) {

@@ -2,9 +2,7 @@ var default_settings = {
     lastMessageConfirmedVersion: 0,
     twitchKeywordReplacement: true,
     faceEmotes: true,
-    suggestUser: true,
     addColonAfterInsertedUser: false,
-    suggestEmote: true,
     recentEmotes: false,
     hideAvatars: false,
     saveSpace: true,
@@ -16,7 +14,6 @@ var default_settings = {
 	lessVipHighlight: false,
 	betterSeperateMessages: false,
     noGreenMemberAccent: false,
-    showTimestamp: true,
     blockedTerms: {
         termString: '',
         isRegex: false
