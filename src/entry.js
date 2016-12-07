@@ -142,7 +142,7 @@ function initializeYoutube() {
         /*
 		if (settings.pinnableMentions) {
             include_pinnable_mentions();
-        }
+        }*/
 
         // put it before mention highlighting because it searches for .mention class inside comment, which the
         // following function would already have removed
@@ -152,7 +152,7 @@ function initializeYoutube() {
         if (settings.pushNotifications) {
             include_push_notifications();
         }
-		*/
+
         if (settings.coloredNames) {
             include_colored_names();
         }

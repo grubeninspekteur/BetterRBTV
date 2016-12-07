@@ -3,14 +3,14 @@ function createPinnedMention(commentElem) {
 	let $comment = $(commentElem);
 
 	// when initiated and it iterates the existing comments, only check comments from within the last 60 seconds
-	if( Math.round( ((new Date) - 60000) / 1000 ) < $comment.data('timestamp') && $.contains(document, $comment[0]) ) {
+	if( Math.round( ((new Date) - 60000) / 1000 ) < message.data('timestamp') && $.contains(document, message[0]) ) {
 	
 		// search for mentions inside comment
-		var mention = $comment.not('.author-viewing').find('.mention');
+		var mention = message.not('.author-viewing').find('.mention');
 		if (mention.length) {
 			
-			var userName = $comment.find('.yt-user-name').text().trim();
-			var commentMsg = $comment.find('.comment-text').text().trim();
+			var userName = message.find('.yt-user-name').text().trim();
+			var commentMsg = message.find('.comment-text').text().trim();
 
 			let pinnedMention = $("<li>", {class: "pinnedMention"}).append(
 				$("<div>", {class: "content-pinnendMention"}).text(userName + ': ' + commentMsg)
@@ -27,7 +27,7 @@ function createPinnedMention(commentElem) {
 		
 	}
 
-	$comment = null;
+	message = null;
 }
 
 function include_pinnable_mentions() {
