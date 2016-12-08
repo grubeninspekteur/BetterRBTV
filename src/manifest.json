@@ -26,6 +26,7 @@
       "default_settings.js",
       "colored_names.js",
       "better_mention_highlight.js",
+      "better_seperate_messages.js",
       "pinnable_mentions.js",
       "push_notifications.js",
       "sound_notifications.js",

@@ -62,18 +62,6 @@ function addOtherCSS(items) {
         css += ".live-chat-widget.dark .comment:not(:hover) .comment-text a {color:#fff !important;}";
         css += ".live-chat-widget.dark .comment:hover .comment-text a {color:#fff !important;}";
     }
-    if (items.betterSeperateMessages == true) {
-        css += 
-		`
-		.yt-live-chat-text-message-renderer-0 {
-			border-bottom: 1px solid #111;
-			border-top: 1px solid #333;
-		}
-		.yt-live-chat-text-message-renderer-0:nth-last-child(even) {
-			background-color: rgba(100,100,100,0.1);
-		}
-		`;
-    }
 
     addCssToHead(css);
 }
@@ -151,6 +139,11 @@ function initializeYoutube() {
             include_push_notifications();
         }
 		*/
+		
+		if(settings.betterSeperateMessages) {
+			include_better_seperate_messages();
+		}
+		
         if (settings.coloredNames) {
             include_colored_names();
         }
