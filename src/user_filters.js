@@ -10,6 +10,11 @@ function include_user_filter(settings) {
     const REMOVE_ACTION = false;
 
     YouTubeLive.onChatLoaded(function (youtube) {
+<<<<<<< HEAD
+=======
+        const AVATAR_PLACEHOLDER_SRC = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+
+>>>>>>> refs/remotes/grubeninspekteur/master
         var theCss = `
 		#brbtv-user-actions-menu {
             display: none;
@@ -50,10 +55,13 @@ function include_user_filter(settings) {
 			border-top: 1px solid rgb(204, 0, 0) !important;
 			border-bottom: 1px solid rgb(204, 0, 0) !important;
 		}
+<<<<<<< HEAD
         .brbtv-highlighted-message .comment-time,
 		.brbtv-highlighted-message .byline {
 			color: rgba(255,255,255,0.54) !important;
 		}
+=======
+>>>>>>> refs/remotes/grubeninspekteur/master
         .brbtv-highlighted-message .mention {
 			background-color: transparent !important;
 		}
@@ -66,8 +74,13 @@ function include_user_filter(settings) {
         .brbtv-highlighted-message #author-name {
 			color: #fff !important;
 		}
+<<<<<<< HEAD
         .brbtv-muted-message .yt-user-name {
 			text-decoration: line-through !important;
+=======
+        .brbtv-muted-message #author-name button {
+			text-decoration: line-through;
+>>>>>>> refs/remotes/grubeninspekteur/master
 		}
 		.brbtv-author-link {
 			cursor: pointer; color: inherit; padding: 0;
@@ -276,11 +289,13 @@ function include_user_filter(settings) {
             let authorPhotoSrc = jMessage.find('img[id="author-photo"]').attr("src");
             let authorName = jMessage.find("#author-name").text();
             let ytId = authorPhotoSrc + " " + authorName;
-            jUserMenu.empty();
 
-            //let jVisitProfile = createMenuButton("brbtv-visit-button", chrome.i18n.getMessage("userActionVisitProfile"));
-            //jVisitProfile.attr("href", jUserLink.attr('href'));
-            //jUserMenu.append(jVisitProfile);
+            // don't show menu if we don't have a photo to work with
+            if (authorPhotoSrc == AVATAR_PLACEHOLDER_SRC) {
+                return;
+            }
+
+            jUserMenu.empty();
 
             if (highlightedUsers.has(ytId)) {
                 addUnhighlightUserButton(ytId, jUserLink);
@@ -303,6 +318,34 @@ function include_user_filter(settings) {
             jUserMenu.css("left", linkPosition.left + "px");
 
             jUserMenu.addClass("show");
+<<<<<<< HEAD
+=======
+        }
+
+        function deferredCheck(mutations, observer) {
+            for (mutationRecord of mutations) {
+                if (mutationRecord.attributeName == "loaded") {
+                    let jMessage = $(mutationRecord.target).closest("yt-live-chat-text-message-renderer");
+                    var authorPhoto = jMessage.find('img[id="author-photo"]');
+                    let authorPhotoSrc = authorPhoto.attr("src");
+                    let authorName = jMessage.find("#author-name").text();
+                    let ytId = authorPhotoSrc + " " + authorName;
+
+
+                    if (mutedUsers.has(ytId)) {
+                        jMessage.remove();
+                        return;
+                    }
+
+                    if (highlightedUsers.has(ytId)) {
+                        jMessage.addClass("brbtv-highlighted-message");
+                    }
+
+                    observer.disconnect();
+                    return;
+                }
+            }
+>>>>>>> refs/remotes/grubeninspekteur/master
         }
 
         youtube.registerChatMessageObserver(function (message) {
@@ -311,30 +354,36 @@ function include_user_filter(settings) {
             // TODO find new-member-announcement equivalent in new chat
             if (jMessage.hasClass("new-member-announcement")) return;
 
-            let authorPhotoSrc = jMessage.find('img[id="author-photo"]').attr("src");
+            var authorPhoto = jMessage.find('img[id="author-photo"]');
+            let authorPhotoSrc = authorPhoto.attr("src");
             let authorName = jMessage.find("#author-name").text();
             let ytId = authorPhotoSrc + " " + authorName;
 
-            // don't show menu if we don't have a photo to work with
-            if (authorPhotoSrc == "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7") {
-                return;
-            }
+            // if photo not yet loaded, defer block/highlight actions
+            if (authorPhotoSrc == AVATAR_PLACEHOLDER_SRC) {
+                let imageObserver = new MutationObserver(deferredCheck);
+                imageObserver.observe(authorPhoto[0], {"attributes": true});
+            } else {
+                if (mutedUsers.has(ytId)) {
+                    jMessage.remove();
+                    return;
+                }
 
-            if (mutedUsers.has(ytId)) {
-                jMessage.remove();
-                return;
+                if (highlightedUsers.has(ytId)) {
+                    jMessage.addClass("brbtv-highlighted-message");
+                }
             }
 
             let jUserLink = $("<button>", {
+<<<<<<< HEAD
 				"type": "button",
+=======
+                "type": "button",
+>>>>>>> refs/remotes/grubeninspekteur/master
                 "class": "brbtv-author-link"
             }).text(authorName);
 
             jMessage.find("#author-name").html(jUserLink);
-
-            if (highlightedUsers.has(ytId)) {
-                jMessage.addClass("brbtv-highlighted-message");
-            }
 
             jUserLink[0].addEventListener('click', showActionMenu);
 

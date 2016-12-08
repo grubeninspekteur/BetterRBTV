@@ -79,7 +79,7 @@
     "message": "Aktuell:"
   },
   "Opt_HideAvatars": {
-    "message": "Avatare verbergen"
+    "message": "Avatare verbergen (Hinweis: wenn aktiviert, können alte Nachrichten nicht stummgeschaltet/hervorgehoben werden)"
   },
   "Opt_HighlightedUserAddDescription": {
     "message": "Du kennst bereits die ID eines Nutzers, den du stalken willst? Einfach hier eingeben!"
@@ -104,9 +104,6 @@
   },
   "Opt_MutedUsersNone": {
     "message": "Keine. Schalte Benutzer über das Menü beim Klick auf den Namen stumm."
-  },
-  "Opt_NoGreenVIPBar": {
-    "message": "Keine grüne Akzentleiste links bei Nachrichten von VIPs"
   },
   "Opt_PinMentions": {
     "message": "@Erwähnungen am oberen Chatrand dauerhaft anheften"
