@@ -10,6 +10,7 @@ function include_user_filter(settings) {
     const REMOVE_ACTION = false;
 
     YouTubeLive.onChatLoaded(function (youtube) {
+
         const AVATAR_PLACEHOLDER_SRC = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
         var theCss = `
@@ -52,6 +53,12 @@ function include_user_filter(settings) {
 			border-top: 1px solid rgb(204, 0, 0) !important;
 			border-bottom: 1px solid rgb(204, 0, 0) !important;
 		}
+
+        .brbtv-highlighted-message .comment-time,
+		.brbtv-highlighted-message .byline {
+			color: rgba(255,255,255,0.54) !important;
+		}
+
         .brbtv-highlighted-message .mention {
 			background-color: transparent !important;
 		}
@@ -64,11 +71,25 @@ function include_user_filter(settings) {
         .brbtv-highlighted-message #author-name {
 			color: #fff !important;
 		}
+
+		.brbtv-muted-message {
+			opacity: 0.4 !important;
+		}
+		
+        .brbtv-muted-message .yt-user-name {
+			text-decoration: line-through !important;
+		}
         .brbtv-muted-message #author-name button {
 			text-decoration: line-through;
+
 		}
-		.brbtv-author-link {
-			cursor: pointer; color: inherit; padding: 0;
+		button.brbtv-author-link {
+			cursor: pointer;
+			color: inherit;
+			padding: 0;
+		}
+		button.brbtv-author-link:focus {
+			background-color: rgba(255,255,255,0.1);
 		}
 		`;
         addCssToHead(theCss);
@@ -303,6 +324,7 @@ function include_user_filter(settings) {
             jUserMenu.css("left", linkPosition.left + "px");
 
             jUserMenu.addClass("show");
+
         }
 
         function deferredCheck(mutations, observer) {
@@ -328,6 +350,7 @@ function include_user_filter(settings) {
                     return;
                 }
             }
+
         }
 
         youtube.registerChatMessageObserver(function (message) {
@@ -357,7 +380,7 @@ function include_user_filter(settings) {
             }
 
             let jUserLink = $("<button>", {
-                "type": "button",
+				"type": "button",
                 "class": "brbtv-author-link"
             }).text(authorName);
 
