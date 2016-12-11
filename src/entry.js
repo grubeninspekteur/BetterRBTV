@@ -16,7 +16,7 @@ function addOtherCSS(items) {
 		css += 
 		`
 		.yt-live-chat-text-message-renderer-0 {
-			padding: 6px 24px 6px 10px;
+			padding: 6px 24px 6px 8px;
 		}
 		.yt-live-chat-text-message-renderer-0 #author-photo.yt-live-chat-text-message-renderer {
 			width: 24px;
@@ -24,7 +24,7 @@ function addOtherCSS(items) {
 			margin-right: 10px;
 		}
 
-		/** Message Input **/
+		/* Message Input */
 
 		.yt-live-chat-message-input-renderer-0 {
 			padding: 6px 10px;
@@ -48,15 +48,28 @@ function addOtherCSS(items) {
     }
 
     if (items.lessVipHighlight == true) {
-        css += ".live-chat-widget .comment.fan-funding-tip, .live-chat-widget .comment.new-member-announcement, .live-chat-widget.dark .comment.fan-funding-tip, .live-chat-widget.dark .comment.new-member-announcement {background-color: initial !important;}";
-        css += ".live-chat-widget .comment.fan-funding-tip.pinned, .live-chat-widget .comment.new-member-announcement.pinned {background-color: #fff !important;}";
-        css += ".live-chat-widget.dark .comment.fan-funding-tip.pinned, .live-chat-widget.dark .comment.new-member-announcement.pinned {background-color: #1b1b1b !important;}";
-        css += ".live-chat-widget .comment.new-member-announcement .byline {color: #0f9d58 !important;}";
-        css += ".live-chat-widget .comment.fan-funding-tip, .live-chat-widget .comment.fan-funding-tip .comment-text, .live-chat-widget .comment.new-member-announcement .comment-text {color: rgba(0,0,0,0.54) !important;}";
-        css += ".live-chat-widget.dark .comment.fan-funding-tip, .live-chat-widget.dark .comment.fan-funding-tip .comment-text, .live-chat-widget.dark .comment.new-member-announcement .comment-text {color: rgba(255,255,255,0.54) !important;}";
-        css += ".live-chat-widget .comment.fan-funding-tip:not(:hover) .comment-text a, .live-chat-widget .comment.new-member-announcement .comment-text a {color:#000 !important;}";
-        css += ".live-chat-widget.dark .comment:not(:hover) .comment-text a {color:#fff !important;}";
-        css += ".live-chat-widget.dark .comment:hover .comment-text a {color:#fff !important;}";
+	
+		css += `
+			.yt-live-chat-legacy-paid-message-renderer-0 {
+				background-color: #1b1b1b !important;
+				font-size: 13px !important;
+				align-items: flex-start !important;
+				padding: 6px 24px 6px 8px !important;
+				min-height: 32px !important;
+				margin: 0 !important;
+				border-radius: 0 !important;
+			}
+			.yt-live-chat-legacy-paid-message-renderer-0 #detail-text.yt-live-chat-legacy-paid-message-renderer {
+				font-size: 13px !important;
+			}
+			.yt-live-chat-legacy-paid-message-renderer-0 #author-photo.yt-live-chat-legacy-paid-message-renderer {
+				width: 24px !important;
+				height: 24px !important;
+				-webkit-align-self: auto !important;
+				align-self: auto !important;
+				margin: 0 10px 0 0 !important;
+			}
+		`
     }
 
     addCssToHead(css);
@@ -139,16 +152,14 @@ function initializeYoutube() {
         if (settings.pushNotifications) {
             include_push_notifications();
         }
-<<<<<<< HEAD
-		*/
+
+
 		
 		if(settings.betterSeperateMessages) {
 			include_better_seperate_messages();
 		}
 		
-=======
 
->>>>>>> refs/remotes/grubeninspekteur/master
         if (settings.coloredNames) {
             include_colored_names();
         }

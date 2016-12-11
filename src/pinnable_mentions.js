@@ -13,7 +13,7 @@ function include_pinnable_mentions() {
                 var commentMsg = message.find('#message').text().trim();
 
                 let pinnedMention = $("<li>", {class: "pinnedMention"}).append(
-                    $("<div>", {class: "content-pinnendMention"}).text(userName + ': ' + commentMsg)
+                    $("<div>", {class: "content-pinnedMention"}).text(userName + ': ' + commentMsg)
                 ).append(
                     $("<div>", {class: "remove-pinnedMention"}).text("×")
                 );
@@ -46,13 +46,15 @@ function include_pinnable_mentions() {
         addCssToHead(`
 		#brbtv-pinnedMentions-container {
 			position: absolute;
-			top: 10px;
+			top: 55px;
 			left: 14px;
 			z-index: 30000000;
 			right: 14px;
 			max-height: 75%;
 			overflow-x: hidden;
 			overflow-y: auto;
+			margin: 0;
+			padding: 0;
 			box-shadow: 3px 3px 0px rgba(0,0,0,0.3);
 		}
 		#brbtv-pinnedMentions-container li.pinnedMention {
@@ -65,7 +67,6 @@ function include_pinnable_mentions() {
 			border-bottom: 1px solid #006155;
 			font-size: 85%;
 			color: #fff;
-			
 			display: -webkit-flex;
 			display: flex;
 			justify-content: space-between;
@@ -75,7 +76,7 @@ function include_pinnable_mentions() {
 			cursor: pointer;
 		}
 		#brbtv-pinnedMentions-container li.pinnedMention .content-pinnedMention {
-			padding: 8px;
+			padding: 4px;
 			align-self: flex-start;
 		}
 		#brbtv-pinnedMentions-container li.pinnedMention .remove-pinnedMention {
