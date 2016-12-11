@@ -12,6 +12,7 @@ function include_colored_names() {
     YouTubeLive.onChatLoaded(function (youtube) {
         addCssToHead(
 		`
+.yt-live-chat-text-message-renderer-0 img[src*="ytimg.com/"] + #content #author-name { color: #e57e20 ; }
 .yt-live-chat-text-message-renderer-0 img[src*="/-A"] + #content #author-name { color: #47d288 ; }
 .yt-live-chat-text-message-renderer-0 img[src*="/-B"] + #content #author-name { color: #b94ff1 ; }
 .yt-live-chat-text-message-renderer-0 img[src*="/-C"] + #content #author-name { color: #3cdc36 ; }
@@ -76,7 +77,6 @@ function include_colored_names() {
 .yt-live-chat-text-message-renderer-0 img[src*="/-9"] + #content #author-name { color: #de9b36 ; }
 .yt-live-chat-text-message-renderer-0 img[src*="/--"] + #content #author-name { color: #e57e20 ; }
 .yt-live-chat-text-message-renderer-0 img[src*="/-_"] + #content #author-name { color: #46ad68 ; }
-.yt-live-chat-text-message-renderer-0 img[src*="https://i.ytimg.com/i/"] + #content #author-name { color: #e57e20 ; }
 		`);
 	});
 }
