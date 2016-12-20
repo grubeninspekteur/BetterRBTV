@@ -94,6 +94,9 @@ function include_user_filter(settings) {
 		`;
         addCssToHead(theCss);
 
+        var ownUserName = $("yt-live-chat-message-input-renderer #author-name").text();
+        var ownPhotoSrc = $("yt-live-chat-message-input-renderer #avatar").attr("src");
+
         var mutedUsers = new Set();
         for (let i = 0; i < settings.ignoredUsers.length; i++) {
             mutedUsers.add(settings.ignoredUsers[i].id);
@@ -338,7 +341,7 @@ function include_user_filter(settings) {
 
 
                     if (mutedUsers.has(ytId)) {
-                        jMessage.remove();
+                        jMessage.addClass("brbtv-removed-message");
                         return;
                     }
 
@@ -356,13 +359,15 @@ function include_user_filter(settings) {
         youtube.registerChatMessageObserver(function (message) {
             let jMessage = $(message);
 
-            // TODO find new-member-announcement equivalent in new chat
-            if (jMessage.hasClass("new-member-announcement")) return;
-
             var authorPhoto = jMessage.find('img[id="author-photo"]');
             let authorPhotoSrc = authorPhoto.attr("src");
             let authorName = jMessage.find("#author-name").text();
             let ytId = authorPhotoSrc + " " + authorName;
+
+            // don't alter own messages
+            if (authorName == ownUserName && authorPhotoSrc == ownPhotoSrc) {
+                return;
+            }
 
             // if photo not yet loaded, defer block/highlight actions
             if (authorPhotoSrc == AVATAR_PLACEHOLDER_SRC) {
@@ -370,7 +375,7 @@ function include_user_filter(settings) {
                 imageObserver.observe(authorPhoto[0], {"attributes": true});
             } else {
                 if (mutedUsers.has(ytId)) {
-                    jMessage.remove();
+                    jMessage.addClass("brbtv-removed-message");
                     return;
                 }
 
