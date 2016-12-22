@@ -30,8 +30,7 @@ function include_push_notifications() {
         if (isHidden()) {
             message = $(commentElem);
 
-            // when initiated and it iterates the existing comments, only check comments from within the last 60 seconds
-            if ($.contains(document, message[0])) {
+            if (!message.hasClass("brbtv-removed-message")) {
 
                 // search for mentions inside comment
                 var mention = message.find('.mention');
