@@ -21,8 +21,13 @@ function include_user_filter(settings) {
 			left: 1747.39px;
 			top: 315px;
 			z-index: 103;
-			background-color: #333;
+			background-color: #fff;
 			padding: 6px 0;
+			
+			box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+		}
+		.ytg-watch-page #brbtv-user-actions-menu {
+			background-color: #333;
 		}
 		#brbtv-user-actions-menu.show {
 			display: block;
@@ -35,9 +40,14 @@ function include_user_filter(settings) {
 			max-height: 96px;
 		}
 		.brbtv-user-actions-item {
-			color: white;
-			font-family: Roboto, Arial, sans-serif;
-			font-size: 15px;
+			outline: none;
+			border: none;
+			background: transparent;
+			font: inherit;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+			
 			display: flex;
 			cursor: pointer;
 			padding: 3px 6px;
@@ -45,7 +55,16 @@ function include_user_filter(settings) {
 			width: 100%;
 			padding: 0 10px;
 		}
+		.ytg-watch-page .brbtv-user-actions-item {
+			
+			color: white;
+			font-family: Roboto, Arial, sans-serif;
+			font-size: 15px;
+		}
 		.brbtv-user-actions-item:hover {
+			background-color: #bbb;
+		}
+		.ytg-watch-page .brbtv-user-actions-item:hover {
 			background-color: #444;
 		}
         .brbtv-highlighted-message {
@@ -62,7 +81,8 @@ function include_user_filter(settings) {
         .brbtv-highlighted-message .mention {
 			background-color: transparent !important;
 		}
-        .brbtv-highlighted-message .comment-text {
+        .brbtv-highlighted-message .comment-text,
+		.brbtv-highlighted-message #message {
 			color: #fff !important;
 		}
         .brbtv-highlighted-message .accent-bar {
@@ -84,6 +104,15 @@ function include_user_filter(settings) {
 
 		}
 		button.brbtv-author-link {
+			outline: none;
+			border: none;
+			background: transparent;
+			font: inherit;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+			
+			
 			cursor: pointer;
 			color: inherit;
 			padding: 0;

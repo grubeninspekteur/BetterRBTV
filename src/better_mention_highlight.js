@@ -18,9 +18,11 @@ function include_better_mention_highlight() {
 				border-bottom: 0 !important;
 			}
 			
-			yt-live-chat-text-message-renderer.brbtv-highlight-mention #author-name {
+			yt-live-chat-text-message-renderer.brbtv-highlight-mention #author-name,
+			yt-live-chat-text-message-renderer.brbtv-highlight-mention #message {
 			    color: white !important;
 			}
+			
 		`);
         youtube.registerChatMessageObserver(handleMention, true);
     });

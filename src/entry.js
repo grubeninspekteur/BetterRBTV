@@ -31,7 +31,7 @@ function addOtherCSS(items) {
 		/* Message Input */
 
 		.yt-live-chat-message-input-renderer-0 {
-			padding: 6px 10px;
+			padding: 8px 10px;
 		}
 
 		.yt-live-chat-message-input-renderer-0 #top.yt-live-chat-message-input-renderer,
@@ -55,13 +55,28 @@ function addOtherCSS(items) {
 	
 		css += `
 			.yt-live-chat-legacy-paid-message-renderer-0 {
-				background-color: #1b1b1b !important;
+				background-color: transparent !important;
 				font-size: 13px !important;
 				align-items: flex-start !important;
 				padding: 6px 24px 6px 8px !important;
 				min-height: 32px !important;
 				margin: 0 !important;
 				border-radius: 0 !important;
+			}
+			.ytg-watch-page .yt-live-chat-legacy-paid-message-renderer-0 {
+				background-color: #1b1b1b !important;
+			}
+			.yt-live-chat-legacy-paid-message-renderer-0 #event-text.yt-live-chat-legacy-paid-message-renderer {
+				color: rgba(0,0,0, 0.5) !important;
+			}
+			.ytg-watch-page .yt-live-chat-legacy-paid-message-renderer-0 #event-text.yt-live-chat-legacy-paid-message-renderer {
+				color: rgba(255, 255, 255, 0.7) !important;
+			}
+			.yt-live-chat-legacy-paid-message-renderer-0 #detail-text.yt-live-chat-legacy-paid-message-renderer {
+				color: rgba(0,0,0, 0.7) !important;
+			}
+			.ytg-watch-page .yt-live-chat-legacy-paid-message-renderer-0 #detail-text.yt-live-chat-legacy-paid-message-renderer {
+				color: rgba(255, 255, 255, 1) !important;
 			}
 			.yt-live-chat-legacy-paid-message-renderer-0 #detail-text.yt-live-chat-legacy-paid-message-renderer {
 				font-size: 13px !important;
