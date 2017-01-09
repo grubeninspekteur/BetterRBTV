@@ -3,7 +3,7 @@ function include_pinnable_mentions() {
 
         let message = $(commentElem);
 
-        if ($.contains(document, message[0])) {
+        if (!message.hasClass("brbtv-removed-message")) {
 
             // search for mentions inside comment
             var mention = message.find('.mention');

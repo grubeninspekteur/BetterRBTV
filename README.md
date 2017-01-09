@@ -1,12 +1,10 @@
 # BetterRBTV Browser Extension
-Comfort functions for YouTube™ Live and YouTube™ Gaming Live.
+Comfort functions for YouTube™ Gaming Live.
 
 ## Features
 * Replacement of keywords known from another well-known streaming site
-* Timestamp for messages
 * Colored names
 * Hide avatars
-* User, emote autocompletion
 * Save space
 * Ignore/highlight users, filter chat messages
 
@@ -14,7 +12,7 @@ Comfort functions for YouTube™ Live and YouTube™ Gaming Live.
 
 ### Installation
 
-To use the [Gulp-Tasks](gulpjs.com) you need to:
+If you want to deploy the add-on, you can use the [Gulp-Tasks](gulpjs.com):
 1. Install [NPM](http://blog.npmjs.org/post/85484771375/how-to-install-npm)
 2. Run `$ npm install`
 

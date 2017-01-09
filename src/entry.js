@@ -15,6 +15,10 @@ function addOtherCSS(items) {
     if (items.saveSpace == true) {
 		css += 
 		`
+		yt-live-chat-text-message-renderer.brbtv-removed-message {
+		    display: none;
+		}
+		
 		.yt-live-chat-text-message-renderer-0 {
 			padding: 6px 24px 6px 8px;
 		}

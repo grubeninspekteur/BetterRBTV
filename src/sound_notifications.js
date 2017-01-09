@@ -6,7 +6,7 @@ function include_sound_notifications() {
     function createSoundNotification(message) {
         jMessage = $(message);
 
-        if ($.contains(document, message)) {
+        if (!jMessage.hasClass("brbtv-removed-message")) {
 
             // search for mentions inside comment
             var mention = jMessage.find('.mention');

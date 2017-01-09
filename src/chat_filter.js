@@ -1,7 +1,7 @@
 function filterComment(pattern, comment) {
     var jComment = $(comment);
     if (pattern.test(jComment.find("#message").text().trim())) {
-        jComment.remove();
+        jComment.addClass("brbtv-removed-message");
     }
 }
 
