@@ -1,0 +1,9 @@
+.yt-live-chat-text-message-renderer-0 {
+    border-top: 1px solid #bbb;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.06) 00%, rgba(0,0,0,0) 50%);
+}
+.ytg-watch-page .yt-live-chat-text-message-renderer-0 {
+    border-bottom: 1px solid #111;
+    border-top: 1px solid #333;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(255,255,255,0.03) 100%);
+}

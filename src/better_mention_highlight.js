@@ -11,19 +11,7 @@ function handleMention(commentElem) {
 
 function include_better_mention_highlight() {
     YouTubeLive.onChatLoaded(function (youtube) {
-        addCssToHead(`
-			yt-live-chat-text-message-renderer.brbtv-highlight-mention {
-				background-color: #00796b !important;
-				border-top: 0 !important;
-				border-bottom: 0 !important;
-			}
-			
-			yt-live-chat-text-message-renderer.brbtv-highlight-mention #author-name,
-			yt-live-chat-text-message-renderer.brbtv-highlight-mention #message {
-			    color: white !important;
-			}
-			
-		`);
+        loadAndAddCssFile('mention-highlight.css');
         youtube.registerChatMessageObserver(handleMention, true);
     });
 }

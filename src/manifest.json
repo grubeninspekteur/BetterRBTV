@@ -26,7 +26,7 @@
       "default_settings.js",
       "colored_names.js",
       "better_mention_highlight.js",
-      "better_seperate_messages.js",
+      "better_separate_messages.js",
       "pinnable_mentions.js",
       "push_notifications.js",
       "sound_notifications.js",
@@ -41,7 +41,7 @@
   "web_accessible_resources": [
     "sounds/*",
 	"img/*",
-    "page_bridge.js"
+    "css/*"
   ],
   "permissions": [
     "storage"

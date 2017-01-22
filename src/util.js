@@ -46,18 +46,35 @@ class None {
     }
 }
 
+function loadAndAddCssFile(fileName) {
+    var styleId = "brbtv-style-" + fileName.substring(0,fileName.length - 4);
+    if (document.getElementById(styleId)) return true;
+    var style = document.createElement('link');
+    style.setAttribute('rel', 'stylesheet');
+    style.setAttribute('type', 'text/css');
+    style.setAttribute("id", styleId);
+    style.setAttribute("href", chrome.extension.getURL("css/"+fileName));
+    var head = document.getElementsByTagName('head')[0];
+    if (head) {
+        head.appendChild(style);
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function addCssToHead(css) {
     if (css != null && css != '') {
         var brbtvStyle = document.getElementById('brbtv-style-optional');
 
         if (brbtvStyle != null) {
-            brbtvStyle.innerHTML += " " + css;
+            brbtvStyle.textContent += css;
             return true;
         } else {
             var style = document.createElement('style');
             style.id = 'brbtv-style-optional';
             var head = document.getElementsByTagName('head')[0];
-            style.innerHTML = css;
+            style.textContent = css;
             if (head) {
                 head.appendChild(style);
                 return true;
