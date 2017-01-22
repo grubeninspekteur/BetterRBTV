@@ -40,7 +40,7 @@ function include_keyword_replacement() {
             "LUL": "😂",
             "MingLee": "🐯",
             "MrDestructoid": "🤖",
-            "MVGame": "😕",
+            "MVGame": "🙃",
             "NicenStein": "😸",
             "NotLikeGregor": "😵",
             "NotLikeThis": "🙈",
