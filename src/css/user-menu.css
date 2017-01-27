@@ -87,20 +87,9 @@
     text-decoration: line-through;
 
 }
-button.brbtv-author-link {
-    outline: none;
-    border: none;
-    background: transparent;
-    font: inherit;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-
-
+.brbtv-author-link {
     cursor: pointer;
-    color: inherit;
-    padding: 0;
 }
-button.brbtv-author-link:focus {
+.brbtv-author-link:focus {
     background-color: rgba(255,255,255,0.1);
 }

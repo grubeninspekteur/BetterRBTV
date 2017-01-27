@@ -305,12 +305,14 @@ function include_user_filter(settings) {
                 }
             }
 
-            let jUserLink = $("<button>", {
+            /*let jUserLink = $("<button>", {
 				"type": "button",
                 "class": "brbtv-author-link"
-            }).text(authorName);
+            }).text(authorName);*/
 
-            jMessage.find("#author-name").html(jUserLink);
+            let jUserLink = jMessage.find("#author-name");
+
+            jUserLink.addClass("brbtv-author-link");
 
             jUserLink[0].addEventListener('click', showActionMenu);
 
