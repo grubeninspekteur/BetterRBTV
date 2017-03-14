@@ -126,7 +126,7 @@ class YouTubeLive {
                 return;
             }
 
-            if (!liveChats.length && $("ytg-watch-page[show-live-chat]").length) {
+            if (!liveChats.length && ($("ytg-watch-page[show-live-chat]").length || document.getElementsByTagName("ytg-live-chat-config"))) {
                 // YT Gaming loaded in background tab
                 rescheduleTimeout(callback);
                 return;

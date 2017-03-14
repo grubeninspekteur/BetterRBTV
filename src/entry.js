@@ -1,6 +1,3 @@
-const BRBTV_DEBUG = false;
-const BRBTV_COMMIT_VERSION = 174; // last commit # for which a message was generated containing useful information
-
 function addOtherCSS(items) {
 
     var css = '';
@@ -49,8 +46,8 @@ function addFaceEmotes(settings) {
 }
 
 // *** ENTRY POINT ***
-// Non Chrome browsers: if sync is not available, redirect to local storage
-if (!chrome.storage.sync) {
+// Due to Firefox's sync storage feature being unstable, we redirect to local sync
+if (BRBTV_IS_FIREFOX) {
     chrome.storage.sync = chrome.storage.local;
 }
 

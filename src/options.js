@@ -1,5 +1,5 @@
-// Non Chrome browsers: if sync is not available, redirect to local storage
-if (!chrome.storage.sync) {
+// Due to usntable sync storage in Firefox, we rely only on local storage
+if (BRBTV_IS_FIREFOX) {
     chrome.storage.sync = chrome.storage.local;
 }
 
