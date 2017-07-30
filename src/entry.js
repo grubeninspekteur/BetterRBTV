@@ -29,7 +29,7 @@ function addFaceEmotes(settings) {
                     var img = items.emotePack.images[i];
 
                     // use CSS to push img out of box - see https://css-tricks.com/replace-the-image-in-an-img-with-css/
-                    css += 'yt-live-chat-text-message-renderer #message img[alt="' + img.emote + '"], yt-emoji-picker-category-renderer #emoji img[src$="' + img.emote.codePointAt(0).toString(16) + '.svg"] {' +
+                    css += 'yt-live-chat-text-message-renderer #message img[alt="' + img.emote + '"], yt-emoji-picker-category-renderer #emoji img[src$="emoji_u' + img.emote.codePointAt(0).toString(16) + '.svg"] {' +
                         'display: inline-block !important; -moz-box-sizing: border-box !important; box-sizing: border-box !important;' +
                         'background: no-repeat url( data:image/png;base64,'
                         + img.base64
