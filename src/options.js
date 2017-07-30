@@ -85,12 +85,11 @@ function listFilteredUsers(filteredUsersArray, storageKey, jNoUsersFiltered, jFi
             let li = $("<li>");
             li.text(filteredUser.name + " (" + filteredUser.id + ") ");
             li.attr('data-yt-user-id', filteredUser.id);
-            let btn = $('<button class="remove-user-button"></button>');
+            let btn = $('<button>').addClass("remove-user-button");
             btn.text(chrome.i18n.getMessage("filterListRemove"));
             btn.click(function (e) {
                 let query = {};
                 query[storageKey] = [];
-                console.log(query);
                 chrome.storage.sync.get(query, function (items) {
                     var updatedFilteredUsers = items[storageKey].filter(u => u.id != filteredUser.id);
                     let query = {};
@@ -143,7 +142,7 @@ function readPending() {
 
 function readError(error) {
     document.getElementById('file-error').textContent = error;
-    console.error(error);
+    if (BRBTV_DEBUG) console.error(error);
     loading_complete();
 }
 

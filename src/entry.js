@@ -39,7 +39,7 @@ function addFaceEmotes(settings) {
                         + img.height + 'px !important;' +
                         'padding-left: ' + img.width + 'px !important; } ';
                 }
-                if (!addCssToHead(css)) console.warn("BRBTV error: Could not add style to head");
+                if (BRBTV_DEBUG && !addCssToHead(css)) console.warn("BRBTV error: Could not add style to head");
             }
         });
     }
@@ -68,7 +68,7 @@ function initializeYoutube() {
             // remove obsolete options
             chrome.storage.sync.remove(["showTimestamp", "suggestEmote", "suggestUser", "noGreenMemberAccent"]);
 
-            console.log("BRBTV: Deleted unique ID based highlights & mutes, disabled hide avatars, cleared up unneeded options");
+            if (BRBTV_DEBUG) console.log("BRBTV: Deleted unique ID based highlights & mutes, disabled hide avatars, cleared up unneeded options");
         }
 
         if (settings.twitchKeywordReplacement) {
