@@ -80,7 +80,7 @@ function include_user_filter(settings) {
             let photoSrc = parts[0];
             let authorName = parts.slice(1).join(" ");
 
-            return jChatMessage.find('#author-photo[src="' + photoSrc + '"]').length && jChatMessage.find("#author-name").text() == authorName;
+            return jChatMessage.find('#author-photo img[src="' + photoSrc + '"]').length && jChatMessage.find("#author-name").text() == authorName;
         }
 
         function addHighlightUserButton(ytId, jUserLink) {
@@ -216,7 +216,7 @@ function include_user_filter(settings) {
             let jUserLink = $(e.target);
             let jMessage = jUserLink.closest("yt-live-chat-text-message-renderer");
             let jUserMenu = $("#brbtv-user-actions-menu");
-            let authorPhotoSrc = jMessage.find('img[id="author-photo"]').attr("src");
+            let authorPhotoSrc = jMessage.find('#author-photo img').attr("src");
             let authorName = jMessage.find("#author-name").text();
             let ytId = authorPhotoSrc + " " + authorName;
 
@@ -255,7 +255,7 @@ function include_user_filter(settings) {
             for (mutationRecord of mutations) {
                 if (mutationRecord.attributeName == "loaded") {
                     let jMessage = $(mutationRecord.target).closest("yt-live-chat-text-message-renderer");
-                    var authorPhoto = jMessage.find('img[id="author-photo"]');
+                    var authorPhoto = jMessage.find('#author-photo img');
                     let authorPhotoSrc = authorPhoto.attr("src");
                     let authorName = jMessage.find("#author-name").text();
                     let ytId = authorPhotoSrc + " " + authorName;
@@ -280,7 +280,7 @@ function include_user_filter(settings) {
         youtube.registerChatMessageObserver(function (message) {
             let jMessage = $(message);
 
-            var authorPhoto = jMessage.find('img[id="author-photo"]');
+            var authorPhoto = jMessage.find('#author-photo img');
             let authorPhotoSrc = authorPhoto.attr("src");
             let authorName = jMessage.find("#author-name").text();
             let ytId = authorPhotoSrc + " " + authorName;
@@ -304,11 +304,6 @@ function include_user_filter(settings) {
                     jMessage.addClass("brbtv-highlighted-message");
                 }
             }
-
-            /*let jUserLink = $("<button>", {
-				"type": "button",
-                "class": "brbtv-author-link"
-            }).text(authorName);*/
 
             let jUserLink = jMessage.find("#author-name");
 
