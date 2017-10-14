@@ -19,5 +19,8 @@
     "gulp-zip": "^3.2.0",
     "inquirer": "^1.1.2",
     "semver": "^5.3.0"
+  },
+  "dependencies": {
+    "push.js": "~1.0.5"
   }
 }
