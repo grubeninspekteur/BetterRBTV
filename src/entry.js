@@ -6,7 +6,7 @@ function addOtherCSS(items) {
     css += ".live-chat-widget {-webkit-backface-visibility: hidden;}";
 
     if (items.hideAvatars == true) {
-        css += "#author-photo {display: none;}";
+        css += "#author-photo {display: none !important;}";
     }
 
     addCssToHead(css);
