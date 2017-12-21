@@ -105,6 +105,9 @@
   "Opt_MutedUsersNone": {
     "message": "None. Mute users via the menu opened by clicking on their names."
   },
+  "Opt_ParseBeansplan": {
+    "message": "Determine next show start time (RBTV only)"
+  },
   "Opt_PinMentions": {
     "message": "Pin @mentions permanently at the top"
   },

@@ -1,0 +1,13 @@
+#brbtv-next-show-circle {
+    display: none;
+    border: 0.08em solid #307bbb;
+    width: 0.84em;
+    height: 0.84em;
+    clip: rect(0em, 0.5em, 1em, 0em);
+    border-radius: 50%;
+    transform: rotate(0deg);
+}
+
+#brbtv-next-show-circle div {
+    display: none;
+}

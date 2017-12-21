@@ -105,6 +105,9 @@
   "Opt_MutedUsersNone": {
     "message": "Keine. Schalte Benutzer über das Menü beim Klick auf den Namen stumm."
   },
+  "Opt_ParseBeansplan": {
+    "message": "Nächste Sendung aus Beansplan auslesen"
+  },
   "Opt_PinMentions": {
     "message": "@Erwähnungen am oberen Chatrand dauerhaft anheften"
   },

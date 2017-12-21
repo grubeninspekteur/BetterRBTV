@@ -114,6 +114,10 @@ function initializeYoutube() {
             include_better_mention_highlight();
         }
 
+        if (settings.parseBeansplan) {
+            new Beansplan();
+        }
+
     });
 }
 

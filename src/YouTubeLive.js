@@ -97,7 +97,7 @@ class YouTubeLive {
     }
 
     _initializeUniqueChatElements() {
-        this.jHidingMessage = $('#contents > paper-icon-button[icon="yt-icons:down_arrow"]');
+        this.jHidingMessage = $('#show-more');
         this.jCommentsScroller = $("yt-live-chat-renderer #chat #items");
 
     }
@@ -224,9 +224,13 @@ class YouTubeLive {
 
     /**
      * Creates a timer that is automatically deleted when the chat context is left.
+     * 
+     * Returns the interval id so the interval can be cleared via clearInterval() manually.
      */
     setInterval(callback, interval) {
-        this._intervals.push(setInterval(callback, interval));
+        var interval = setInterval(callback, interval);
+        this._intervals.push(interval);
+        return interval;
     }
 
     /**

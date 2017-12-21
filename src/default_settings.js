@@ -12,7 +12,8 @@ var default_settings = {
 	pushNotifications: false,
 	soundNotifications: false,
 	lessVipHighlight: false,
-	betterSeperateMessages: false,
+    betterSeperateMessages: false,
+    parseBeansplan: true,
     blockedTerms: {
         termString: '',
         isRegex: false
