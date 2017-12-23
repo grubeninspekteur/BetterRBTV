@@ -145,6 +145,10 @@
   "Opt_TrainingWheelsWarning": {
     "message": "Caution: the mapping from keywords to emojis has been changed in version 0.2.3.2. You may require a new emote pack from your provider."
   },
+  "nextShowIn": {
+    "message": "In $1 minutes: $2",
+    "description": "Message for the next show title text on RBTV."
+  },
   "userActionHighlight": {
     "message": "Highlight",
     "description": "Label for a button in the user action menu to enable highlighting for that user."

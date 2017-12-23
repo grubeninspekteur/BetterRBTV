@@ -78,7 +78,8 @@ class Beansplan {
 
         // update title
         var diffMinutes = Math.floor(diffMilli / 1000 / 60);
-        this._nextshowContainer.attr('title', 'In ' + diffMinutes.toString() + ' Minuten: ' + this._nextShow);
+        this._nextshowContainer.attr('title', chrome.i18n.getMessage('nextShowIn',
+        [diffMinutes.toString(), this._nextShow]));
 
         if (diffMilli < 0) {
             this.clearNextShowDisplay();

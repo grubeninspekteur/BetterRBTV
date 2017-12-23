@@ -145,6 +145,10 @@
   "Opt_TrainingWheelsWarning": {
     "message": "Achtung: Die Zuordnung von Keywords zu Emotes hat sich mit Version 0.2.3.2 geändert. Du musst gegebenenfalls dein Emote-Pack aktualisieren."
   },
+  "nextShowIn": {
+    "message": "In $1 Minuten: $2",
+    "description": "Message for the next show title text on RBTV."
+  },
   "userActionHighlight": {
     "message": "Hervorheben",
     "description": "Label for a button in the user action menu to enable highlighting for that user."

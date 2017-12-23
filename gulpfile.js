@@ -5,7 +5,6 @@ var zip = require('gulp-zip');
 var jeditor = require('gulp-json-editor');
 
 var version = require('./src/manifest.json').version;
-var config = require('./config.json')
 
 gulp.task('chrome', function () {
     var manifestFilter = filter('**/manifest.json', {restore: true});
@@ -22,15 +21,6 @@ gulp.task('firefox', function () {
     var manifestFilter = filter('**/manifest.json', {restore: true});
     var constantsFilter = filter('**/constants_ff.js', {restore: true});
     return gulp.src(['./src/**', '!./src/constants.js', '!./src/constants_c.js'])
-        .pipe(manifestFilter)
-        .pipe(jeditor({
-            'applications': {
-                'gecko': {
-                    'id': config.firefoxId
-                }
-            }
-        }))
-        .pipe(manifestFilter.restore)
         .pipe(constantsFilter)
         .pipe(rename('constants.js'))
         .pipe(constantsFilter.restore)
