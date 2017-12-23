@@ -31,35 +31,36 @@ class Beansplan {
                         var showTitle = matches[2];
                         var hourMinutes = timeShowStarts.split(":")
                         hourMinutes[0] = parseInt(hourMinutes[0]);
-                        // DEBUG
-                        hourMinutes[0] = 21;
-                        hourMinutes[1] = 15;
                         hourMinutes[1] = parseInt(hourMinutes[1]);
                         var then = new Date();
                         var now = new Date();
                         then.setHours(hourMinutes[0]);
                         then.setMinutes(hourMinutes[1]);
-                        console.log("DEBUG: nextShow " + showTitle + " at " + then);
+                        
                         // when will then be now?
                         var diffMilli = then - now;
-                        console.log("diffMilli " + diffMilli);
+
                         // Did we already miss it?
                         if (diffMilli < 0) {
                             self.clearNextShowDisplay();
 
                         } else {
+                            // remove unneccesary period
+                            if (showTitle.endsWith('.')) {
+                                showTitle = showTitle.substr(0, showTitle.length - 1);
+                            }
                             self._nextShow = showTitle;
                             self._startTime = then;
                             self._nextshowContainer.find('.nextshow-time').text( timeShowStarts );
                             
-							/* TODO: Titel-Attribut dynamisch anpassen */
-							self._nextshowContainer.attr('title', 'NEXT SHOW WILL BEGIN IN XX MINUTES');
-							
-                            // self._circle.css("transform", "");
+							self._nextshowContainer.attr('title', showTitle);
                             self._nextshowContainer.addClass('visible');
-                            self._interval = youtube.setInterval(function() {self.timerFired();}, 2000);
+                            if (!self._interval) {
+                                self._interval = youtube.setInterval(function() {self.timerFired();}, 2000);
+                            }
                             
                             // Update now
+                            self.removePercent();
                             self.timerFired();
                         }
                     }
@@ -69,32 +70,39 @@ class Beansplan {
     }
 
     timerFired() {
-        console.log("DEBUG: Timer fired, start time is " + this._startTime);
         if (!this._startTime) {
             return;
         }
-        
 
         var diffMilli =  this._startTime - (new Date());
+
+        // update title
+        var diffMinutes = Math.floor(diffMilli / 1000 / 60);
+        this._nextshowContainer.attr('title', 'In ' + diffMinutes.toString() + ' Minuten: ' + this._nextShow);
+
         if (diffMilli < 0) {
             this.clearNextShowDisplay();
         } else if (diffMilli < Beansplan.DISPLAY_THRESHOLD) {
-            // var degree = 360 - Math.floor((diffMilli / Beansplan.DISPLAY_THRESHOLD) * 360);
-            // console.log("DEBUG: degree = " + degree);
-            // this._circle.css("transform", "rotate("+degree.toString()+"deg)");
-			
-			/* TODO: Keine Gradzahlen mehr errechnen.
-				Stattdessen eine Prozentzahl errechnen
-				und dann this._circle eine entsprechende Klasse geben,
-				.p1, .p2, .p3, ..., .p99, .p100
-				(alte Klasse entfernen)
-			*/
-			
+            this.removePercent();
+            var percent = Math.floor(100.0 * (1.0 - (diffMilli / Beansplan.DISPLAY_THRESHOLD)));
+            }
+
+            this._circle.addClass('p'+percent);
         }
+
+    removePercent() {
+        // remove old percent class
+        var classes = this._circle.attr('class').split(' ');
+        if (classes) {
+          for (let clazz of classes) {
+              if (clazz.startsWith('p')) {
+                  this._circle.removeClass(clazz);
+              }
+          }
+       }
     }
 
     clearNextShowDisplay() {
-        console.log("DEBUG: Clearing Next Show");
         if (this._interval) {
             clearInterval(this._interval);
             this._interval = null;
