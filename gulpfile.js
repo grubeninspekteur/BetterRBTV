@@ -28,4 +28,4 @@ gulp.task('firefox', function () {
         .pipe(gulp.dest('./dist/firefox'));
 });
 
-gulp.task('dist', ['chrome', 'firefox']);
+gulp.task('dist', gulp.series('chrome', 'firefox'));
