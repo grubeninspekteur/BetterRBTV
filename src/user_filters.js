@@ -307,15 +307,15 @@ function include_user_filter(settings) {
 
             let jUserLink = jMessage.find("#author-name");
 
-            jUserLink.addClass("brbtv-author-link");
+            if (jUserLink && jUserLink.length) {
+                jUserLink.addClass("brbtv-author-link");
+                jUserLink[0].addEventListener('click', showActionMenu);
 
-            jUserLink[0].addEventListener('click', showActionMenu);
+                // insert the name as a mention on doubleclick
+                jUserLink[0].addEventListener('dblclick', insertDoubleclickedAuthor);
 
-
-            // insert the name as a mention on doubleclick
-            jUserLink[0].addEventListener('dblclick', insertDoubleclickedAuthor);
-
-            jUserLink = null;
+                jUserLink = null;
+            }
 
         }, true);
     });

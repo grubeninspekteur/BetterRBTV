@@ -58,7 +58,16 @@ function include_push_notifications() {
 
     // ask for permission at startup
     if (!Push.Permission.has()) {
-        Push.Permission.request();
+        Push.Permission.request().then(
+            response => {
+                if (BRBTV_DEBUG) {
+                    console.log("Permission granted");
+                }
+            }).catch(e => {
+                if (BRBTV_DEBUG) {
+                    console.log("Permission rejected");
+                }
+            });
     }
 
     YouTubeLive.onChatLoaded(function (youtube) {

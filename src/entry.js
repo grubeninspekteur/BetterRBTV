@@ -12,11 +12,15 @@ function addOtherCSS(items) {
     addCssToHead(css);
 
     if (items.saveSpace == true) {
-		loadAndAddCssFile('save-space.css');
+        loadAndAddCssFile('save-space.css');
     }
 
     if (items.lessVipHighlight == true) {
         loadAndAddCssFile('less-vip-highlight.css');
+    }
+
+    if (items.hideWelcome == true) {
+        loadAndAddCssFile('hide-welcome.css');
     }
 }
 
@@ -57,14 +61,14 @@ function initializeYoutube() {
 
     chrome.storage.sync.get(default_settings, function (settings) {
         if (settings.lastMessageConfirmedVersion < BRBTV_COMMIT_VERSION) {
-            chrome.storage.sync.set({"lastMessageConfirmedVersion": BRBTV_COMMIT_VERSION});
+            chrome.storage.sync.set({ "lastMessageConfirmedVersion": BRBTV_COMMIT_VERSION });
 
             // delete old-style ytIds
-            chrome.storage.sync.set({"ignoredUsers" : []});
-            chrome.storage.sync.set({"highlightedUsers" : []});
+            chrome.storage.sync.set({ "ignoredUsers": [] });
+            chrome.storage.sync.set({ "highlightedUsers": [] });
 
             // disable hide avatars so user sees warning about problems with mute/highlight
-            chrome.storage.sync.set({"hideAvatars": false});
+            chrome.storage.sync.set({ "hideAvatars": false });
 
             // remove obsolete options
             chrome.storage.sync.remove(["showTimestamp", "suggestEmote", "suggestUser", "noGreenMemberAccent"]);
@@ -86,7 +90,7 @@ function initializeYoutube() {
         include_chat_filter(settings);
         include_user_filter(settings);
 
-		if (settings.pinnableMentions) {
+        if (settings.pinnableMentions) {
             include_pinnable_mentions();
         }
 
@@ -100,11 +104,11 @@ function initializeYoutube() {
         }
 
 
-		
-		if(settings.betterSeperateMessages) {
-			include_better_separate_messages();
-		}
-		
+
+        if (settings.betterSeperateMessages) {
+            include_better_separate_messages();
+        }
+
 
         if (settings.coloredNames) {
             include_colored_names();
@@ -144,5 +148,21 @@ if (page) {
         }
 
     });
-    observer.observe(page, {attributes: true});
+    observer.observe(page, { attributes: true });
 }
+
+YouTubeLive.onChatLoaded(yt => {
+    // listen to changes due to switch between live/top chat
+    let chat = document.getElementById("item-list");
+
+    if (chat) {
+        let observer = new MutationObserver(mutations => {
+            if (mutations.some(mutationRecord =>
+                mutationRecord.addedNodes && mutationRecord.addedNodes.length > 0)) {
+                YouTubeLive.resetPage();
+                initializeYoutube();
+            }
+        });
+        observer.observe(chat, { childList: true });
+    }
+});

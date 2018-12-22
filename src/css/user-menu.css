@@ -85,7 +85,9 @@
 }
 .brbtv-muted-message #author-name button {
     text-decoration: line-through;
-
+}
+.brbtv-removed-message {
+    display: none;
 }
 .brbtv-author-link {
     cursor: pointer;

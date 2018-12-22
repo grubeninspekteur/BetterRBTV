@@ -29,11 +29,10 @@ function copyAvatarId(commentElem) {
 	var avatar = jCommentElem.find('#img');
 	
 	// if photo not yet loaded, defer block/highlight actions
-	if ( avatar.attr('src') == AVATAR_PLACEHOLDER_SRC) {
+	if ( avatar && avatar.attr('src') == AVATAR_PLACEHOLDER_SRC) {
 		let imageObserver = new MutationObserver(deferredCheck);
 		imageObserver.observe(avatar[0], {"attributes": true});
-	} else {
-		
+	} else if (avatar && avatar.attr('src')) {
 		var avatarSrcParts = avatar.attr('src').split('/');
 		var userName = jCommentElem.find('#author-name');
 		

@@ -65,8 +65,6 @@ class YouTubeLive {
             YouTubeLive._instance._chatObservers = [];
             delete YouTubeLive._instance.jHidingMessage;
             delete YouTubeLive._instance.jCommentsScroller;
-
-            SuggestionBox.removeAllInstances();
         }
         YouTubeLive._instance = null;
         YouTubeLive._tried_loading = 0; // which parts of the page have already been checked for

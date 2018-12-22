@@ -14,6 +14,7 @@ var default_settings = {
 	lessVipHighlight: false,
     betterSeperateMessages: false,
     parseBeansplan: true,
+    hideWelcome: false,
     blockedTerms: {
         termString: '',
         isRegex: false

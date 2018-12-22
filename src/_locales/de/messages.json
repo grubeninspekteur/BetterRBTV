@@ -81,6 +81,9 @@
   "Opt_HideAvatars": {
     "message": "Avatare verbergen (Hinweis: wenn aktiviert, können alte Nachrichten nicht stummgeschaltet/hervorgehoben werden)"
   },
+  "Opt_HideWelcome": {
+    "message": "\"Welcome to live chat!\"-Nachricht verbergen"
+  },
   "Opt_HighlightedUserAddDescription": {
     "message": "Du kennst bereits die ID eines Nutzers, den du stalken willst? Einfach hier eingeben!"
   },
@@ -141,9 +144,6 @@
   },
   "Opt_TrainingWheelsDescription": {
     "message": "Wandelt bekannte Schlüsselwörter einer anderen Streamingseite in Emoticons um."
-  },
-  "Opt_TrainingWheelsWarning": {
-    "message": "Achtung: Die Zuordnung von Keywords zu Emotes hat sich mit Version 0.2.3.2 geändert. Du musst gegebenenfalls dein Emote-Pack aktualisieren."
   },
   "nextShowIn": {
     "message": "In $1 Minuten: $2",

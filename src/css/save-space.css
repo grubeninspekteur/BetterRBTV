@@ -1,33 +1,14 @@
-yt-live-chat-text-message-renderer.brbtv-removed-message {
-    display: none;
-}
-
-.yt-live-chat-text-message-renderer-0 {
-    padding: 6px 24px 6px 8px;
-}
-.yt-live-chat-text-message-renderer-0 #author-photo.yt-live-chat-text-message-renderer {
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
-}
-
-/* Message Input */
-
-.yt-live-chat-message-input-renderer-0 {
-    padding: 8px 10px;
-}
-
-.yt-live-chat-message-input-renderer-0 #top.yt-live-chat-message-input-renderer,
-.yt-live-chat-message-input-renderer-0 #pickers.yt-live-chat-message-input-renderer,
-.yt-live-chat-message-input-renderer-0 #error-message.yt-live-chat-message-input-renderer {
-    margin: 0;
-}
-/* smaller avatar */
-.yt-live-chat-message-input-renderer-0 #avatar.yt-live-chat-message-input-renderer {
-    height: 24px;
-    width: 24px;
-}
 /* remove own user name */
-.yt-live-chat-message-input-renderer-0 #author.yt-live-chat-message-input-renderer {
-    display: none;
+yt-live-chat-message-input-renderer yt-live-chat-author-chip {
+    display: none !important;
+}
+
+/* reduce margins */
+yt-live-chat-text-message-renderer {
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+}
+
+yt-live-chat-text-message-renderer yt-img-shadow {
+    margin-right:8px;
 }

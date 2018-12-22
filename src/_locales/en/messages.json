@@ -81,6 +81,9 @@
   "Opt_HideAvatars": {
     "message": "Hide avatars (Note: if enabled, old messages can't be highlighted or muted)"
   },
+  "Opt_HideWelcome": {
+    "message": "Hide \"Welcome to live chat!\" message"
+  },
   "Opt_HighlightedUserAddDescription": {
     "message": "You already know the unique ID of a user you want to stalk? Just enter it here!"
   },
@@ -141,9 +144,6 @@
   },
   "Opt_TrainingWheelsDescription": {
     "message": "Converts keywords from another well known streaming site into suiting emojis."
-  },
-  "Opt_TrainingWheelsWarning": {
-    "message": "Caution: the mapping from keywords to emojis has been changed in version 0.2.3.2. You may require a new emote pack from your provider."
   },
   "nextShowIn": {
     "message": "In $1 minutes: $2",
