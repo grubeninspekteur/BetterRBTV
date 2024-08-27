@@ -1,6 +1,9 @@
 # BetterRBTV Browser Extension
 Comfort functions for YouTube™ Gaming Live.
 
+> [!IMPORTANT]
+> BetterRBTV is discontinued. No updates will be pushed to the Browser stores.
+
 ## Features
 * Replacement of keywords known from another well-known streaming site
 * Colored names
